@@ -20,9 +20,11 @@ class Course(db.Model):
     __tablename__ = 'courses'
 
     id = db.Column(db.Integer,primary_key = True)
-    title = db.Column(db.String(255),nullabe = False)
+    title = db.Column(db.String(255),nullable = False)
     description = db.Column(db.Text,nullable = True)
     enrollments = db.relationship('Enrollment', back_populates='course', lazy=True)
+    reviews = db.relationship('Review', back_populates='course', lazy=True)
+
 
 
 
