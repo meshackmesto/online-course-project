@@ -48,16 +48,7 @@ class Review(db.Model):
     student = db.relationship('Student', back_populates='reviews')
     course = db.relationship('Course', back_populates='reviews')
 
-class Courses(db.Model):
-    __tablename__ = 'course'
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100), nullable=False)
-    description = db.Column(db.String(255), nullable=False)
-    created_at = db.Column(db.DateTime, default=datetime,)
-    updated_at = db.Column(db.DateTime, default=datetime, onupdate=datetime.utcnow)
-    enrollments = db.relationship('Enrollment', back_populates='course', lazy=True)
-    reviews = db.relationship('Review', back_populates='course', lazy=True)
-    instructors = db.relationship('Instructor', secondary='instructor_course', back_populates='courses')
+
 
 
     
