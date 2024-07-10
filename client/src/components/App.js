@@ -6,6 +6,7 @@ import Course from "./Course";
 import Enrollment from "./Enrollments";
 import Navbar from "./Navbar";
 import Reviews from "./Reviews";
+import MyCourses from "./MyCourses";
 import "../App.css";
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
         <Route path="/enrollment" component={Enrollment} />
         <Route path="/reviews" component={Reviews} />
         <Route path="/navbar" component={Navbar} />
+        <Route path="/mycourses" component={MyCourses} />
       </Switch>
     </div>
   );

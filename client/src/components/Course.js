@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import Navbar from "./Navbar";
 import CourseCard from "./CourseCard";
 
@@ -27,7 +28,9 @@ function Course() {
             <button className="close-modal" onClick={toggleModal}>
               Close
             </button>
-            <button className="select-course">Select Course</button>
+            <Link to="/mycourses">
+              <button className="select-course">Select Course</button>
+            </Link>
           </div>
         </div>
       )}
