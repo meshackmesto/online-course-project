@@ -6,7 +6,8 @@ from config import db
 
 # Models go here!
 class Student(db.Model):
-    __tablename__ = 'student'
+    __tablename__ = 'students'
+
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(50), unique=True, nullable=False)
     email = db.Column(db.String(100), unique=True, nullable=False)
@@ -14,6 +15,15 @@ class Student(db.Model):
     created_at = db.Column(db.DateTime, default=datetime,)
     updated_at = db.Column(db.DateTime, default=datetime, onupdate=datetime.utcnow)
     enrollments = db.relationship('Enrollment', back_populates='student', lazy=True)
+
+class Course(db.Model):
+    __tablename__ = 'courses'
+
+    id = db.Column(db.Integer,primary_key = True)
+    title = db.Column(db.String(255),nullabe = False)
+    description = db.Column(db.Text,nullable = True)
+    enrollments = db.relationship('Enrollment', back_populates='course', lazy=True)
+
 
 
 class Enrollment(db.Model):
