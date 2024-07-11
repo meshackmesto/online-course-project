@@ -1,5 +1,24 @@
+/* styling home */
+.home {
+  display: flex;
+  height: 100%;
+}
+
+
+/* styling logo */
+.logo a{
+  width: 100px;
+  height: 100px;
+  margin-left: 15px;
+  font-size: 40px;
+  text-decoration: none;
+  color: rgb(42, 189, 67);
+  font-family: century;
+  font-weight: bolder;
+}
+
 /*styling navbar*/
-.navbar {
+.navbar{
   display: flex;
   flex-direction: row;
   width: 15vw;
@@ -65,4 +84,23 @@ nav li a {
 .overlay {
   background: gray;
   opacity: 0.3;
+}
+
+/* styling enrollement */
+.enrolled{
+  display: flex;
+  height: 100%;
+}
+
+.enrolled h1 {
+  color: #333;
+  margin-top: 20px;
+  padding-left: 20vw;
+}
+
+.names {
+  text-align: center;
+  margin-left: 5vw;
+  padding-left: 10vw;
+  /* list-style: none; */
 }

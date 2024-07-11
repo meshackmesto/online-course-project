@@ -4,6 +4,9 @@ import { NavLink } from "react-router-dom";
 function Navbar() {
   return (
     <nav className="navbar bg-dark">
+      <div className="logo">
+        <a href="/">Logo</a>
+      </div>
       <ul>
         <li>
           <NavLink to="/">Home</NavLink>
@@ -16,6 +19,9 @@ function Navbar() {
         </li>
         <li>
           <NavLink to="/reviews">Reviews </NavLink>
+        </li>
+        <li>
+          <NavLink to="/signup">Sign up </NavLink>
         </li>
       </ul>
     </nav>
