@@ -1,10 +1,10 @@
 from sqlalchemy_serializer import SerializerMixin
 from sqlalchemy.ext.associationproxy import association_proxy
-from datetime import datetime
 
 from config import db
 
 # Models go here!
+
 class Student(db.Model):
     __tablename__ = 'students'
 
@@ -30,3 +30,4 @@ class Course(db.Model):
 
 if __name__ == '__main__':
     app.run(debug=True)
+
