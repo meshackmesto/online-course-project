@@ -15,6 +15,9 @@ function Navbar() {
           <NavLink to="/course">Course</NavLink>
         </li>
         <li>
+          <NavLink to="/mycourses">My Courses</NavLink>
+        </li>
+        <li>
           <NavLink to="/enrollment">Enrollment </NavLink>
         </li>
         <li>

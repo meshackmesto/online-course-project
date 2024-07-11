@@ -7,6 +7,7 @@ import Enrollment from "./Enrollment";
 import Navbar from "./Navbar";
 import Reviews from "./Reviews";
 import Signup from "./Signup";
+import MyCourses from "./MyCourses";
 import "../App.css";
 
 function App() {
@@ -17,8 +18,9 @@ function App() {
           <Route path="/course" component={Course} />
           <Route path="/enrollment" component={Enrollment} />
           <Route path="/reviews" component={Reviews} />
-          <Route path="signup" component={Signup} />
           <Route path="/navbar" component={Navbar} />
+          <Route path="signup" component={Signup} />
+          <Route path="/mycourses" component={MyCourses} />
         </Switch>
     </div>
   );
