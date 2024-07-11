@@ -1,0 +1,74 @@
+/*styling navbar*/
+.navbar {
+  display: flex;
+  flex-direction: row;
+  width: 15vw;
+  height: 100vh;
+}
+
+nav li {
+  list-style-type: none;
+  text-decoration: none;
+  margin-left: 5px;
+  margin-right: 5px;
+  padding: 20px 18px;
+}
+
+nav li a {
+  text-decoration: none;
+  color: white;
+}
+
+/*styling search container and search input*/
+.search_bar {
+  margin-top: 20px;
+}
+
+.search {
+  width: 70vw;
+  height: 45px;
+  border: none;
+  border-radius: 15px;
+  border: 1px solid black;
+  margin-left: 70px;
+  padding-left: 30vw;
+}
+
+/*styling courses*/
+.courses {
+  display: flex;
+  overflow-y: hidden;
+}
+
+/*styling course card*/
+.card {
+  width: 20%;
+  height: 40vh;
+  overflow: hidden;
+  display: inline-flex;
+  flex-direction: column;
+  margin: 20px 40px;
+  padding: 10px;
+}
+
+/*styling modal*/
+.modal,
+.overlay {
+  display: block;
+  width: 100%;
+  height: 100vh;
+  background: white;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.overlay {
+  background: gray;
+  opacity: 0.3;
+}
+
+/*styling my courses*/
+.mycourses {
+  display: flex;
+}
