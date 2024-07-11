@@ -4,8 +4,6 @@ from sqlalchemy.ext.associationproxy import association_proxy
 from config import db
 
 # Models go here!
-<<<<<<< HEAD
-=======
 class Student(db.Model):
     __tablename__ = 'students'
 
@@ -53,4 +51,3 @@ class Review(db.Model):
     
 if __name__ == '__main__':
     app.run(debug=True)
->>>>>>> e718fe655831ac39a5b3d23481ffa2cb192bd868
