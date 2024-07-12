@@ -79,7 +79,7 @@ function Course({ onAddCourse }) {
   return (
     <div className="courses">
       <Navbar />
-
+    
       {modal && (
         <div className="modal">
           <div className="overlay" onClick={toggleModal}></div>

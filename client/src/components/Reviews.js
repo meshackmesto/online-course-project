@@ -1,11 +1,9 @@
-
 import Navbar from "./Navbar";
-import React, {useEffect, useState} from "react";
-
+import React, { useEffect, useState } from "react";
 
 function Reviews() {
   const [reviews, setReviews] = useState([]);
-  const [newReview, setNewReview] = useState('');
+  const [newReview, setNewReview] = useState("");
   const [editIndex, setEditIndex] = useState(-1);
 
   useEffect(() => {
@@ -13,57 +11,57 @@ function Reviews() {
   }, []);
 
   const fetchReviews = () => {
-    fetch('/api/reviews')
-      .then(response => {
+    fetch("/api/reviews")
+      .then((response) => {
         if (!response.ok) {
-          throw new Error('Failed to fetch reviews');
+          throw new Error("Failed to fetch reviews");
         }
         return response.json();
       })
-      .then(reviewsData => {
+      .then((reviewsData) => {
         setReviews(reviewsData);
       })
-      .catch(error => {
-        console.error('Error fetching reviews:', error);
+      .catch((error) => {
+        console.error("Error fetching reviews:", error);
       });
   };
 
   const addReview = () => {
-    fetch('/api/reviews', {
-      method: 'POST',
+    fetch("/api/reviews", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify({ text: newReview })
+      body: JSON.stringify({ text: newReview }),
     })
-      .then(response => {
+      .then((response) => {
         if (!response.ok) {
-          throw new Error('Failed to add review');
+          throw new Error("Failed to add review");
         }
         return response.json();
       })
-      .then(newReviewData => {
+      .then((newReviewData) => {
         setReviews([...reviews, newReviewData]);
-        setNewReview('');
+        setNewReview("");
       })
-      .catch(error => {
-        console.error('Error adding review:', error);
+      .catch((error) => {
+        console.error("Error adding review:", error);
       });
   };
 
   const deleteReview = (id) => {
     fetch(`/api/reviews/${id}`, {
-      method: 'DELETE'
+      method: "DELETE",
     })
-      .then(response => {
+      .then((response) => {
         if (!response.ok) {
-          throw new Error('Failed to delete review');
+          throw new Error("Failed to delete review");
         }
-        const updatedReviews = reviews.filter(review => review.id !== id);
+        const updatedReviews = reviews.filter((review) => review.id !== id);
         setReviews(updatedReviews);
       })
-      .catch(error => {
-        console.error('Error deleting review:', error);
+      .catch((error) => {
+        console.error("Error deleting review:", error);
       });
   };
 
@@ -74,24 +72,24 @@ function Reviews() {
 
   const updateReview = (id) => {
     fetch(`/api/reviews/${id}`, {
-      method: 'PUT',
+      method: "PUT",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify({ text: newReview })
+      body: JSON.stringify({ text: newReview }),
     })
-      .then(response => {
+      .then((response) => {
         if (!response.ok) {
-          throw new Error('Failed to update review');
+          throw new Error("Failed to update review");
         }
         const updatedReviews = [...reviews];
         updatedReviews[editIndex] = { id, text: newReview };
         setReviews(updatedReviews);
         setEditIndex(-1);
-        setNewReview('');
+        setNewReview("");
       })
-      .catch(error => {
-        console.error('Error updating review:', error);
+      .catch((error) => {
+        console.error("Error updating review:", error);
       });
   };
 
@@ -112,7 +110,9 @@ function Reviews() {
         {editIndex === -1 ? (
           <button onClick={addReview}>Add Review</button>
         ) : (
-          <button onClick={() => updateReview(reviews[editIndex].id)}>Update Review</button>
+          <button onClick={() => updateReview(reviews[editIndex].id)}>
+            Update Review
+          </button>
         )}
       </div>
 
@@ -144,8 +144,6 @@ function Reviews() {
       </ul>
     </div>
   );
-};
-
+}
 
 export default Reviews;
-
