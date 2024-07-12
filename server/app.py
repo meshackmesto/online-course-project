@@ -18,22 +18,22 @@ from config import app, db, api
 from models import Student, Course, Enrollment, Review
 
 # Views go here!
-class StudentSchema(SQLAlchemyAutoSchema):
+class Student(SQLAlchemyAutoSchema):
     class Meta:
         model = Student
         load_instance = True
 
-class CourseSchema(SQLAlchemyAutoSchema):
+class Course(SQLAlchemyAutoSchema):
     class Meta:
         model = Course
         load_instance = True
 
-class EnrollmentSchema(SQLAlchemyAutoSchema):
+class Enrollment(SQLAlchemyAutoSchema):
     class Meta:
         model = Enrollment
         load_instance = True
 
-class ReviewSchema(SQLAlchemyAutoSchema):
+class Review(SQLAlchemyAutoSchema):
     class Meta:
         model = Review
         load_instance = True
@@ -47,12 +47,12 @@ enrollments_schema = EnrollmentSchema(many=True)
 review_schema = ReviewSchema()
 reviews_schema = ReviewSchema(many=True)
 
-class StudentResource(Resource):
+class Student(Resource):
     def get(self, student_id):
         student = Student.query.get_or_404(student_id)
         return student_schema.dump(student)
 
-    def put(self, student_id):
+    def patch(self, student_id):
         student = Student.query.get_or_404(student_id)
         student.first_name = request.json.get('first_name', student.first_name)
         student.last_name = request.json.get('last_name', student.last_name)
@@ -67,7 +67,7 @@ class StudentResource(Resource):
         db.session.commit()
         return '', 204
 
-class StudentListResource(Resource):
+class StudentList(Resource):
     def get(self):
         students = Student.query.all()
         return students_schema.dump(students)
@@ -78,7 +78,7 @@ class StudentListResource(Resource):
         db.session.commit()
         return student_schema.dump(new_student), 201
 
-class CourseResource(Resource):
+class Course(Resource):
     def get(self, course_id):
         course = Course.query.get_or_404(course_id)
         return course_schema.dump(course)
@@ -96,7 +96,7 @@ class CourseResource(Resource):
         db.session.commit()
         return '', 204
 
-class CourseListResource(Resource):
+class CourseList(Resource):
     def get(self):
         courses = Course.query.all()
         return courses_schema.dump(courses)
@@ -107,7 +107,7 @@ class CourseListResource(Resource):
         db.session.commit()
         return course_schema.dump(new_course), 201
 
-class EnrollmentResource(Resource):
+class Enrollment(Resource):
     def get(self, enrollment_id):
         enrollment = Enrollment.query.get_or_404(enrollment_id)
         return enrollment_schema.dump(enrollment)
@@ -125,7 +125,7 @@ class EnrollmentResource(Resource):
         db.session.commit()
         return '', 204
 
-class EnrollmentListResource(Resource):
+class EnrollmentList(Resource):
     def get(self):
         enrollments = Enrollment.query.all()
         return enrollments_schema.dump(enrollments)
@@ -136,7 +136,7 @@ class EnrollmentListResource(Resource):
         db.session.commit()
         return enrollment_schema.dump(new_enrollment), 201
 
-class ReviewResource(Resource):
+class Review(Resource):
     def get(self, review_id):
         review = Review.query.get_or_404(review_id)
         return review_schema.dump(review)
@@ -155,7 +155,7 @@ class ReviewResource(Resource):
         db.session.commit()
         return '', 204
 
-class ReviewListResource(Resource):
+class ReviewList(Resource):
     def get(self):
         reviews = Review.query.all()
         return reviews_schema.dump(reviews)
@@ -166,9 +166,9 @@ class ReviewListResource(Resource):
         db.session.commit()
         return review_schema.dump(new_review), 201
     
-api.add_resource(StudentListResource, '/students')
-api.add_resource(StudentResource, '/students/<int:student_id>')
-api.add_resource(CourseListResource, '/courses>')
+api.add_resource(StudentList, '/students')
+api.add_resource(Student, '/students/<int:student_id>')
+api.add_resource(CourseList, '/courses>')
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
