@@ -4,24 +4,52 @@ import { Switch, Route } from "react-router-dom";
 import Home from "./Home";
 import Course from "./Course";
 import Enrollment from "./Enrollment";
-import Navbar from "./Navbar";
+import Navbar from "./bar";
+import Sidebar from "./Navbar";
 import Reviews from "./Reviews";
+import Login from "./Login";
 import Signup from "./Signup";
 import MyCourses from "./MyCourses";
 import "../App.css";
 
 function App() {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    fetch("/check_session").then((r) => {
+      if (r.ok) {
+        r.json().then((user) => setUser(user));
+      }
+    });
+  }, []);
+
   return (
     <div>
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route path="/course" component={Course} />
-          <Route path="/enrollment" component={Enrollment} />
-          <Route path="/reviews" component={Reviews} />
-          <Route path="/navbar" component={Navbar} />
-          <Route path="/signup" component={Signup} />
-          <Route path="/mycourses" component={MyCourses} />
-        </Switch>
+      <main>
+        {user ? (
+          <Switch>
+            <Route exact path="/" component={Home}>
+              <Home user={user} />
+            </Route>
+          </Switch>
+        ) : (
+          <Switch>
+            <Route path="/signup" component={Signup}>
+              <Signup setUser={setUser} />
+            </Route>
+            <Route path="/login" component={Login}>
+              <Login setUser={setUser} />
+            </Route>
+            <Route exact path="/" component={Home} />
+            <Route path="/course" component={Course} />
+            <Route path="/enrollment" component={Enrollment} />
+            <Route path="/reviews" component={Reviews} />
+            <Route path="/navbar" component={Navbar} />
+            <Route path="/sidebar" component={Sidebar} />
+            <Route path="/mycourses" component={MyCourses} />
+          </Switch>
+        )}
+      </main>
     </div>
   );
 }

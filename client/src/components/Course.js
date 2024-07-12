@@ -64,7 +64,7 @@ function Course({ onAddCourse }) {
       },
       body: JSON.stringify({
         id: selectedCourse.id,
-        image: selectedCourse.image,
+        /* image: selectedCourse.image, */
         title: selectedCourse.title,
         description: selectedCourse.description,
       }),
@@ -85,8 +85,8 @@ function Course({ onAddCourse }) {
           <div className="overlay" onClick={toggleModal}></div>
           <div className="modal-content">
             <CourseCard
-              image={selectedCourse.image}
-              alt={selectedCourse.title}
+              /* image={selectedCourse.image}
+              alt={selectedCourse.title} */
               title={selectedCourse.title}
               description={selectedCourse.description}
             />
