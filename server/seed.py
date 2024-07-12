@@ -32,7 +32,7 @@ if __name__ == '__main__':
         courses = []
         for _ in range(10):  # Change the range for more courses
             course = Course(
-                title=fake.sentence(nb_words=4),
+                title=fake.title(),
                 description=fake.text()
             )
             courses.append(course)
