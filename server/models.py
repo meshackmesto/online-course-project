@@ -14,6 +14,7 @@ class Student(db.Model):
     created_at = db.Column(db.DateTime, default=datetime,)
     updated_at = db.Column(db.DateTime, default=datetime, onupdate=datetime)
     enrollments = db.relationship('Enrollment', back_populates='student', lazy=True)
+    reviews = db.relationship('Review', back_populates='student', lazy=True)
 
 class Course(db.Model):
     __tablename__ = 'courses'
