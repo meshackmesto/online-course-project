@@ -9,9 +9,8 @@ from config import app, db
 
 
 def generate_course_title():
-    subjects = ["Math", "History", "Science", "English", "Art", "Music", "Physics", "Chemistry", "Biology", "Economics"]
-    levels = ["101", "201", "301", "401", "Advanced", "Introduction to"]
-    return f"{rc(subjects)} {rc(levels)}"
+    subjects = ["Medicine", "Software Engineering", "Law", "Web Development", "Ui/Ux Design", "Musician", "Data Analyst", "Dermatologist", "Botanist", "Economics"]
+    return f"{rc(subjects)}"
 
 if __name__ == '__main__':
     fake = Faker()
