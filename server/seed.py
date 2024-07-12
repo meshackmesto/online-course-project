@@ -1,11 +1,16 @@
 from faker import Faker
-from random import randint
+from random import choice as rc ,randint
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from models import Student, Course, Enrollment, Review
 from config import app, db
 
 # Local imports
+
+
+def generate_course_title():
+    subjects = ["Medicine", "Software Engineering", "Law", "Web Development", "Ui/Ux Design", "Musician", "Data Analyst", "Dermatologist", "Botanist", "Economics"]
+    return f"{rc(subjects)}"
 
 if __name__ == '__main__':
     fake = Faker()
@@ -32,7 +37,7 @@ if __name__ == '__main__':
         courses = []
         for _ in range(10):  # Change the range for more courses
             course = Course(
-                title=fake.title(),
+                title=generate_course_title(),
                 description=fake.text()
             )
             courses.append(course)
