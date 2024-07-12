@@ -43,3 +43,5 @@ class Review(db.Model):
     comment = db.Column(db.String(255), nullable=False)
     student = db.relationship('Student', back_populates='reviews')
     course = db.relationship('Course', back_populates='reviews')
+
+    
