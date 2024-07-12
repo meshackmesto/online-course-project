@@ -53,6 +53,11 @@
       "title": "Web Development",
       "image": "webdevelopment.jpg",
       "description": "The world of web development is as wide as the internet itself. Much of our social and vocational lives play out on the internet, which prompts new industries aimed at creating, managing, and debugging the websites and applications that we increasingly rely on."
+    },
+    {
+      "id": "f52a",
+      "title": "Angular",
+      "description": "Angular is a TypeScript-based JavaScript framework."
     }
   ],
   "myCourses": [
@@ -97,6 +102,17 @@
       "image": "react.jpg",
       "title": "React",
       "description": "React is a JavaScript library for building user interfaces."
+    },
+    {
+      "id": "ecd4",
+      "image": "react.jpg",
+      "title": "React",
+      "description": "React is a JavaScript library for building user interfaces."
+    },
+    {
+      "id": "6cf3",
+      "title": "Web Development",
+      "description": "The world of web development is as wide as the internet itself. Much of our social and vocational lives play out on the internet, which prompts new industries aimed at creating, managing, and debugging the websites and applications that we increasingly rely on."
     }
   ],
   "reviews": [
@@ -126,6 +142,27 @@
       "email": "hunni@gmail.com",
       "password": "hunniuser",
       "password_confirmation": "hunniuser"
+    },
+    {
+      "id": "fff5",
+      "first_name": "mellisa",
+      "last_name": "murugi",
+      "email": "mellisa@hotmail.com",
+      "password": "78uiyyhjkkk"
+    },
+    {
+      "id": "195a",
+      "first_name": "mellisa",
+      "last_name": "murugi",
+      "email": "mellisa@hotmail.com",
+      "password": "78uiyyhjkkk"
+    }
+  ],
+  "login": [
+    {
+      "id": "a8fb",
+      "username": "pass",
+      "password": "pass"
     }
   ]
 }

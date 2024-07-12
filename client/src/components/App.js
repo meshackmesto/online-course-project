@@ -25,7 +25,6 @@ function App() {
 
   return (
     <div>
-      <Signup user={user} setUser={setUser} />
       <main>
         {user ? (
           <Switch>
