@@ -1,20 +1,18 @@
-from sqlalchemy_serializer import SerializerMixin
-from sqlalchemy.ext.associationproxy import association_proxy
-
 from config import db
+from datetime import datetime
+
 
 # Models go here!
-<<<<<<< HEAD
-=======
 class Student(db.Model):
     __tablename__ = 'students'
 
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(50), unique=True, nullable=False)
+    First_name = db.Column(db.String(50), unique=False nullable=False)
+    Last_name = db.Column(db.String(50), unique=False, nullable=False)
     email = db.Column(db.String(100), unique=True, nullable=False)
     password_hash = db.Column(db.String(255), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime,)
-    updated_at = db.Column(db.DateTime, default=datetime, onupdate=datetime.utcnow)
+    updated_at = db.Column(db.DateTime, default=datetime, onupdate=datetime)
     enrollments = db.relationship('Enrollment', back_populates='student', lazy=True)
 
 class Course(db.Model):
@@ -46,11 +44,3 @@ class Review(db.Model):
     comment = db.Column(db.String(255), nullable=False)
     student = db.relationship('Student', back_populates='reviews')
     course = db.relationship('Course', back_populates='reviews')
-
-
-
-
-    
-if __name__ == '__main__':
-    app.run(debug=True)
->>>>>>> e718fe655831ac39a5b3d23481ffa2cb192bd868
