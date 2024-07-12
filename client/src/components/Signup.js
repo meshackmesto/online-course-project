@@ -5,10 +5,10 @@ import "./Signup.css";
 function Signup({ setUser }) {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [username, setUsername] = useState("");
+  /*  const [username, setUsername] = useState(""); */
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [passwordConfirmation, setPasswordConfirmation] = useState("");
+  /* const [passwordConfirmation, setPasswordConfirmation] = useState(""); */
 
   const baseUrl = "http://localhost:3031";
   function postSignup(e) {
@@ -21,10 +21,10 @@ function Signup({ setUser }) {
       body: JSON.stringify({
         first_name: firstName,
         last_name: lastName,
-        username: username,
+        /* username: username, */
         email: email,
         password: password,
-        password_confirmation: passwordConfirmation,
+        /* password_confirmation: passwordConfirmation, */
       }),
     }).then((r) => {
       if (r.ok) {
@@ -60,7 +60,7 @@ function Signup({ setUser }) {
             onChange={(e) => setLastName(e.target.value)}
           />
         </label>
-        <label for="">
+        {/*  <label for="">
           Username
           <input
             id="username"
@@ -70,7 +70,7 @@ function Signup({ setUser }) {
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
-        </label>
+        </label> */}
         <label for="">
           Email
           <input
@@ -93,7 +93,7 @@ function Signup({ setUser }) {
             onChange={(e) => setPassword(e.target.value)}
           />
         </label>
-        <label for="">
+        {/*   <label for="">
           Password Confirmation
           <input
             type="password"
@@ -102,7 +102,7 @@ function Signup({ setUser }) {
             value={passwordConfirmation}
             onChange={(e) => setPasswordConfirmation(e.target.value)}
           />
-        </label>
+        </label> */}
         <button type="submit" className="signup-button">
           Sign up
         </button>

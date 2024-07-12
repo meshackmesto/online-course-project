@@ -1,7 +1,7 @@
 import React from "react";
 import Navbar from "./Navbar";
 import books from "../assets/image/books.jpg";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 function Home() {
   return (
@@ -10,6 +10,12 @@ function Home() {
       <div className="container">
         <div className="row">
           <div className="col-1">
+            <NavLink to="/signup">
+              <button className="signup-btn">Signup</button>
+            </NavLink>
+            <NavLink to="/login">
+              <button className="login-btn">Login</button>
+            </NavLink>
             <h1>
               Welcome to our Online Course Website, where learning meets
               innovation
