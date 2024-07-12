@@ -61,12 +61,21 @@ p {
 }
 
 /*styling navbar*/
-.navbar {
+.sidebar {
   display: flex;
   /* position: fixed; */
   flex-direction: row;
   width: 15vw;
   height: 100vh;
+}
+
+.sidebar .navbar {
+  display: flex;
+  flex-direction: row;
+  width: 15vw;
+  height: 100vh;
+  background-color: rgb(42, 189, 67);
+  color: white;
 }
 
 nav li {

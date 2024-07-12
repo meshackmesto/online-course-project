@@ -9,6 +9,8 @@
     left: 50%;
     border: 2px solid black;
 }
-/* .inputs{
-   
-} */
+.signup-btn{
+    position: relative;
+    top: 2vh;
+    left: 60%;
+}
