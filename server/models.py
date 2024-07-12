@@ -1,21 +1,14 @@
-from sqlalchemy_serializer import SerializerMixin
-from sqlalchemy.ext.associationproxy import association_proxy
+import datetime
+from flask_sqlalchemy import SQLAlchemy
 
-from config import db
+db = SQLAlchemy()
 
-# Models go here!
-<<<<<<< HEAD
-=======
 class Student(db.Model):
-    __tablename__ = 'students'
-
+    _tablename_= "Students"
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(50), unique=True, nullable=False)
+    name = db.Column(db.String(100), nullable=False)
     email = db.Column(db.String(100), unique=True, nullable=False)
-    password_hash = db.Column(db.String(255), nullable=False)
-    created_at = db.Column(db.DateTime, default=datetime,)
-    updated_at = db.Column(db.DateTime, default=datetime, onupdate=datetime.utcnow)
-    enrollments = db.relationship('Enrollment', back_populates='student', lazy=True)
+    created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow)
 
 class Course(db.Model):
     __tablename__ = 'courses'
@@ -53,4 +46,4 @@ class Review(db.Model):
     
 if __name__ == '__main__':
     app.run(debug=True)
->>>>>>> e718fe655831ac39a5b3d23481ffa2cb192bd868
+
