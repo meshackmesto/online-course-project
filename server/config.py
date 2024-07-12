@@ -10,6 +10,8 @@ from flask_sqlalchemy import SQLAlchemy
 
 # Local imports
 
+
+
 # Instantiate app, set attributes
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
