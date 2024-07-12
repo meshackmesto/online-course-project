@@ -23,29 +23,34 @@ class Student(SQLAlchemyAutoSchema):
         model = Student
         load_instance = True
 
+student_schema = Student()
+students_schema = Student(many=True)
+
 class Course(SQLAlchemyAutoSchema):
     class Meta:
         model = Course
         load_instance = True
+
+course_schema = Course()
+courses_schema = Course(many=True)
 
 class Enrollment(SQLAlchemyAutoSchema):
     class Meta:
         model = Enrollment
         load_instance = True
 
+enrollment_schema = Enrollment()
+enrollments_schema = Enrollment(many=True)
+
 class Review(SQLAlchemyAutoSchema):
     class Meta:
         model = Review
         load_instance = True
 
-student_schema = StudentSchema()
-students_schema = StudentSchema(many=True)
-course_schema = CourseSchema()
-courses_schema = CourseSchema(many=True)
-enrollment_schema = EnrollmentSchema()
-enrollments_schema = EnrollmentSchema(many=True)
-review_schema = ReviewSchema()
-reviews_schema = ReviewSchema(many=True)
+review_schema = Review()
+reviews_schema = Review(many=True)
+
+
 
 class Student(Resource):
     def get(self, student_id):
@@ -168,7 +173,12 @@ class ReviewList(Resource):
     
 api.add_resource(StudentList, '/students')
 api.add_resource(Student, '/students/<int:student_id>')
-api.add_resource(CourseList, '/courses>')
+api.add_resource(CourseList, '/courses')
+api.add_resource(Course, '/courses/<int:course_id>')
+api.add_resource(EnrollmentList, '/enrollments')
+api.add_resource(Enrollment, '/enrollments/<int:enrollment_id>')
+api.add_resource(ReviewList, '/reviews')
+api.add_resource(Review, '/reviews/<int:review_id>')
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
