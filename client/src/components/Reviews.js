@@ -1,3 +1,4 @@
+
 import Navbar from "./Navbar";
 import React, {useEffect, useState} from "react";
 
@@ -147,3 +148,4 @@ function Reviews() {
 
 
 export default Reviews;
+

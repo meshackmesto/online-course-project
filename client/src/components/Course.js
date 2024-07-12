@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import Navbar from "./Navbar";
 import CourseCard from "./CourseCard";
+
 //import CoursePage from "./CoursePage";
 
 function Course({ onAddCourse }) {
@@ -10,15 +12,18 @@ function Course({ onAddCourse }) {
   const [filteredCourses, setFilteredCourses] = useState([]);
   const [search, setSearch] = useState("");
 
+  //toggle modal(pop up page) set to true
   const toggleModal = () => {
     setModal(!modal);
   };
 
+  //to toggle to display selected course when select button is clicked
   const openCourse = (course) => {
     setSelectedCourse(course);
     toggleModal();
   };
 
+  //fetch courses from db.json
   useEffect(() => {
     const baseUrl = "http://localhost:3031";
     fetch(`${baseUrl}/courses`)
@@ -29,8 +34,10 @@ function Course({ onAddCourse }) {
       .catch((err) => console.log(err));
   }, []);
 
+  //get values from  courses object
   const coursesArr = Object.values(courses);
 
+  //filter out courses by the search input value
   function filterCourses(e) {
     const input = e.target.value;
     setSearch(input);
@@ -42,19 +49,22 @@ function Course({ onAddCourse }) {
     );
     setFilteredCourses(filtered);
   }
-  console.log(filteredCourses);
 
+  //toggles between display all courses and the searched course
   const displayedCourses = search.length > 0 ? filteredCourses : courses;
 
+  //add course to db.json myCourses
   const baseUrl = "http://localhost:3031";
   function postCourse(e) {
     e.preventDefault();
-    fetch(`${baseUrl}/courses`, {
+    fetch(`${baseUrl}/myCourses`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
+        id: selectedCourse.id,
+        image: selectedCourse.image,
         title: selectedCourse.title,
         description: selectedCourse.description,
       }),
@@ -74,14 +84,20 @@ function Course({ onAddCourse }) {
         <div className="modal">
           <div className="overlay" onClick={toggleModal}></div>
           <div className="modal-content">
-            <h2>{selectedCourse.title}</h2>
-            <p>{selectedCourse.description}</p>
+            <CourseCard
+              image={selectedCourse.image}
+              alt={selectedCourse.title}
+              title={selectedCourse.title}
+              description={selectedCourse.description}
+            />
             <button className="close-modal" onClick={toggleModal}>
               Close
             </button>
-            <button className="select-course" onClick={postCourse}>
-              Select Course
-            </button>
+            <Link to="/mycourses">
+              <button className="select-course" onClick={postCourse}>
+                Select Course
+              </button>
+            </Link>
           </div>
         </div>
       )}
@@ -95,15 +111,19 @@ function Course({ onAddCourse }) {
             placeholder="search courses"
           />
         </div>
+
+        {/*check where error is coming from*/}
         <div className="course-container">
           {displayedCourses &&
             displayedCourses.map((course) => (
               <CourseCard
                 key={course.id}
                 title={course.title}
+                image={course.image}
                 description={course.description}
                 onClick={() =>
                   openCourse({
+                    image: course.image,
                     title: course.title,
                     description: course.description,
                   })
@@ -112,6 +132,7 @@ function Course({ onAddCourse }) {
               />
             ))}
         </div>
+
         {/* <CourseCard
           title="Web Development"
           description="The world of web development is as wide as the internet itself. Much of our social and vocational lives play out on the internet, which prompts new industries aimed at creating, managing, and debugging the websites and applications that we increasingly rely on."
