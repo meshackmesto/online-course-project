@@ -1,14 +1,11 @@
-#!/usr/bin/env python3
-
-# Standard library imports
-from random import randint, choice as rc
-
-# Remote library imports
 from faker import Faker
+from random import randint
+from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
+from models import Student, Course, Enrollment, Review
+from config import app, db
 
 # Local imports
-from app import app
-from models import db ,Student, Course, Enrollment, Review
 
 if __name__ == '__main__':
     fake = Faker()
@@ -22,7 +19,8 @@ if __name__ == '__main__':
         students = []
         for _ in range(30):  # Change the range for more students
             student = Student(
-                username=fake.user_name(),
+                first_name=fake.first_name(),
+                last_name=fake.last_name(),
                 email=fake.email(),
                 password_hash=fake.password()
             )
@@ -45,8 +43,8 @@ if __name__ == '__main__':
         enrollments = []
         for _ in range(25):  # Change the range for more enrollments
             enrollment = Enrollment(
-                student_id=rc([student.id for student in students]),
-                course_id=rc([course.id for course in courses])
+                student_id=randint(1, len(students)),  # Use correct randint usage
+                course_id=randint(1, len(courses))  # Use correct randint usage
             )
             enrollments.append(enrollment)
         db.session.add_all(enrollments)
@@ -56,8 +54,8 @@ if __name__ == '__main__':
         reviews = []
         for _ in range(30):  # Change the range for more reviews
             review = Review(
-                student_id=rc([student.id for student in students]),
-                course_id=rc([course.id for course in courses]),
+                student_id=randint(1, len(students)),  # Use correct randint usage
+                course_id=randint(1, len(courses)),  # Use correct randint usage
                 rating=randint(1, 5),
                 comment=fake.text()
             )

@@ -1,36 +1,30 @@
-from sqlalchemy_serializer import SerializerMixin # type: ignore
-from sqlalchemy.ext.associationproxy import association_proxy # type: ignore
+from config import db
 from datetime import datetime
 
-from config import app
-
-from config import db
-
 # Models go here!
-class Student(db.Model,SerializerMixin):
+class Student(db.Model):
     __tablename__ = 'students'
 
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(50), unique=True, nullable=False)
+    first_name = db.Column(db.String(50), nullable=False)
+    last_name = db.Column(db.String(50), nullable=False)
     email = db.Column(db.String(100), unique=True, nullable=False)
     password_hash = db.Column(db.String(255), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
-
     enrollments = db.relationship('Enrollment', back_populates='student', lazy=True)
     reviews = db.relationship('Review', back_populates='student', lazy=True)
 
-class Course(db.Model,SerializerMixin):
+class Course(db.Model):
     __tablename__ = 'courses'
 
-    id = db.Column(db.Integer,primary_key = True)
-    title = db.Column(db.String(255),nullable = False)
-    description = db.Column(db.Text,nullable = True)
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(255), nullable=False)
+    description = db.Column(db.Text, nullable=True)
     enrollments = db.relationship('Enrollment', back_populates='course', lazy=True)
     reviews = db.relationship('Review', back_populates='course', lazy=True)
 
-
-class Enrollment(db.Model,SerializerMixin):
+class Enrollment(db.Model):
     __tablename__ = 'enrollments'
 
     id = db.Column(db.Integer, primary_key=True)
@@ -39,8 +33,8 @@ class Enrollment(db.Model,SerializerMixin):
     student = db.relationship('Student', back_populates='enrollments')
     course = db.relationship('Course', back_populates='enrollments')
 
-class Review(db.Model,SerializerMixin):
-    __tablename__ ='reviews'
+class Review(db.Model):
+    __tablename__ = 'reviews'
 
     id = db.Column(db.Integer, primary_key=True)
     student_id = db.Column(db.Integer, db.ForeignKey('students.id'), nullable=False)

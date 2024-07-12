@@ -3,167 +3,118 @@
     {
       "id": "1",
       "title": "React",
+      "image": "react.jpg",
       "description": "React is a JavaScript library for building user interfaces."
     },
     {
       "id": "2",
       "title": "Angular",
+      "image": "angular.jpg",
       "description": "Angular is a TypeScript-based JavaScript framework."
     },
     {
       "id": "3",
       "title": "Vue",
+      "image": "angular.jpg",
       "description": "Vue.js is an open-source JavaScript framework for building user interfaces."
     },
     {
       "id": "4",
       "title": "Svelte",
+      "image": "angular.jpg",
       "description": "Svelte is a radical new approach to building user interfaces."
     },
     {
       "id": "5",
       "title": "Ember",
+      "image": "angular.jpg",
       "description": "Ember.js is an open-source JavaScript framework for creating ambitious web applications."
     },
     {
       "id": "6",
       "title": "Backbone",
+      "image": "angular.jpg",
       "description": "Backbone.js is an open-source JavaScript framework for creating web applications."
     },
     {
       "id": "7",
       "title": "Django",
+      "image": "django.jpg",
       "description": "Django is a free and open-source web framework written in Python."
     },
     {
       "id": "8",
       "title": "Flask",
+      "image": "flask.jpg",
       "description": "Flask is a micro web framework written in Python."
     },
     {
       "id": "a0f0",
       "title": "Web Development",
+      "image": "webdevelopment.jpg",
       "description": "The world of web development is as wide as the internet itself. Much of our social and vocational lives play out on the internet, which prompts new industries aimed at creating, managing, and debugging the websites and applications that we increasingly rely on."
+    }
+  ],
+  "myCourses": [
+    {
+      "id": "0b08",
+      "image": "angular.jpg",
+      "title": "Svelte",
+      "description": "Svelte is a radical new approach to building user interfaces."
     },
     {
-      "id": "a94b",
-      "title": "Web Development",
-      "description": "The world of web development is as wide as the internet itself. Much of our social and vocational lives play out on the internet, which prompts new industries aimed at creating, managing, and debugging the websites and applications that we increasingly rely on."
-    },
-    {
-      "id": "a3bf",
-      "title": "Web Development",
-      "description": "The world of web development is as wide as the internet itself. Much of our social and vocational lives play out on the internet, which prompts new industries aimed at creating, managing, and debugging the websites and applications that we increasingly rely on."
-    },
-    {
-      "id": "d428",
-      "title": "Web Development",
-      "description": "The world of web development is as wide as the internet itself. Much of our social and vocational lives play out on the internet, which prompts new industries aimed at creating, managing, and debugging the websites and applications that we increasingly rely on."
-    },
-    {
-      "id": "072d",
-      "title": "Web Development",
-      "description": "The world of web development is as wide as the internet itself. Much of our social and vocational lives play out on the internet, which prompts new industries aimed at creating, managing, and debugging the websites and applications that we increasingly rely on."
-    },
-    {
-      "id": "f969",
-      "title": "Web Development",
-      "description": "The world of web development is as wide as the internet itself. Much of our social and vocational lives play out on the internet, which prompts new industries aimed at creating, managing, and debugging the websites and applications that we increasingly rely on."
-    },
-    {
-      "id": "3551",
-      "title": "Web Development",
-      "description": "The world of web development is as wide as the internet itself. Much of our social and vocational lives play out on the internet, which prompts new industries aimed at creating, managing, and debugging the websites and applications that we increasingly rely on."
-    },
-    {
-      "id": "1412",
-      "title": "Web Development",
-      "description": "The world of web development is as wide as the internet itself. Much of our social and vocational lives play out on the internet, which prompts new industries aimed at creating, managing, and debugging the websites and applications that we increasingly rely on."
-    },
-    {
-      "id": "6a60",
-      "title": "Web Development",
-      "description": "The world of web development is as wide as the internet itself. Much of our social and vocational lives play out on the internet, which prompts new industries aimed at creating, managing, and debugging the websites and applications that we increasingly rely on."
-    },
-    {
-      "id": "5382",
-      "title": "Web Development",
-      "description": "The world of web development is as wide as the internet itself. Much of our social and vocational lives play out on the internet, which prompts new industries aimed at creating, managing, and debugging the websites and applications that we increasingly rely on."
-    },
-    {
-      "id": "b4cd",
-      "title": "Web Development",
-      "description": "The world of web development is as wide as the internet itself. Much of our social and vocational lives play out on the internet, which prompts new industries aimed at creating, managing, and debugging the websites and applications that we increasingly rely on."
-    },
-    {
-      "id": "b904",
-      "title": "Web Development",
-      "description": "The world of web development is as wide as the internet itself. Much of our social and vocational lives play out on the internet, which prompts new industries aimed at creating, managing, and debugging the websites and applications that we increasingly rely on."
-    },
-    {
-      "id": "203c",
-      "title": "Web Development",
-      "description": "The world of web development is as wide as the internet itself. Much of our social and vocational lives play out on the internet, which prompts new industries aimed at creating, managing, and debugging the websites and applications that we increasingly rely on."
-    },
-    {
-      "id": "17ac",
-      "title": "Web Development",
-      "description": "The world of web development is as wide as the internet itself. Much of our social and vocational lives play out on the internet, which prompts new industries aimed at creating, managing, and debugging the websites and applications that we increasingly rely on."
-    },
-    {
-      "id": "6e81",
-      "title": "Web Development",
-      "description": "The world of web development is as wide as the internet itself. Much of our social and vocational lives play out on the internet, which prompts new industries aimed at creating, managing, and debugging the websites and applications that we increasingly rely on."
-    },
-    {
-      "id": "64a3",
-      "title": "Web Development",
-      "description": "The world of web development is as wide as the internet itself. Much of our social and vocational lives play out on the internet, which prompts new industries aimed at creating, managing, and debugging the websites and applications that we increasingly rely on."
-    },
-    {
-      "id": "a62d",
-      "title": "Web Development",
-      "description": "The world of web development is as wide as the internet itself. Much of our social and vocational lives play out on the internet, which prompts new industries aimed at creating, managing, and debugging the websites and applications that we increasingly rely on."
-    },
-    {
-      "id": "1325",
-      "title": "Web Development",
-      "description": "The world of web development is as wide as the internet itself. Much of our social and vocational lives play out on the internet, which prompts new industries aimed at creating, managing, and debugging the websites and applications that we increasingly rely on."
-    },
-    {
-      "id": "c28e",
-      "title": "Web Development",
-      "description": "The world of web development is as wide as the internet itself. Much of our social and vocational lives play out on the internet, which prompts new industries aimed at creating, managing, and debugging the websites and applications that we increasingly rely on."
-    },
-    {
-      "id": "fe03",
-      "title": "Statistics",
-      "description": "Study how to  study and manipulation of data, including ways to gather, review, analyze, and draw conclusions from data"
-    },
-    {
-      "id": "ee4e",
-      "title": "React",
-      "description": "React is a JavaScript library for building user interfaces."
-    },
-    {
-      "id": "ed85",
+      "id": "59f3",
+      "image": "angular.jpg",
       "title": "Angular",
       "description": "Angular is a TypeScript-based JavaScript framework."
     },
     {
-      "id": "e52a",
-      "title": "Web Development",
-      "description": "The world of web development is as wide as the internet itself. Much of our social and vocational lives play out on the internet, which prompts new industries aimed at creating, managing, and debugging the websites and applications that we increasingly rely on."
+      "id": "cd1f",
+      "image": "react.jpg",
+      "title": "React",
+      "description": "React is a JavaScript library for building user interfaces."
     },
     {
-      "id": "5874",
-      "title": "Web Development",
-      "description": "The world of web development is as wide as the internet itself. Much of our social and vocational lives play out on the internet, which prompts new industries aimed at creating, managing, and debugging the websites and applications that we increasingly rely on."
+      "id": "bd35",
+      "image": "angular.jpg",
+      "title": "Svelte",
+      "description": "Svelte is a radical new approach to building user interfaces."
     },
     {
-      "id": "6c5f",
-      "title": "Web Development",
-      "description": "The world of web development is as wide as the internet itself. Much of our social and vocational lives play out on the internet, which prompts new industries aimed at creating, managing, and debugging the websites and applications that we increasingly rely on."
+      "id": "2f0c",
+      "image": "react.jpg",
+      "title": "React",
+      "description": "React is a JavaScript library for building user interfaces."
+    },
+    {
+      "id": "602a",
+      "image": "react.jpg",
+      "title": "React",
+      "description": "React is a JavaScript library for building user interfaces."
+    },
+    {
+      "id": "489f",
+      "image": "react.jpg",
+      "title": "React",
+      "description": "React is a JavaScript library for building user interfaces."
+    }
+  ],
+  "reviews": [
+    {
+      "id": "6f78",
+      "review": "freeewee"
+    },
+    {
+      "id": "1cc9",
+      "review": "yyyy"
+    },
+    {
+      "id": "5003",
+      "review": "yyyy"
+    },
+    {
+      "id": "30ff",
+      "review": "getetetetettete"
     }
   ]
 }

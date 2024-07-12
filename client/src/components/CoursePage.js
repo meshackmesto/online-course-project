@@ -12,7 +12,7 @@ function CoursePage() {
     fetch(`${baseUrl}/courses`)
       .then((response) => response.json())
       .then((coursesArray) => {
-        console.log(coursesArray);
+        setCourses(coursesArray);
       })
       .catch((err) => console.log(err));
   }, []);
@@ -22,9 +22,7 @@ function CoursePage() {
     setSelectedCourses(updatedCourses);
   }
 
-  /*  const displayedCourses = courses.map((course) => {
-    return <Course key={course.id} course={course} />;
-  }); */
+
 
   return (
     <div className="coursepage">

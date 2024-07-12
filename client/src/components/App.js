@@ -19,7 +19,7 @@ function App() {
           <Route path="/enrollment" component={Enrollment} />
           <Route path="/reviews" component={Reviews} />
           <Route path="/navbar" component={Navbar} />
-          <Route path="signup" component={Signup} />
+          <Route path="/signup" component={Signup} />
           <Route path="/mycourses" component={MyCourses} />
         </Switch>
     </div>
