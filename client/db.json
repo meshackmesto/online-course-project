@@ -116,5 +116,16 @@
       "id": "30ff",
       "review": "getetetetettete"
     }
+  ],
+  "signup": [
+    {
+      "id": "4a14",
+      "first_name": "gladys",
+      "last_name": "hunni",
+      "username": "hunniG",
+      "email": "hunni@gmail.com",
+      "password": "hunniuser",
+      "password_confirmation": "hunniuser"
+    }
   ]
 }

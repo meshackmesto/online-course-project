@@ -17,9 +17,9 @@ function MyCourses() {
   function removeCourse(id) {
     fetch(`${baseUrl}/myCourses/${id}`, {
       method: "DELETE",
-    })
+    });
     handleDelete(id);
-      /* .then(() => handleDelete(id))
+    /* .then(() => handleDelete(id))
       .catch((err) => console.log(err));  */
   }
 
