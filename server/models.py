@@ -53,6 +53,6 @@ class Review(db.Model,SerializerMixin):
 
 
 
-    
+
 if __name__ == '__main__':
     app.run(debug=True)
