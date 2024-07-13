@@ -4,6 +4,7 @@ import MyCourseCard from "./MyCourseCard";
 
 function MyCourses() {
   const [mycourses, setMyCourses] = useState([]);
+  
 
   //return to fetch courses from api endpoint/ database
   const baseUrl = "http://localhost:3031";
@@ -13,17 +14,6 @@ function MyCourses() {
       .then((courses) => setMyCourses(courses))
       .catch((err) => console.log("deleting course failed", err));
   }, []);
-
-  /* useEffect = (()=> {
-    fetchCourses()
-  }, [])
-
-  const fetchCourses = () => {
-    fetch(`${baseUrl}/myCourses`)
-      .then((response) => response.json())
-      .then((courses) => setMyCourses(courses))
-      .catch((err) => console.log("deleting course failed", err));
-  } */
 
   function removeCourse(id) {
     fetch(`http://localhost:3031/myCourses/${id}`, {
@@ -38,8 +28,11 @@ function MyCourses() {
     const updatedCourses = mycourses.filter((course) => course.id !== id);
     setMyCourses(updatedCourses);
   }
+
+ 
+
   console.log(mycourses);
-  const courseArr = Object.values(mycourses);
+  //const courseArr = Object.values(mycourses);
 
   return (
     <div className="mycourses">
@@ -56,12 +49,6 @@ function MyCourses() {
               removeCourse={removeCourse}
             />
           ))}
-        {/*  <button
-          className="delete-course"
-          onClick={(course) => removeCourse(course.id)}
-        >
-          Remove
-        </button> */}
       </div>
     </div>
   );
