@@ -11,6 +11,7 @@ function Course({ onAddCourse }) {
   const [selectedCourse, setSelectedCourse] = useState(null);
   const [filteredCourses, setFilteredCourses] = useState([]);
   const [search, setSearch] = useState("");
+  const [selectedCourses, setSelectedCourses] = useState([]);
 
   //toggle modal(pop up page) set to true
   const toggleModal = () => {
@@ -53,6 +54,10 @@ function Course({ onAddCourse }) {
   //toggles between display all courses and the searched course
   const displayedCourses = search.length > 0 ? filteredCourses : courses;
 
+  function handleAddCourse(newCourse) {
+    const updatedCourses = [...selectedCourses, newCourse];
+    setSelectedCourses(updatedCourses);
+  }
   //add course to db.json myCourses
   const baseUrl = "http://localhost:3031";
   function postCourse(e) {
@@ -71,7 +76,7 @@ function Course({ onAddCourse }) {
     })
       .then((response) => response.json())
       .then((newCourse) => {
-        onAddCourse(newCourse);
+        handleAddCourse(newCourse);
         toggleModal();
       });
   }
@@ -128,7 +133,7 @@ function Course({ onAddCourse }) {
                     description: course.description,
                   })
                 }
-                onAddCourse={onAddCourse}
+                handleAddCourse={handleAddCourse}
               />
             ))}
         </div>

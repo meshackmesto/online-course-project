@@ -62,12 +62,6 @@
   ],
   "myCourses": [
     {
-      "id": "0b08",
-      "image": "angular.jpg",
-      "title": "Svelte",
-      "description": "Svelte is a radical new approach to building user interfaces."
-    },
-    {
       "id": "59f3",
       "image": "angular.jpg",
       "title": "Angular",
@@ -113,6 +107,66 @@
       "id": "6cf3",
       "title": "Web Development",
       "description": "The world of web development is as wide as the internet itself. Much of our social and vocational lives play out on the internet, which prompts new industries aimed at creating, managing, and debugging the websites and applications that we increasingly rely on."
+    },
+    {
+      "id": "7502",
+      "title": "Vue",
+      "description": "Vue.js is an open-source JavaScript framework for building user interfaces."
+    },
+    {
+      "id": "ad5c",
+      "title": "Angular",
+      "description": "Angular is a TypeScript-based JavaScript framework."
+    },
+    {
+      "id": "946f",
+      "title": "React",
+      "description": "React is a JavaScript library for building user interfaces."
+    },
+    {
+      "id": "e5b0",
+      "title": "React",
+      "description": "React is a JavaScript library for building user interfaces."
+    },
+    {
+      "id": "25ce",
+      "title": "React",
+      "description": "React is a JavaScript library for building user interfaces."
+    },
+    {
+      "id": "b0b4",
+      "title": "Svelte",
+      "description": "Svelte is a radical new approach to building user interfaces."
+    },
+    {
+      "id": "f969",
+      "title": "Vue",
+      "description": "Vue.js is an open-source JavaScript framework for building user interfaces."
+    },
+    {
+      "id": "c445",
+      "title": "React",
+      "description": "React is a JavaScript library for building user interfaces."
+    },
+    {
+      "id": "a053",
+      "title": "Angular",
+      "description": "Angular is a TypeScript-based JavaScript framework."
+    },
+    {
+      "id": "a7af",
+      "title": "React",
+      "description": "React is a JavaScript library for building user interfaces."
+    },
+    {
+      "id": "f94d",
+      "title": "React",
+      "description": "React is a JavaScript library for building user interfaces."
+    },
+    {
+      "id": "4ede",
+      "title": "React",
+      "description": "React is a JavaScript library for building user interfaces."
     }
   ],
   "reviews": [
@@ -156,6 +210,13 @@
       "last_name": "murugi",
       "email": "mellisa@hotmail.com",
       "password": "78uiyyhjkkk"
+    },
+    {
+      "id": "83c8",
+      "first_name": "mary",
+      "last_name": "kamau",
+      "email": "kamau.mary@gmail.com",
+      "password": "maria888"
     }
   ],
   "login": [
