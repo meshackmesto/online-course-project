@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Navbar from "./Navbar";
+import { Link } from "react-router-dom";
 import "./Signup.css";
 
 function Signup({ setUser }) {
@@ -9,10 +10,12 @@ function Signup({ setUser }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   /* const [passwordConfirmation, setPasswordConfirmation] = useState(""); */
+  const [formSubmitted, setFormSubmitted] = useState(false);
 
   const baseUrl = "http://localhost:3031";
   function postSignup(e) {
     e.preventDefault();
+    setFormSubmitted(true);
     fetch(`${baseUrl}/signup`, {
       method: "POST",
       headers: {
@@ -33,11 +36,16 @@ function Signup({ setUser }) {
     });
   }
 
+  /* const submitForm = (e) => {
+    e.preventDefault();
+    setFormSubmitted(true);
+  }; */
+
   return (
     <div>
       <Navbar />
-      <form className="signup" onSubmit={postSignup}>
-        <h1>Signup</h1>
+      <form className="signup bg-dark" onSubmit={postSignup}>
+        <h1>Sign up</h1>
         <label for="">
           First Name
           <input
@@ -47,6 +55,9 @@ function Signup({ setUser }) {
             autoComplete="off"
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
+            pattern="^[A-Za-z\-']+$"
+            placeholder="John"
+            required
           />
         </label>
         <label for="">
@@ -58,6 +69,9 @@ function Signup({ setUser }) {
             autoComplete="off"
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
+            pattern="^[A-Za-z\-']+$"
+            placeholder="Doe"
+            required
           />
         </label>
         {/*  <label for="">
@@ -69,6 +83,8 @@ function Signup({ setUser }) {
             autoComplete="off"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
+            pattern="^[A-Za-z\-']+$"
+            required
           />
         </label> */}
         <label for="">
@@ -80,6 +96,9 @@ function Signup({ setUser }) {
             autoComplete="off"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            pattern="^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+            placeholder="hunni@gmail"
+            required
           />
         </label>
         <label for="">
@@ -91,22 +110,18 @@ function Signup({ setUser }) {
             autoComplete="off"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            pattern="^[a-z0-9_]{3,}$"
+            placeholder="Password"
+            required
           />
         </label>
-        {/*   <label for="">
-          Password Confirmation
-          <input
-            type="password"
-            id="password-confirmation"
-            autoComplete="off"
-            value={passwordConfirmation}
-            onChange={(e) => setPasswordConfirmation(e.target.value)}
-          />
-        </label> */}
-        <button type="submit" className="signup-button">
-          Sign up
-        </button>
+        <Link to="/login">
+          <button type="submit" className="signup-button">
+            Sign up
+          </button>
+        </Link>
       </form>
+      {formSubmitted ? <p>Sign up successful!</p> : null}
     </div>
   );
 }
