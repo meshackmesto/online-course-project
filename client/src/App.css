@@ -61,7 +61,7 @@ p {
 }
 
 /*styling navbar*/
-.sidebar {
+.navbar {
   display: flex;
   /* position: fixed; */
   flex-direction: row;
@@ -69,13 +69,10 @@ p {
   height: 100vh;
 }
 
-.sidebar .navbar {
+nav ul {
   display: flex;
-  flex-direction: row;
-  width: 15vw;
-  height: 100vh;
-  background-color: rgb(42, 189, 67);
-  color: white;
+  flex-direction: column;
+  padding: 0px 20px 0px 0px;
 }
 
 nav li {
@@ -139,6 +136,24 @@ nav li a {
 .overlay {
   background: gray;
   opacity: 0.3;
+}
+
+/*styling my course card*/
+.mycoursecard {
+  width: 20%;
+  height: 40vh;
+  overflow: hidden;
+  display: inline-flex;
+  flex-direction: column;
+  margin: 20px 40px;
+  padding: 10px;
+  border: 1px solid black;
+}
+
+/*styling close button*/
+.close {
+  background: none;
+  border: none;
 }
 
 /* styling enrollement */

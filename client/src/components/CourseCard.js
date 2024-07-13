@@ -7,11 +7,11 @@ function CourseCard({ id, image, title, description, onClick }) {
         <h3>{title}</h3>
       </div>
       <div className="card-body">
-       {/*  <img
-          src={require(`./images/${image}`).default}
+      {/*  <img
+          src={require(`../images/${image}`).default}
           alt={title}
           className="images"
-        /> */}
+        />  */}
         <p>{description}</p>
       </div>
     </div>
