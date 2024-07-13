@@ -44,9 +44,4 @@ class Review(db.Model):
     student = db.relationship('Student', back_populates='reviews')
     course = db.relationship('Course', back_populates='reviews')
 
-
-
-
-
-if __name__ == '__main__':
-    app.run(debug=True)
+    

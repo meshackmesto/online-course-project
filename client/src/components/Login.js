@@ -38,9 +38,9 @@ function Login({ setUser }) {
         <label for="">
           Password
           <input
-            type="text"
+            type="password"
             id="password"
-            autoComplete="off"
+            autoComplete="current-password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
