@@ -68,105 +68,29 @@
       "description": "Angular is a TypeScript-based JavaScript framework."
     },
     {
-      "id": "cd1f",
-      "image": "react.jpg",
-      "title": "React",
-      "description": "React is a JavaScript library for building user interfaces."
-    },
-    {
-      "id": "bd35",
-      "image": "angular.jpg",
+      "id": "4",
       "title": "Svelte",
       "description": "Svelte is a radical new approach to building user interfaces."
     },
     {
-      "id": "2f0c",
-      "image": "react.jpg",
-      "title": "React",
-      "description": "React is a JavaScript library for building user interfaces."
-    },
-    {
-      "id": "602a",
-      "image": "react.jpg",
-      "title": "React",
-      "description": "React is a JavaScript library for building user interfaces."
-    },
-    {
-      "id": "489f",
-      "image": "react.jpg",
-      "title": "React",
-      "description": "React is a JavaScript library for building user interfaces."
-    },
-    {
-      "id": "ecd4",
-      "image": "react.jpg",
-      "title": "React",
-      "description": "React is a JavaScript library for building user interfaces."
-    },
-    {
-      "id": "6cf3",
-      "title": "Web Development",
-      "description": "The world of web development is as wide as the internet itself. Much of our social and vocational lives play out on the internet, which prompts new industries aimed at creating, managing, and debugging the websites and applications that we increasingly rely on."
-    },
-    {
-      "id": "7502",
-      "title": "Vue",
-      "description": "Vue.js is an open-source JavaScript framework for building user interfaces."
-    },
-    {
-      "id": "ad5c",
+      "id": "2",
       "title": "Angular",
       "description": "Angular is a TypeScript-based JavaScript framework."
     },
     {
-      "id": "946f",
+      "id": "1",
       "title": "React",
       "description": "React is a JavaScript library for building user interfaces."
     },
     {
-      "id": "e5b0",
-      "title": "React",
-      "description": "React is a JavaScript library for building user interfaces."
-    },
-    {
-      "id": "25ce",
-      "title": "React",
-      "description": "React is a JavaScript library for building user interfaces."
-    },
-    {
-      "id": "b0b4",
-      "title": "Svelte",
-      "description": "Svelte is a radical new approach to building user interfaces."
-    },
-    {
-      "id": "f969",
+      "id": "3",
       "title": "Vue",
       "description": "Vue.js is an open-source JavaScript framework for building user interfaces."
     },
     {
-      "id": "c445",
-      "title": "React",
-      "description": "React is a JavaScript library for building user interfaces."
-    },
-    {
-      "id": "a053",
-      "title": "Angular",
-      "description": "Angular is a TypeScript-based JavaScript framework."
-    },
-    {
-      "id": "a7af",
-      "title": "React",
-      "description": "React is a JavaScript library for building user interfaces."
-    },
-    {
-      "id": "f94d",
-      "title": "React",
-      "description": "React is a JavaScript library for building user interfaces."
-    },
-    {
-      "id": "4ede",
-      "title": "React",
-      "description": "React is a JavaScript library for building user interfaces."
+      "id": "6",
+      "title": "Backbone",
+      "description": "Backbone.js is an open-source JavaScript framework for creating web applications."
     }
   ],
   "reviews": [

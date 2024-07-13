@@ -140,9 +140,30 @@ nav li a {
   opacity: 0.3;
 }
 
+/*styling select-course button*/
+.select-course, .close-modal {
+  width: 20%;
+  height: 6vh;
+  position: absolute;
+  left: 30px;
+  top: 85%;
+  border-radius: 10px;
+  background-color: gray;
+  font-weight: bold;
+  color: white;
+  border: none;
+}
+
+/*styling close-modal button*/
+.close-modal {
+  position: relative;
+  left: 180px;
+  top: 65%;
+  margin: 10px;
+}
 /*styling my course card*/
 .mycoursecard {
-  width: 20%;
+  width: 25%;
   height: 40vh;
   overflow: hidden;
   display: inline-flex;
@@ -150,6 +171,7 @@ nav li a {
   margin: 20px 40px;
   padding: 10px;
   border: 1px solid black;
+
 }
 
 /*styling close button*/
