@@ -115,11 +115,10 @@ function Signup({ setUser }) {
             required
           />
         </label>
-        <Link to="/login">
-          <button type="submit" className="signup-button">
-            Sign up
-          </button>
-        </Link>
+
+        <button type="submit" className="signup-button">
+          Sign up
+        </button>
       </form>
       {formSubmitted ? <p>Sign up successful!</p> : null}
     </div>
