@@ -52,9 +52,9 @@ function Login({ setUser }) {
             required
           />
         </label>
-        <Link to="/">
+        
           <button className="login-button">Log in</button>
-        </Link>
+        
       </form>
     </div>
   );

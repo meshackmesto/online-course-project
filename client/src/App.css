@@ -141,17 +141,20 @@ nav li a {
 }
 
 /*styling select-course button*/
-.select-course, .close-modal {
-  width: 20%;
+.select-course,
+.close-modal {
+  width: 10%;
   height: 6vh;
-  position: absolute;
-  left: 30px;
-  top: 85%;
   border-radius: 10px;
   background-color: gray;
   font-weight: bold;
   color: white;
   border: none;
+}
+.select-course {
+  position: absolute;
+  left: 30px;
+  top: 85%;
 }
 
 /*styling close-modal button*/
@@ -171,7 +174,6 @@ nav li a {
   margin: 20px 40px;
   padding: 10px;
   border: 1px solid black;
-
 }
 
 /*styling close button*/
