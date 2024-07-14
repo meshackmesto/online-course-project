@@ -1,12 +1,11 @@
 #!/usr/bin/env python3
 
 # Remote library imports
-from flask import Flask, request
+from flask import Flask, request, session, make_response, jsonify
 from flask_restful import Resource
 from flask_cors import CORS
 from flask_migrate import Migrate
 from flask_restful import Api
-from flask_sqlalchemy import SQLAlchemy
 from marshmallow_sqlalchemy import SQLAlchemyAutoSchema
 
 
@@ -17,42 +16,49 @@ from config import app, db, api
 # Add your model imports
 from models import Student, Course, Enrollment, Review
 
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.json.compact = False
+
+db.init_app(app)
+migrate = Migrate (app, db)
+api = Api(app)
+
 # Views go here!
-class Student(SQLAlchemyAutoSchema):
+class StudentSchema(SQLAlchemyAutoSchema):
     class Meta:
         model = Student
         load_instance = True
 
-student_schema = Student()
-students_schema = Student(many=True)
+student_schema = StudentSchema()
+students_schema = StudentSchema(many=True)
 
-class Course(SQLAlchemyAutoSchema):
+class CourseSchema(SQLAlchemyAutoSchema):
     class Meta:
         model = Course
         load_instance = True
 
-course_schema = Course()
-courses_schema = Course(many=True)
+course_schema = CourseSchema()
+courses_schema = CourseSchema(many=True)
 
-class Enrollment(SQLAlchemyAutoSchema):
+class EnrollmentSchema(SQLAlchemyAutoSchema):
     class Meta:
         model = Enrollment
         load_instance = True
 
-enrollment_schema = Enrollment()
-enrollments_schema = Enrollment(many=True)
+enrollment_schema = EnrollmentSchema()
+enrollments_schema = EnrollmentSchema(many=True)
 
-class Review(SQLAlchemyAutoSchema):
+class ReviewSchema(SQLAlchemyAutoSchema):
     class Meta:
         model = Review
         load_instance = True
 
-review_schema = Review()
-reviews_schema = Review(many=True)
+review_schema = ReviewSchema()
+reviews_schema = ReviewSchema(many=True)
 
 
-
-class Student(Resource):
+class Students(Resource):
     def get(self, student_id):
         student = Student.query.get_or_404(student_id)
         return student_schema.dump(student)
@@ -83,10 +89,23 @@ class StudentList(Resource):
         db.session.commit()
         return student_schema.dump(new_student), 201
 
-class Course(Resource):
-    def get(self, course_id):
-        course = Course.query.get_or_404(course_id)
-        return course_schema.dump(course)
+class Courses(Resource):
+    def get(self):
+        courses = [course.to_dict() for course in Course.query.all()]
+        return make_response(jsonify(courses), 200)
+
+    def post(self):
+        data = request.get_json()
+
+        new_course = Course(
+            title=data['title'],
+            description=data['description']
+        )
+        
+        db.session.add(new_course)
+        db.session.commit()
+
+        return make_response(jsonify(new_course.to_dict()), 201)
 
     def patch(self, course_id):
         course = Course.query.get_or_404(course_id)
@@ -112,7 +131,7 @@ class CourseList(Resource):
         db.session.commit()
         return course_schema.dump(new_course), 201
 
-class Enrollment(Resource):
+class Enrollments(Resource):
     def get(self, enrollment_id):
         enrollment = Enrollment.query.get_or_404(enrollment_id)
         return enrollment_schema.dump(enrollment)
@@ -141,7 +160,7 @@ class EnrollmentList(Resource):
         db.session.commit()
         return enrollment_schema.dump(new_enrollment), 201
 
-class Review(Resource):
+class Reviews(Resource):
     def get(self, review_id):
         review = Review.query.get_or_404(review_id)
         return review_schema.dump(review)
@@ -172,13 +191,13 @@ class ReviewList(Resource):
         return review_schema.dump(new_review), 201
     
 api.add_resource(StudentList, '/students')
-api.add_resource(Student, '/students/<int:student_id>')
+api.add_resource(Students, '/students/<int:student_id>')
 api.add_resource(CourseList, '/courses')
-api.add_resource(Course, '/courses/<int:course_id>')
+api.add_resource(Courses, '/courses/<int:course_id>')
 api.add_resource(EnrollmentList, '/enrollments')
-api.add_resource(Enrollment, '/enrollments/<int:enrollment_id>')
+api.add_resource(Enrollments, '/enrollments/<int:enrollment_id>')
 api.add_resource(ReviewList, '/reviews')
-api.add_resource(Review, '/reviews/<int:review_id>')
+api.add_resource(Reviews, '/reviews/<int:review_id>')
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)

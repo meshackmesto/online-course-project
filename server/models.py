@@ -1,5 +1,9 @@
+
+from sqlalchemy_serializer import SerializerMixin
 from config import db
 from datetime import datetime
+
+""" db = SQLAlchemy() """
 
 # Models go here!
 class Student(db.Model):
@@ -15,7 +19,7 @@ class Student(db.Model):
     enrollments = db.relationship('Enrollment', back_populates='student', lazy=True)
     reviews = db.relationship('Review', back_populates='student', lazy=True)
 
-class Course(db.Model):
+class Course(db.Model, SerializerMixin):
     __tablename__ = 'courses'
 
     id = db.Column(db.Integer, primary_key=True)
@@ -24,6 +28,10 @@ class Course(db.Model):
     enrollments = db.relationship('Enrollment', back_populates='course', lazy=True)
     reviews = db.relationship('Review', back_populates='course', lazy=True)
 
+    def  __repr__(self):
+        return f'<Course {self.title} {self.description}>'
+
+# Schemas go here!
 class Enrollment(db.Model):
     __tablename__ = 'enrollments'
 
@@ -43,3 +51,5 @@ class Review(db.Model):
     comment = db.Column(db.String(255), nullable=False)
     student = db.relationship('Student', back_populates='reviews')
     course = db.relationship('Course', back_populates='reviews')
+
+    

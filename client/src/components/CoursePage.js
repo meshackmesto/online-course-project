@@ -17,10 +17,10 @@ function CoursePage() {
       .catch((err) => console.log(err));
   }, []);
 
-  function handleAddCourse(newCourse) {
+ function handleAddCourse(newCourse) {
     const updatedCourses = [...selectedCourses, newCourse];
     setSelectedCourses(updatedCourses);
-  }
+  } 
 
 
 

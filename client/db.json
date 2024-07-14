@@ -53,15 +53,14 @@
       "title": "Web Development",
       "image": "webdevelopment.jpg",
       "description": "The world of web development is as wide as the internet itself. Much of our social and vocational lives play out on the internet, which prompts new industries aimed at creating, managing, and debugging the websites and applications that we increasingly rely on."
+    },
+    {
+      "id": "f52a",
+      "title": "Angular",
+      "description": "Angular is a TypeScript-based JavaScript framework."
     }
   ],
   "myCourses": [
-    {
-      "id": "0b08",
-      "image": "angular.jpg",
-      "title": "Svelte",
-      "description": "Svelte is a radical new approach to building user interfaces."
-    },
     {
       "id": "59f3",
       "image": "angular.jpg",
@@ -69,34 +68,29 @@
       "description": "Angular is a TypeScript-based JavaScript framework."
     },
     {
-      "id": "cd1f",
-      "image": "react.jpg",
-      "title": "React",
-      "description": "React is a JavaScript library for building user interfaces."
-    },
-    {
-      "id": "bd35",
-      "image": "angular.jpg",
+      "id": "4",
       "title": "Svelte",
       "description": "Svelte is a radical new approach to building user interfaces."
     },
     {
-      "id": "2f0c",
-      "image": "react.jpg",
+      "id": "2",
+      "title": "Angular",
+      "description": "Angular is a TypeScript-based JavaScript framework."
+    },
+    {
+      "id": "1",
       "title": "React",
       "description": "React is a JavaScript library for building user interfaces."
     },
     {
-      "id": "602a",
-      "image": "react.jpg",
-      "title": "React",
-      "description": "React is a JavaScript library for building user interfaces."
+      "id": "3",
+      "title": "Vue",
+      "description": "Vue.js is an open-source JavaScript framework for building user interfaces."
     },
     {
-      "id": "489f",
-      "image": "react.jpg",
-      "title": "React",
-      "description": "React is a JavaScript library for building user interfaces."
+      "id": "6",
+      "title": "Backbone",
+      "description": "Backbone.js is an open-source JavaScript framework for creating web applications."
     }
   ],
   "reviews": [
@@ -126,6 +120,77 @@
       "email": "hunni@gmail.com",
       "password": "hunniuser",
       "password_confirmation": "hunniuser"
+    },
+    {
+      "id": "fff5",
+      "first_name": "mellisa",
+      "last_name": "murugi",
+      "email": "mellisa@hotmail.com",
+      "password": "78uiyyhjkkk"
+    },
+    {
+      "id": "195a",
+      "first_name": "mellisa",
+      "last_name": "murugi",
+      "email": "mellisa@hotmail.com",
+      "password": "78uiyyhjkkk"
+    },
+    {
+      "id": "83c8",
+      "first_name": "mary",
+      "last_name": "kamau",
+      "email": "kamau.mary@gmail.com",
+      "password": "maria888"
+    },
+    {
+      "id": "6d59",
+      "first_name": "",
+      "last_name": "",
+      "email": "",
+      "password": ""
+    },
+    {
+      "id": "502f",
+      "first_name": "",
+      "last_name": "",
+      "email": "",
+      "password": ""
+    },
+    {
+      "id": "ff3f",
+      "first_name": "kal",
+      "last_name": "magg",
+      "email": "mager@gmail.com",
+      "password": "ret2"
+    },
+    {
+      "id": "1090",
+      "first_name": "fa",
+      "last_name": "def",
+      "email": "ader@gmail.com",
+      "password": "ret1"
+    }
+  ],
+  "login": [
+    {
+      "id": "a8fb",
+      "username": "pass",
+      "password": "pass"
+    },
+    {
+      "id": "8ad3",
+      "username": "",
+      "password": ""
+    },
+    {
+      "id": "744d",
+      "username": "de123",
+      "password": "dersf"
+    },
+    {
+      "id": "ab7b",
+      "username": "hanifa",
+      "password": "123"
     }
   ]
 }
