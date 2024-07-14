@@ -61,7 +61,7 @@ p {
 }
 
 /*styling navbar*/
-.sidebar {
+.navbar {
   display: flex;
   /* position: fixed; */
   flex-direction: row;
@@ -69,13 +69,10 @@ p {
   height: 100vh;
 }
 
-.sidebar .navbar {
+nav ul {
   display: flex;
-  flex-direction: row;
-  width: 15vw;
-  height: 100vh;
-  background-color: rgb(42, 189, 67);
-  color: white;
+  flex-direction: column;
+  padding: 0px 20px 0px 0px;
 }
 
 nav li {
@@ -90,6 +87,8 @@ nav li {
 nav li a {
   text-decoration: none;
   color: white;
+  font-weight: bold;
+  padding: 10px;
 }
 
 /*styling search container and search input*/
@@ -139,6 +138,48 @@ nav li a {
 .overlay {
   background: gray;
   opacity: 0.3;
+}
+
+/*styling select-course button*/
+.select-course,
+.close-modal {
+  width: 10%;
+  height: 6vh;
+  border-radius: 10px;
+  background-color: gray;
+  font-weight: bold;
+  color: white;
+  border: none;
+}
+.select-course {
+  position: absolute;
+  left: 30px;
+  top: 85%;
+}
+
+/*styling close-modal button*/
+.close-modal {
+  position: relative;
+  left: 180px;
+  top: 65%;
+  margin: 10px;
+}
+/*styling my course card*/
+.mycoursecard {
+  width: 25%;
+  height: 40vh;
+  overflow: hidden;
+  display: inline-flex;
+  flex-direction: column;
+  margin: 20px 40px;
+  padding: 10px;
+  border: 1px solid black;
+}
+
+/*styling close button*/
+.close {
+  background: none;
+  border: none;
 }
 
 /* styling enrollement */

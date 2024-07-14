@@ -11,10 +11,10 @@ function Home() {
         <div className="row">
           <div className="col-1">
             <NavLink to="/signup">
-              <button className="signup-btn">Signup</button>
+              <button className="signup-btn bg-dark">Sign up</button>
             </NavLink>
             <NavLink to="/login">
-              <button className="login-btn">Login</button>
+              <button className="login-btn bg-dark">Log in</button>
             </NavLink>
             <h1>
               Welcome to our Online Course Website, where learning meets

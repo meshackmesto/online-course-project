@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import "./Login.css";
 
 function Login({ setUser }) {
@@ -23,7 +24,7 @@ function Login({ setUser }) {
 
   return (
     <div>
-      <form className="login" onSubmit={postLogin}>
+      <form className="login bg-dark" onSubmit={postLogin}>
         <h1>Log in</h1>
         <label for="">
           Username
@@ -33,6 +34,9 @@ function Login({ setUser }) {
             autoComplete="off"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
+            pattern="^[a-z0-9_]{3,}$"
+            placeholder="Enter username"
+            required
           />
         </label>
         <label for="">
@@ -43,9 +47,14 @@ function Login({ setUser }) {
             autoComplete="current-password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            placeholder="Enter password"
+            pattern="^[a-z0-9_]{3,}$"
+            required
           />
         </label>
-        <button className="login-button">Log in</button>
+        
+          <button className="login-button">Log in</button>
+        
       </form>
     </div>
   );

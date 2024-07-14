@@ -1,7 +1,9 @@
+
 from sqlalchemy_serializer import SerializerMixin
-from sqlalchemy.ext.associationproxy import association_proxy
 from config import db
 from datetime import datetime
+
+""" db = SQLAlchemy() """
 
 # Models go here!
 class Student(db.Model,SerializerMixin):
@@ -17,7 +19,7 @@ class Student(db.Model,SerializerMixin):
     enrollments = db.relationship('Enrollment', back_populates='student', lazy=True)
     reviews = db.relationship('Review', back_populates='student', lazy=True)
 
-class Course(db.Model,SerializerMixin):
+class Course(db.Model, SerializerMixin):
     __tablename__ = 'courses'
 
     id = db.Column(db.Integer, primary_key=True)
@@ -26,7 +28,11 @@ class Course(db.Model,SerializerMixin):
     enrollments = db.relationship('Enrollment', back_populates='course', lazy=True)
     reviews = db.relationship('Review', back_populates='course', lazy=True)
 
-class Enrollment(db.Model,SerializerMixin):
+    def  __repr__(self):
+        return f'<Course {self.title} {self.description}>'
+
+# Schemas go here!
+class Enrollment(db.Model):
     __tablename__ = 'enrollments'
 
     id = db.Column(db.Integer, primary_key=True)

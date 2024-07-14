@@ -1,12 +1,11 @@
 #!/usr/bin/env python3
 
 # Remote library imports
-from flask import Flask, request,jsonify
+from flask import Flask, request, session, make_response, jsonify
 from flask_restful import Resource
 from flask_cors import CORS
 from flask_migrate import Migrate
 from flask_restful import Api
-from flask_sqlalchemy import SQLAlchemy
 from marshmallow_sqlalchemy import SQLAlchemyAutoSchema
 
 
@@ -17,17 +16,49 @@ from config import app, db, api
 # Add your model imports
 from models import Student, Course, Enrollment, Review
 
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.json.compact = False
 
-CORS(app)
-migrate = Migrate(app, db)
+db.init_app(app)
+migrate = Migrate (app, db)
 api = Api(app)
 
 # Views go here!
-@app.route('/')
-def index():
-    return '<h1>Project Server</h1>'
+class StudentSchema(SQLAlchemyAutoSchema):
+    class Meta:
+        model = Student
+        load_instance = True
 
-class StudentResource(Resource):
+student_schema = StudentSchema()
+students_schema = StudentSchema(many=True)
+
+class CourseSchema(SQLAlchemyAutoSchema):
+    class Meta:
+        model = Course
+        load_instance = True
+
+course_schema = CourseSchema()
+courses_schema = CourseSchema(many=True)
+
+class EnrollmentSchema(SQLAlchemyAutoSchema):
+    class Meta:
+        model = Enrollment
+        load_instance = True
+
+enrollment_schema = EnrollmentSchema()
+enrollments_schema = EnrollmentSchema(many=True)
+
+class ReviewSchema(SQLAlchemyAutoSchema):
+    class Meta:
+        model = Review
+        load_instance = True
+
+review_schema = ReviewSchema()
+reviews_schema = ReviewSchema(many=True)
+
+
+class Students(Resource):
     def get(self, student_id):
         student = Student.query.get(student_id)
         if student:
@@ -71,12 +102,30 @@ class StudentListResource(Resource):
         db.session.commit()
         return jsonify(new_student.to_dict()), 201
 
-class CourseResource(Resource):
-    def get(self, course_id):
-        course = Course.query.get(course_id)
-        if course:
-            return jsonify(course.to_dict())
-        return {'message': 'Course not found'}, 404
+class Courses(Resource):
+    def get(self):
+        courses = [course.to_dict() for course in Course.query.all()]
+        return make_response(jsonify(courses), 200)
+
+    def post(self):
+        data = request.get_json()
+
+        new_course = Course(
+            title=data['title'],
+            description=data['description']
+        )
+        
+        db.session.add(new_course)
+        db.session.commit()
+
+        return make_response(jsonify(new_course.to_dict()), 201)
+
+    def patch(self, course_id):
+        course = Course.query.get_or_404(course_id)
+        course.title = request.json.get('title', course.title)
+        course.description = request.json.get('description', course.description)
+        db.session.commit()
+        return course_schema.dump(course)
 
     def delete(self, course_id):
         course = Course.query.get(course_id)
@@ -111,7 +160,7 @@ class CourseListResource(Resource):
         db.session.commit()
         return jsonify(new_course.to_dict()), 201
 
-class EnrollmentResource(Resource):
+class Enrollments(Resource):
     def get(self, enrollment_id):
         enrollment = Enrollment.query.get(enrollment_id)
         if enrollment:
@@ -151,7 +200,7 @@ class EnrollmentListResource(Resource):
         db.session.commit()
         return jsonify(new_enrollment.to_dict()), 201
 
-class ReviewResource(Resource):
+class Reviews(Resource):
     def get(self, review_id):
         review = Review.query.get(review_id)
         if review:
@@ -191,17 +240,16 @@ class ReviewListResource(Resource):
         )
         db.session.add(new_review)
         db.session.commit()
-        return jsonify(new_review.to_dict()), 201
-
-# Register resources with API
-api.add_resource(StudentListResource, '/students')
-api.add_resource(StudentResource, '/students/<int:student_id>')
-api.add_resource(CourseListResource, '/courses')
-api.add_resource(CourseResource, '/courses/<int:course_id>')
-api.add_resource(EnrollmentListResource, '/enrollments')
-api.add_resource(EnrollmentResource, '/enrollments/<int:enrollment_id>')
-api.add_resource(ReviewListResource, '/reviews')
-api.add_resource(ReviewResource, '/reviews/<int:review_id>')
+        return review_schema.dump(new_review), 201
+    
+api.add_resource(StudentList, '/students')
+api.add_resource(Students, '/students/<int:student_id>')
+api.add_resource(CourseList, '/courses')
+api.add_resource(Courses, '/courses/<int:course_id>')
+api.add_resource(EnrollmentList, '/enrollments')
+api.add_resource(Enrollments, '/enrollments/<int:enrollment_id>')
+api.add_resource(ReviewList, '/reviews')
+api.add_resource(Reviews, '/reviews/<int:review_id>')
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
