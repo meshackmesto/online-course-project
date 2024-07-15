@@ -7,7 +7,7 @@ function MyCourses() {
   
 
   //return to fetch courses from api endpoint/ database
-  const baseUrl = "http://localhost:3031";
+  const baseUrl = "http://localhost:5555";
   useEffect(() => {
     fetch(`${baseUrl}/myCourses`)
       .then((response) => response.json())
@@ -16,7 +16,7 @@ function MyCourses() {
   }, []);
 
   function removeCourse(id) {
-    fetch(`http://localhost:3031/myCourses/${id}`, {
+    fetch(`http://localhost:5555/myCourses/${id}`, {
       method: "DELETE",
     })
       .then(() => handleDelete(id))
@@ -37,7 +37,7 @@ function MyCourses() {
   return (
     <div className="mycourses">
       <Navbar />
-      <h1>My Courses</h1>
+      <h2>My Courses</h2>
       <div className="card-container">
         {mycourses &&
           mycourses.map((course) => (
