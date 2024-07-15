@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import Navbar from "./Navbar";
 
 function Enrollment() {
-
   const [enrollments, setEnrollments] = useState([]);
   const [students, setStudents] = useState([]);
   const [courses, setCourses] = useState([]);
@@ -14,29 +13,29 @@ function Enrollment() {
   }, []);
 
   const fetchEnrollments = () => {
-    fetch('/api/enrollments') 
-      .then(response => response.json())
-      .then(data => setEnrollments(data))
-      .catch(error => console.error('Error fetching enrollments:', error));
+    fetch("/api/enrollments")
+      .then((response) => response.json())
+      .then((data) => setEnrollments(data))
+      .catch((error) => console.error("Error fetching enrollments:", error));
   };
 
   const fetchStudents = () => {
-    fetch('/api/students') 
-      .then(response => response.json())
-      .then(data => setStudents(data))
-      .catch(error => console.error('Error fetching students:', error));
+    fetch("/api/students")
+      .then((response) => response.json())
+      .then((data) => setStudents(data))
+      .catch((error) => console.error("Error fetching students:", error));
   };
 
   const fetchCourses = () => {
-    fetch('/api/courses') 
-      .then(response => response.json())
-      .then(data => setCourses(data))
-      .catch(error => console.error('Error fetching courses:', error));
+    fetch("/api/courses")
+      .then((response) => response.json())
+      .then((data) => setCourses(data))
+      .catch((error) => console.error("Error fetching courses:", error));
   };
 
   return (
     <div>
-       <Navbar/>
+      <Navbar />
       <h1>Enrollments</h1>
 
       <table>
@@ -49,14 +48,18 @@ function Enrollment() {
           </tr>
         </thead>
         <tbody>
-          {enrollments.map(enrollment => {
-            const student = students.find(student => student.id === enrollment.studentId);
-            const course = courses.find(course => course.id === enrollment.courseId);
+          {enrollments.map((enrollment) => {
+            const student = students.find(
+              (student) => student.id === enrollment.studentId
+            );
+            const course = courses.find(
+              (course) => course.id === enrollment.courseId
+            );
             return (
               <tr key={enrollment.id}>
                 <td>{enrollment.id}</td>
-                <td>{student ? student.name : 'Unknown'}</td>
-                <td>{course ? course.course_name : 'Unknown'}</td>
+                <td>{student ? student.name : "Unknown"}</td>
+                <td>{course ? course.course_name : "Unknown"}</td>
                 <td>{enrollment.courseId}</td>
               </tr>
             );
@@ -65,6 +68,6 @@ function Enrollment() {
       </table>
     </div>
   );
-};
+}
 
 export default Enrollment;

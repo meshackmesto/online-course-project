@@ -6,10 +6,10 @@ function Login({ setUser }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const baseUrl = "http://localhost:3031";
+  //const baseUrl = "http://localhost:3031";
   function postLogin(e) {
     e.preventDefault();
-    fetch(`${baseUrl}/login`, {
+    fetch("http://127.0.0.1:5555/students", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -52,9 +52,9 @@ function Login({ setUser }) {
             required
           />
         </label>
-        
+        <Link to="/courses">
           <button className="login-button">Log in</button>
-        
+        </Link>
       </form>
     </div>
   );

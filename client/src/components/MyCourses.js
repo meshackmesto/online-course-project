@@ -4,19 +4,18 @@ import MyCourseCard from "./MyCourseCard";
 
 function MyCourses() {
   const [mycourses, setMyCourses] = useState([]);
-  
 
   //return to fetch courses from api endpoint/ database
-  const baseUrl = "http://localhost:3031";
+  //const baseUrl = "http://localhost:3031";
   useEffect(() => {
-    fetch(`${baseUrl}/myCourses`)
+    fetch("http://127.0.0.1:5555/mycourses")
       .then((response) => response.json())
       .then((courses) => setMyCourses(courses))
       .catch((err) => console.log("deleting course failed", err));
   }, []);
 
   function removeCourse(id) {
-    fetch(`http://localhost:3031/myCourses/${id}`, {
+    fetch(`http://127.0.0.1:5555/mycourses/${id}`, {
       method: "DELETE",
     })
       .then(() => handleDelete(id))
@@ -28,8 +27,6 @@ function MyCourses() {
     const updatedCourses = mycourses.filter((course) => course.id !== id);
     setMyCourses(updatedCourses);
   }
-
- 
 
   console.log(mycourses);
   //const courseArr = Object.values(mycourses);

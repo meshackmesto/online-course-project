@@ -16,11 +16,15 @@ function App() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    fetch("/check_session").then((r) => {
-      if (r.ok) {
-        r.json().then((user) => setUser(user));
-      }
-    });
+    fetch("/check_session")
+      .then((r) => {
+        if (r.ok) {
+          return r.json();
+        }
+        throw new Error("No session found");
+      })
+      .then((user) => setUser(user))
+      .catch(() => setUser(null));
   }, []);
 
   return (
