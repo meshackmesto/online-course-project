@@ -12,11 +12,11 @@ function Signup({ setUser }) {
   /* const [passwordConfirmation, setPasswordConfirmation] = useState(""); */
   const [formSubmitted, setFormSubmitted] = useState(false);
 
-  const baseUrl = "http://localhost:3031";
+  //const baseUrl = "http://localhost:3031";
   function postSignup(e) {
     e.preventDefault();
     setFormSubmitted(true);
-    fetch(`${baseUrl}/signup`, {
+    fetch("http://127.0.0.1:5555/students", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -116,9 +116,11 @@ function Signup({ setUser }) {
           />
         </label>
 
-        <button type="submit" className="signup-button">
-          Sign up
-        </button>
+        <Link to="/login">
+          <button type="submit" className="signup-button">
+            Sign up
+          </button>
+        </Link>
       </form>
       {formSubmitted ? <p>Sign up successful!</p> : null}
     </div>

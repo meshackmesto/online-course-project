@@ -3,55 +3,46 @@
     {
       "id": "1",
       "title": "React",
-      "image": "react.jpg",
       "description": "React is a JavaScript library for building user interfaces."
     },
     {
       "id": "2",
       "title": "Angular",
-      "image": "angular.jpg",
       "description": "Angular is a TypeScript-based JavaScript framework."
     },
     {
       "id": "3",
       "title": "Vue",
-      "image": "angular.jpg",
       "description": "Vue.js is an open-source JavaScript framework for building user interfaces."
     },
     {
       "id": "4",
       "title": "Svelte",
-      "image": "angular.jpg",
       "description": "Svelte is a radical new approach to building user interfaces."
     },
     {
       "id": "5",
       "title": "Ember",
-      "image": "angular.jpg",
       "description": "Ember.js is an open-source JavaScript framework for creating ambitious web applications."
     },
     {
       "id": "6",
       "title": "Backbone",
-      "image": "angular.jpg",
       "description": "Backbone.js is an open-source JavaScript framework for creating web applications."
     },
     {
       "id": "7",
       "title": "Django",
-      "image": "django.jpg",
       "description": "Django is a free and open-source web framework written in Python."
     },
     {
       "id": "8",
       "title": "Flask",
-      "image": "flask.jpg",
       "description": "Flask is a micro web framework written in Python."
     },
     {
       "id": "a0f0",
       "title": "Web Development",
-      "image": "webdevelopment.jpg",
       "description": "The world of web development is as wide as the internet itself. Much of our social and vocational lives play out on the internet, which prompts new industries aimed at creating, managing, and debugging the websites and applications that we increasingly rely on."
     },
     {
@@ -62,35 +53,39 @@
   ],
   "myCourses": [
     {
-      "id": "59f3",
-      "image": "angular.jpg",
-      "title": "Angular",
-      "description": "Angular is a TypeScript-based JavaScript framework."
+      "id": "6420",
+      "title": "Peace bed enjoy attack.",
+      "description": "Quickly sort many increase just. Be mention rule responsibility get character score already. Bar evening member office bit bed night name.\nHigh trip step writer. Ball care officer glass go treat go."
     },
     {
-      "id": "4",
-      "title": "Svelte",
-      "description": "Svelte is a radical new approach to building user interfaces."
+      "id": "b6f7",
+      "title": "Peace bed enjoy attack.",
+      "description": "Quickly sort many increase just. Be mention rule responsibility get character score already. Bar evening member office bit bed night name.\nHigh trip step writer. Ball care officer glass go treat go."
     },
     {
-      "id": "2",
-      "title": "Angular",
-      "description": "Angular is a TypeScript-based JavaScript framework."
-    },
-    {
-      "id": "1",
+      "id": "e3a5",
       "title": "React",
       "description": "React is a JavaScript library for building user interfaces."
     },
     {
-      "id": "3",
-      "title": "Vue",
-      "description": "Vue.js is an open-source JavaScript framework for building user interfaces."
+      "id": "9cbe",
+      "title": "React",
+      "description": "React is a JavaScript library for building user interfaces."
     },
     {
-      "id": "6",
-      "title": "Backbone",
-      "description": "Backbone.js is an open-source JavaScript framework for creating web applications."
+      "id": "460b",
+      "title": "React",
+      "description": "React is a JavaScript library for building user interfaces."
+    },
+    {
+      "id": "a1a7",
+      "title": "React",
+      "description": "React is a JavaScript library for building user interfaces."
+    },
+    {
+      "id": "0108",
+      "title": "Angular",
+      "description": "Angular is a TypeScript-based JavaScript framework."
     }
   ],
   "reviews": [
@@ -109,6 +104,10 @@
     {
       "id": "30ff",
       "review": "getetetetettete"
+    },
+    {
+      "id": "d07a",
+      "review": "rerefe"
     }
   ],
   "signup": [
@@ -191,6 +190,11 @@
       "id": "ab7b",
       "username": "hanifa",
       "password": "123"
+    },
+    {
+      "id": "7ac7",
+      "username": "faith",
+      "password": "rete"
     }
   ]
 }

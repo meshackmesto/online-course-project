@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "./Navbar";
 
-function ReviewComponent({ userId, gameId }) {
+function Reviews({ userId, gameId }) {
   const [reviews, setReviews] = useState([]);
   const [editReview, setEditReview] = useState(null);
   const [newReview, setNewReview] = useState({ comment: "", rating: "0" });
@@ -90,7 +90,9 @@ function ReviewComponent({ userId, gameId }) {
         <form onSubmit={editReview ? handleUpdateReview : handleAddReview}>
           <textarea
             value={newReview.comment}
-            onChange={(e) => setNewReview({ ...newReview, comment: e.target.value })}
+            onChange={(e) =>
+              setNewReview({ ...newReview, comment: e.target.value })
+            }
             placeholder="Enter your review..."
             rows={4}
             cols={50}
@@ -99,7 +101,9 @@ function ReviewComponent({ userId, gameId }) {
           <input
             type="number"
             value={newReview.rating}
-            onChange={(e) => setNewReview({ ...newReview, rating: e.target.value })}
+            onChange={(e) =>
+              setNewReview({ ...newReview, rating: e.target.value })
+            }
             placeholder="rating (0-5)"
             min="0"
             max="5"
@@ -122,7 +126,9 @@ function ReviewComponent({ userId, gameId }) {
               <p className="ratings">Rating: {review.rating}</p>
               <p className="comments">{review.comment}</p>
               <button onClick={() => handleEditReview(review)}>Edit</button>
-              <button onClick={() => handleDeleteReview(review.id)}>Delete</button>
+              <button onClick={() => handleDeleteReview(review.id)}>
+                Delete
+              </button>
             </div>
           ))}
         </div>
@@ -131,7 +137,4 @@ function ReviewComponent({ userId, gameId }) {
   );
 }
 
-export default ReviewComponent;
-
-
-
+export default Reviews;
