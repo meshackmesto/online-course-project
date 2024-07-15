@@ -1,184 +1,97 @@
 #!/usr/bin/env python3
 
 # Remote library imports
-from flask import Flask, request
+from flask import Flask, request , jsonify, make_response
 from flask_restful import Resource
 from flask_cors import CORS
 from flask_migrate import Migrate
-from flask_restful import Api
 from flask_sqlalchemy import SQLAlchemy
-from marshmallow_sqlalchemy import SQLAlchemyAutoSchema
 
 
 # Local imports
-from config import app, db, api
+from config import app, db, api 
 
 
 # Add your model imports
 from models import Student, Course, Enrollment, Review
-
 # Views go here!
-class Student(SQLAlchemyAutoSchema):
-    class Meta:
-        model = Student
-        load_instance = True
+class Students(Resource):
 
-student_schema = Student()
-students_schema = Student(many=True)
-
-class Course(SQLAlchemyAutoSchema):
-    class Meta:
-        model = Course
-        load_instance = True
-
-course_schema = Course()
-courses_schema = Course(many=True)
-
-class Enrollment(SQLAlchemyAutoSchema):
-    class Meta:
-        model = Enrollment
-        load_instance = True
-
-enrollment_schema = Enrollment()
-enrollments_schema = Enrollment(many=True)
-
-class Review(SQLAlchemyAutoSchema):
-    class Meta:
-        model = Review
-        load_instance = True
-
-review_schema = Review()
-reviews_schema = Review(many=True)
-
-
-
-class Student(Resource):
-    def get(self, student_id):
-        student = Student.query.get_or_404(student_id)
-        return student_schema.dump(student)
-
-    def patch(self, student_id):
-        student = Student.query.get_or_404(student_id)
-        student.first_name = request.json.get('first_name', student.first_name)
-        student.last_name = request.json.get('last_name', student.last_name)
-        student.email = request.json.get('email', student.email)
-        student.password_hash = request.json.get('password_hash', student.password_hash)
-        db.session.commit()
-        return student_schema.dump(student)
-
-    def delete(self, student_id):
-        student = Student.query.get_or_404(student_id)
-        db.session.delete(student)
-        db.session.commit()
-        return '', 204
-
-class StudentList(Resource):
     def get(self):
-        students = Student.query.all()
-        return students_schema.dump(students)
-
+        students = [student.to_dict() for student in Student.query.all()]
+        return make_response(jsonify(students),200)
+    
     def post(self):
-        new_student = student_schema.load(request.json)
+        data = request.get_json()
+
+        new_student = Student(
+            first_name=data['first_name'],
+            last_name=data['last_name'],
+            email=data['email'],
+            password_hash=data['password_hash']
+        )
+
         db.session.add(new_student)
         db.session.commit()
-        return student_schema.dump(new_student), 201
 
-class Course(Resource):
-    def get(self, course_id):
-        course = Course.query.get_or_404(course_id)
-        return course_schema.dump(course)
+        return make_response(new_student.to_dict(),201)
+    
 
-    def patch(self, course_id):
-        course = Course.query.get_or_404(course_id)
-        course.title = request.json.get('title', course.title)
-        course.description = request.json.get('description', course.description)
+class CourseBYID(Resource):
+
+    def get(self,id):
+        course = Course.query.filter_by(id=id).first().to_dict()
+        return make_response(jsonify(course),200)
+    
+    def patch(self,id):
+        data = request.get_json()
+
+        course = Course.query.filter_by(id=id).first()
+
+        course.title = data.get('title', course.title)
+        course.description = data.get('description', course.description)
+
         db.session.commit()
-        return course_schema.dump(course)
 
-    def delete(self, course_id):
-        course = Course.query.get_or_404(course_id)
+        return make_response(course.to_dict(),200)
+    
+    def delete(self,id):
+        course = Course.query.filter_by(id=id).first()
         db.session.delete(course)
         db.session.commit()
-        return '', 204
 
-class CourseList(Resource):
-    def get(self):
-        courses = Course.query.all()
-        return courses_schema.dump(courses)
+        return make_response(jsonify({'message': 'Course deleted'}),204)
 
-    def post(self):
-        new_course = course_schema.load(request.json)
-        db.session.add(new_course)
-        db.session.commit()
-        return course_schema.dump(new_course), 201
 
 class Enrollment(Resource):
-    def get(self, enrollment_id):
-        enrollment = Enrollment.query.get_or_404(enrollment_id)
-        return enrollment_schema.dump(enrollment)
-
-    def patch(self, enrollment_id):
-        enrollment = Enrollment.query.get_or_404(enrollment_id)
-        enrollment.student_id = request.json.get('student_id', enrollment.student_id)
-        enrollment.course_id = request.json.get('course_id', enrollment.course_id)
-        db.session.commit()
-        return enrollment_schema.dump(enrollment)
-
-    def delete(self, enrollment_id):
-        enrollment = Enrollment.query.get_or_404(enrollment_id)
+    def get(self,id):
+        enrollments =Enrollment.query.filter_by(id=id).first().to_dict()
+        return make_response(jsonify(enrollments),200)
+    
+    def delete(self,id):
+        enrollment = Enrollment.query.filter_by(id=id).first()
         db.session.delete(enrollment)
         db.session.commit()
-        return '', 204
 
-class EnrollmentList(Resource):
-    def get(self):
-        enrollments = Enrollment.query.all()
-        return enrollments_schema.dump(enrollments)
-
-    def post(self):
-        new_enrollment = enrollment_schema.load(request.json)
-        db.session.add(new_enrollment)
-        db.session.commit()
-        return enrollment_schema.dump(new_enrollment), 201
-
-class Review(Resource):
-    def get(self, review_id):
-        review = Review.query.get_or_404(review_id)
-        return review_schema.dump(review)
-    def patch(self, review_id):
-        review = Review.query.get_or_404(review_id)
-        review.student_id = request.json.get('student_id', review.student_id)
-        review.course_id = request.json.get('course_id', review.course_id)
-        review.rating = request.json.get('rating', review.rating)
-        review.comment = request.json.get('comment', review.comment)
-        db.session.commit()
-        return review_schema.dump(review)
-
-    def delete(self, review_id):
-        review = Review.query.get_or_404(review_id)
+        return make_response(jsonify({'message': 'Enrollment deleted'}),204)
+    
+class Reviews(Resource):
+    def get(self,id):
+        reviews = Review.query.filter_by(id=id).first().to_dict()
+        return make_response(jsonify(reviews),200)
+    
+    def delete(self,id):
+        review = Review.query.filter_by(id=id).first()
         db.session.delete(review)
         db.session.commit()
-        return '', 204
 
-class ReviewList(Resource):
-    def get(self):
-        reviews = Review.query.all()
-        return reviews_schema.dump(reviews)
-
-    def post(self):
-        new_review = review_schema.load(request.json)
-        db.session.add(new_review)
-        db.session.commit()
-        return review_schema.dump(new_review), 201
+        return make_response(jsonify({'message': 'Review deleted'}),204)
     
-api.add_resource(StudentList, '/students')
-api.add_resource(Student, '/students/<int:student_id>')
-api.add_resource(CourseList, '/courses')
-api.add_resource(Course, '/courses/<int:course_id>')
-api.add_resource(EnrollmentList, '/enrollments')
-api.add_resource(Enrollment, '/enrollments/<int:enrollment_id>')
-api.add_resource(ReviewList, '/reviews')
-api.add_resource(Review, '/reviews/<int:review_id>')
-
+    # api.add_resource(Reviews, '/reviews/<int:id>')
+    api.add_resource(Students, '/students')
+    api.add_resource(CourseBYID, '/courses/<int:id>')
+    api.add_resource(Enrollment, '/enrollments/<int:id>')
+    
+        
 if __name__ == '__main__':
     app.run(port=5555, debug=True)

@@ -5,7 +5,7 @@ from flask_cors import CORS
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import MetaData
-from flask_restful import Api
+from flask_restful import Api , Resource
 
 # Instantiate app, set attributes
 app = Flask(__name__)
