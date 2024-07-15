@@ -2,7 +2,7 @@ from config import db
 from datetime import datetime
 
 # Models go here!
-class Students(db.Model):
+class Student(db.Model):
     __tablename__ = 'students'
 
     id = db.Column(db.Integer, primary_key=True)
@@ -10,8 +10,8 @@ class Students(db.Model):
     last_name = db.Column(db.String(50), nullable=False)
     email = db.Column(db.String(100), unique=True, nullable=False)
     password_hash = db.Column(db.String(255), nullable=False)
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
-    updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    created_at = db.Column(db.DateTime, default=datetime)
+    updated_at = db.Column(db.DateTime, default=datetime, onupdate=datetime)
     enrollments = db.relationship('Enrollment', back_populates='student', lazy=True)
     reviews = db.relationship('Review', back_populates='student', lazy=True)
 
