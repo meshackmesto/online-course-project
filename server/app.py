@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 
 # Remote library imports
-from flask import request, jsonify, make_response
+from flask import Flask, request, jsonify, make_response
 from flask_restful import Resource
 from flask_cors import CORS
 from flask_migrate import Migrate
-from flask_sqlalchemy import SQLAlchemy
+
 
 # Local imports
 from config import app, db, api
