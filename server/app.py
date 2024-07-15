@@ -9,7 +9,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 
 # Local imports
-from config import app, db, api 
+from config import app, db, api
 
 
 # Add your model imports
