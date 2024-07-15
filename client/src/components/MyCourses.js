@@ -6,7 +6,6 @@ function MyCourses() {
   const [mycourses, setMyCourses] = useState([]);
 
   //return to fetch courses from api endpoint/ database
-  //const baseUrl = "http://localhost:3031";
   useEffect(() => {
     fetch("http://127.0.0.1:5555/mycourses")
       .then((response) => response.json())
@@ -18,7 +17,12 @@ function MyCourses() {
     fetch(`http://127.0.0.1:5555/mycourses/${id}`, {
       method: "DELETE",
     })
-      .then(() => handleDelete(id))
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response error");
+        }
+        handleDelete(id);
+      })
       .catch((err) => console.log(err));
   }
 
@@ -41,7 +45,7 @@ function MyCourses() {
               image={course.image}
               title={course.title}
               description={course.description}
-              removeCourse={removeCourse}
+              removeCourse={() => removeCourse(course.id)}
             />
           ))}
       </div>

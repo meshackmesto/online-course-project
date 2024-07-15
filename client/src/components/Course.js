@@ -14,7 +14,6 @@ function Course({ onAddCourse }) {
 
   //fetch courses from db.json
   useEffect(() => {
-    //const baseUrl = "http://localhost:3031";
     fetch("http://127.0.0.1:5555/courses")
       .then((response) => response.json())
       .then((coursesArray) => {
@@ -24,7 +23,6 @@ function Course({ onAddCourse }) {
   }, []);
 
   useEffect(() => {
-    //const baseUrl = "http://localhost:3031";
     fetch("http://127.0.0.1:5555/mycourses")
       .then((response) => response.json())
       .then((coursesArray) => {
@@ -80,12 +78,12 @@ function Course({ onAddCourse }) {
         })
         .then((newCourse) => {
           setMyCourses([...myCourses, newCourse]);
+          alert("Course added successfully.");
           setSelectedCourse(null);
           setModal(false);
-          alert("Course added successfully.");
         })
         .catch((err) => console.log(err));
-         alert("Failed to add course.");
+      alert("Failed to add course.");
     } else {
       alert("Course already selected");
     }
