@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Login.css";
+import Navbar from "./Navbar";
 
 function Login({ setUser }) {
   const [username, setUsername] = useState("");
@@ -24,6 +25,7 @@ function Login({ setUser }) {
 
   return (
     <div>
+      <Navbar/>
       <form className="login bg-dark" onSubmit={postLogin}>
         <h1>Log in</h1>
         <label for="">

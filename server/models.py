@@ -1,12 +1,9 @@
-
 from sqlalchemy_serializer import SerializerMixin
 from config import db
 from datetime import datetime
 
-""" db = SQLAlchemy() """
-
 # Models go here!
-class Student(db.Model,SerializerMixin):
+class Student(db.Model, SerializerMixin):
     __tablename__ = 'students'
 
     id = db.Column(db.Integer, primary_key=True)
@@ -14,8 +11,8 @@ class Student(db.Model,SerializerMixin):
     last_name = db.Column(db.String(50), nullable=False)
     email = db.Column(db.String(100), unique=True, nullable=False)
     password_hash = db.Column(db.String(255), nullable=False)
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
-    updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+    created_at = db.Column(db.DateTime, default=datetime)
+    updated_at = db.Column(db.DateTime, default=datetime, onupdate=datetime)
     enrollments = db.relationship('Enrollment', back_populates='student', lazy=True)
     reviews = db.relationship('Review', back_populates='student', lazy=True)
 
@@ -25,14 +22,11 @@ class Course(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(255), nullable=False)
     description = db.Column(db.Text, nullable=True)
+    serialize_rules = ('-enrollments.course', '-reviews.course',)
     enrollments = db.relationship('Enrollment', back_populates='course', lazy=True)
     reviews = db.relationship('Review', back_populates='course', lazy=True)
 
-    def  __repr__(self):
-        return f'<Course {self.title} {self.description}>'
-
-# Schemas go here!
-class Enrollment(db.Model):
+class Enrollment(db.Model, SerializerMixin):
     __tablename__ = 'enrollments'
 
     id = db.Column(db.Integer, primary_key=True)
@@ -40,8 +34,9 @@ class Enrollment(db.Model):
     course_id = db.Column(db.Integer, db.ForeignKey('courses.id'), nullable=False)
     student = db.relationship('Student', back_populates='enrollments')
     course = db.relationship('Course', back_populates='enrollments')
+    serialize_rules = ('-student.enrollments', '-course.enrollments')
 
-class Review(db.Model,SerializerMixin):
+class Review(db.Model, SerializerMixin):
     __tablename__ = 'reviews'
 
     id = db.Column(db.Integer, primary_key=True)
@@ -49,7 +44,6 @@ class Review(db.Model,SerializerMixin):
     course_id = db.Column(db.Integer, db.ForeignKey('courses.id'), nullable=False)
     rating = db.Column(db.Integer, nullable=False)
     comment = db.Column(db.String(255), nullable=False)
+    serialize_rules = ('-course.reviews', '-student.reviews')
     student = db.relationship('Student', back_populates='reviews')
     course = db.relationship('Course', back_populates='reviews')
-
-    
