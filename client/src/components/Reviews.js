@@ -1,149 +1,137 @@
-import Navbar from "./Navbar";
 import React, { useEffect, useState } from "react";
+import Navbar from "./Navbar";
 
-function Reviews() {
+function ReviewComponent({ userId, gameId }) {
   const [reviews, setReviews] = useState([]);
-  const [newReview, setNewReview] = useState("");
-  const [editIndex, setEditIndex] = useState(-1);
+  const [editReview, setEditReview] = useState(null);
+  const [newReview, setNewReview] = useState({ comment: "", rating: "0" });
 
+  // Fetch all reviews on component mount
   useEffect(() => {
-    fetchReviews();
+    fetch("http://localhost:5555/reviews")
+      .then((response) => response.json())
+      .then((data) => setReviews(data))
+      .catch((error) => console.error("Error fetching reviews:", error));
   }, []);
 
-  const fetchReviews = () => {
-    fetch("/api/reviews")
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Failed to fetch reviews");
-        }
-        return response.json();
-      })
-      .then((reviewsData) => {
-        setReviews(reviewsData);
-      })
-      .catch((error) => {
-        console.error("Error fetching reviews:", error);
-      });
-  };
-
-  const addReview = () => {
-    fetch("/api/reviews", {
+  // Add a new review
+  function handleAddReview(e) {
+    e.preventDefault();
+    fetch("http://localhost:5555/reviews", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ text: newReview }),
+      body: JSON.stringify({
+        comment: newReview.comment,
+        rating: newReview.rating,
+        user_id: userId,
+        game_id: gameId,
+      }),
     })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Failed to add review");
-        }
-        return response.json();
+      .then((response) => response.json())
+      .then((addedReview) => {
+        setReviews([...reviews, addedReview]);
+        setNewReview({ comment: "", rating: "0" });
       })
-      .then((newReviewData) => {
-        setReviews([...reviews, newReviewData]);
-        setNewReview("");
-      })
-      .catch((error) => {
-        console.error("Error adding review:", error);
-      });
-  };
+      .catch((error) => console.error("Error adding review:", error));
+  }
 
-  const deleteReview = (id) => {
-    fetch(`/api/reviews/${id}`, {
+  // Delete a review
+  function handleDeleteReview(id) {
+    fetch(`http://localhost:5555/reviews/${id}`, {
       method: "DELETE",
     })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Failed to delete review");
-        }
-        const updatedReviews = reviews.filter((review) => review.id !== id);
-        setReviews(updatedReviews);
+      .then(() => {
+        setReviews(reviews.filter((review) => review.id !== id));
       })
-      .catch((error) => {
-        console.error("Error deleting review:", error);
-      });
-  };
+      .catch((error) => console.error("Error deleting review:", error));
+  }
 
-  const editReview = (index) => {
-    setEditIndex(index);
-    setNewReview(reviews[index].text);
-  };
+  // Edit a review
+  function handleEditReview(review) {
+    setEditReview(review);
+    setNewReview({ comment: review.comment, rating: review.rating });
+  }
 
-  const updateReview = (id) => {
-    fetch(`/api/reviews/${id}`, {
-      method: "PUT",
+  // Update an existing review
+  function handleUpdateReview(e) {
+    e.preventDefault();
+    fetch(`http://localhost:5555/reviews/${editReview.id}`, {
+      method: "PATCH",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ text: newReview }),
+      body: JSON.stringify({
+        comment: newReview.comment,
+        rating: newReview.rating,
+      }),
     })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Failed to update review");
-        }
-        const updatedReviews = [...reviews];
-        updatedReviews[editIndex] = { id, text: newReview };
-        setReviews(updatedReviews);
-        setEditIndex(-1);
-        setNewReview("");
+      .then((response) => response.json())
+      .then((updatedReview) => {
+        setReviews(
+          reviews.map((review) =>
+            review.id === updatedReview.id ? updatedReview : review
+          )
+        );
+        setEditReview(null);
+        setNewReview({ comment: "", rating: "0" });
       })
-      .catch((error) => {
-        console.error("Error updating review:", error);
-      });
-  };
+      .catch((error) => console.error("Error updating review:", error));
+  }
 
   return (
     <div>
       <Navbar />
-      <h1>Reviews</h1>
+      <h2>Reviews</h2>
 
-      <div>
-        <textarea
-          value={newReview}
-          onChange={(e) => setNewReview(e.target.value)}
-          placeholder="Enter your review..."
-          rows={4}
-          cols={50}
-        />
-        <br />
-        {editIndex === -1 ? (
-          <button onClick={addReview}>Add Review</button>
-        ) : (
-          <button onClick={() => updateReview(reviews[editIndex].id)}>
-            Update Review
+      {/* Review Form */}
+      <div className="reviews-container">
+        <form onSubmit={editReview ? handleUpdateReview : handleAddReview}>
+          <textarea
+            value={newReview.comment}
+            onChange={(e) => setNewReview({ ...newReview, comment: e.target.value })}
+            placeholder="Enter your review..."
+            rows={4}
+            cols={50}
+          />
+          <br />
+          <input
+            type="number"
+            value={newReview.rating}
+            onChange={(e) => setNewReview({ ...newReview, rating: e.target.value })}
+            placeholder="rating (0-5)"
+            min="0"
+            max="5"
+          />
+          <br />
+          <button type="submit">
+            {editReview ? "Update Review" : "Add Review"}
           </button>
-        )}
-      </div>
+          {editReview && (
+            <button type="button" onClick={() => setEditReview(null)}>
+              Cancel
+            </button>
+          )}
+        </form>
 
-      <ul>
-        {reviews.map((review, index) => (
-          <li key={review.id}>
-            {editIndex === index ? (
-              <textarea
-                value={newReview}
-                onChange={(e) => setNewReview(e.target.value)}
-                placeholder="Edit your review..."
-                rows={4}
-                cols={50}
-              />
-            ) : (
-              <div>{review.text}</div>
-            )}
-            <br />
-            {editIndex === index ? (
-              <button onClick={() => updateReview(review.id)}>Save</button>
-            ) : (
-              <>
-                <button onClick={() => editReview(index)}>Edit</button>
-                <button onClick={() => deleteReview(review.id)}>Delete</button>
-              </>
-            )}
-          </li>
-        ))}
-      </ul>
+        {/* Review List */}
+        <div className="review-cards">
+          {reviews.map((review) => (
+            <div key={review.id} className="review-card">
+              <p className="ratings">Rating: {review.rating}</p>
+              <p className="comments">{review.comment}</p>
+              <button onClick={() => handleEditReview(review)}>Edit</button>
+              <button onClick={() => handleDeleteReview(review.id)}>Delete</button>
+            </div>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }
 
-export default Reviews;
+export default ReviewComponent;
+
+
+

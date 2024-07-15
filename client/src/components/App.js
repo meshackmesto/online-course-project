@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Switch, Route } from "react-router-dom";
 import Home from "./Home";
 import Course from "./Course";
-import Enrollment from "./Enrollment";
+import Students from "./Students";
 import Navbar from "./bar";
 import Sidebar from "./Navbar";
 import Reviews from "./Reviews";
@@ -25,7 +25,6 @@ function App() {
 
   return (
     <div>
-      <Signup user={user} setUser={setUser} />
       <main>
         {user ? (
           <Switch>
@@ -43,7 +42,7 @@ function App() {
             </Route>
             <Route exact path="/" component={Home} />
             <Route path="/course" component={Course} />
-            <Route path="/enrollment" component={Enrollment} />
+            <Route path="/students" component={Students} />
             <Route path="/reviews" component={Reviews} />
             <Route path="/navbar" component={Navbar} />
             <Route path="/sidebar" component={Sidebar} />

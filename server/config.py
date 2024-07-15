@@ -17,10 +17,9 @@ app.json.compact = False
 metadata = MetaData(naming_convention={
     "fk": "fk_%(table_name)s_%(column_0_name)s_%(referred_table_name)s",
 })
-db = SQLAlchemy()
-db.init_app(app)
-migrate = Migrate(app, db)
+
 
 # Instantiate REST API
-api = Api(app)
+api = Flask(__name__)
+db =  SQLAlchemy()
 CORS(app)

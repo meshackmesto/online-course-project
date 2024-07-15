@@ -7,10 +7,12 @@
 
 h1 {
   font-weight: bolder;
+  color: #000;
 }
 
 p {
-  padding-top: 50px;
+  padding-top: 20px;
+  padding-bottom: 10px;
 }
 
 .row {
@@ -20,6 +22,7 @@ p {
   margin-left: 15px;
   margin-right: 15px;
   padding-top: 100px;
+  margin-left: 15vw;
 }
 
 .col-1 {
@@ -28,6 +31,9 @@ p {
 
 .col-2 {
   flex-basis: 50%;
+  padding-top: 60px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .col-2 img {
@@ -61,21 +67,19 @@ p {
 }
 
 /*styling navbar*/
-.sidebar {
+.navbar {
   display: flex;
-  /* position: fixed; */
   flex-direction: row;
   width: 15vw;
   height: 100vh;
+  position: fixed;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
-.sidebar .navbar {
+nav ul {
   display: flex;
-  flex-direction: row;
-  width: 15vw;
-  height: 100vh;
-  background-color: rgb(42, 189, 67);
-  color: white;
+  flex-direction: column;
+  padding: 0px 20px 0px 0px;
 }
 
 nav li {
@@ -90,11 +94,15 @@ nav li {
 nav li a {
   text-decoration: none;
   color: white;
+  font-weight: bold;
+  padding: 10px;
 }
 
 /*styling search container and search input*/
 .search_bar {
   margin-top: 20px;
+  margin-left: 15vw; 
+  padding: 20px;
 }
 
 .search {
@@ -124,6 +132,10 @@ nav li a {
   padding: 10px;
 }
 
+.course-container{
+  margin-left: 15vw;
+}
+
 /*styling modal*/
 .modal,
 .overlay {
@@ -139,6 +151,48 @@ nav li a {
 .overlay {
   background: gray;
   opacity: 0.3;
+}
+
+/*styling select-course button*/
+.select-course,
+.close-modal {
+  width: 10%;
+  height: 6vh;
+  border-radius: 10px;
+  background-color: gray;
+  font-weight: bold;
+  color: white;
+  border: none;
+}
+.select-course {
+  position: absolute;
+  left: 30px;
+  top: 85%;
+}
+
+/*styling close-modal button*/
+.close-modal {
+  position: relative;
+  left: 180px;
+  top: 65%;
+  margin: 10px;
+}
+/*styling my course card*/
+.mycoursecard {
+  width: 25%;
+  height: 40vh;
+  overflow: hidden;
+  display: inline-flex;
+  flex-direction: column;
+  margin: 20px 40px;
+  padding: 10px;
+  border: 1px solid black;
+}
+
+/*styling close button*/
+.close {
+  background: none;
+  border: none;
 }
 
 /* styling enrollement */
@@ -172,27 +226,6 @@ nav li a {
   object-fit: cover;
 }
 
-/*styling review form*/
-.review-form {
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-  top: 5%;
-  left: 15%;
-}
-
-/*styling review card*/
-.review-card {
-  width: 30%;
-  height: 20vh;
-  overflow: hidden;
-  display: inline-flex;
-  flex-direction: column;
-  margin: 20px 30px;
-  padding: 10px 10px;
-  border: 1px solid black;
-}
-
 /*styling signup form*/
 .signup {
   display: flex;
@@ -207,3 +240,139 @@ nav li a {
 .inputs {
   margin: 20px;
 }
+
+/* Reviews styling */
+h2 {
+  font-weight: bolder;
+  color: #000;
+  margin-left: 15vw;
+  padding: 20px;
+  font-size: 2em;
+  text-align: center;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.reviews-container {
+  display: flex;
+  flex-direction: column; 
+  height: 100vh; 
+  margin-left: 15vw;
+  padding: 20px;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
+.review-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-right: 10%;
+  padding: 15px;
+  margin-top: 5%;
+  flex-direction: row;
+  flex: 1;
+}
+
+.review-card {
+  width: 30%;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.review-card button {
+  margin-right: 10px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+}
+
+.review-card button:hover {
+  background-color: #0056b3;
+}
+
+.ratings{
+  padding-top: 5%;
+}
+
+.comments{
+  padding-top: 5%;
+}
+
+form {
+  margin-bottom: 20px;
+}
+
+form textarea {
+  width: 80%;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+form input[type="number"] {
+  width: 100px;
+  margin-bottom: 10px;
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+form button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+}
+
+form button:hover {
+  background-color: #0056b3;
+}
+
+@media (max-width: 1024px) {
+  .review-card {
+    flex: 1 1 calc(50% - 20px);
+    max-width: calc(50% - 20px);
+  }
+}
+
+@media (max-width: 768px) {
+  .review-card {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+}
+
+/* styling students */
+table{
+  margin-left: 20vw;
+  width: 70%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+}
+
+th {
+  background-color: #f4f4f4;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+
