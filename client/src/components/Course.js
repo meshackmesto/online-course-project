@@ -14,7 +14,7 @@ function Course({ onAddCourse }) {
 
   //fetch courses from db.json
   useEffect(() => {
-    const baseUrl = "http://localhost:3031";
+    const baseUrl = "http://localhost:5555";
     fetch(`${baseUrl}/courses`)
       .then((response) => response.json())
       .then((coursesArray) => {
@@ -24,7 +24,7 @@ function Course({ onAddCourse }) {
   }, []);
 
   useEffect(() => {
-    const baseUrl = "http://localhost:3031";
+    const baseUrl = "http://localhost:5555";
     fetch(`${baseUrl}/myCourses`)
       .then((response) => response.json())
       .then((coursesArray) => {
@@ -54,7 +54,7 @@ function Course({ onAddCourse }) {
   const displayedCourses = search.length > 0 ? filteredCourses : courses;
 
   //add course to db.json myCourses
-  const baseUrl = "http://localhost:3031";
+  const baseUrl = "http://localhost:5555";
   function postCourse(e) {
     e.preventDefault();
     if (

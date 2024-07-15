@@ -18,7 +18,7 @@ function Navbar() {
           <NavLink to="/mycourses">My Courses</NavLink>
         </li>
         <li>
-          <NavLink to="/enrollment">Enrollment </NavLink>
+          <NavLink to="/students">Students</NavLink>
         </li>
         <li>
           <NavLink to="/reviews">Reviews </NavLink>
