@@ -2,7 +2,7 @@ from config import db
 from datetime import datetime
 
 # Models go here!
-class Student(db.Model):
+class Students(db.Model):
     __tablename__ = 'students'
 
     id = db.Column(db.Integer, primary_key=True)
