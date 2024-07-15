@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "./Navbar";
 
-function ReviewComponent({ userId, gameId }) {
+function Reviews({ userId, gameId }) {
   const [reviews, setReviews] = useState([]);
   const [editReview, setEditReview] = useState(null);
   const [newReview, setNewReview] = useState({ comment: "", rating: "0" });
@@ -131,7 +131,7 @@ function ReviewComponent({ userId, gameId }) {
   );
 }
 
-export default ReviewComponent;
+export default Reviews;
 
 
 
