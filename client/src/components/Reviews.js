@@ -89,8 +89,7 @@ function Reviews() {
           <textarea
             value={newReview.comment}
             onChange={(e) =>
-              setNewReview({ ...newReview, comment: e.target.value })
-            }
+              setNewReview({ ...newReview, comment: e.target.value })}
             placeholder="Enter your review..."
             rows={4}
             cols={50}
@@ -124,6 +123,9 @@ function Reviews() {
               <p className="ratings">Rating: {review.rating}</p>
               <p className="comments">{review.comment}</p>
               <button onClick={() => handleEditReview(review)}>Edit</button>
+              <button onClick={() => handleDeleteReview(review.id)}>
+                Delete
+              </button>
               <button onClick={() => handleDeleteReview(review.id)}>
                 Delete
               </button>
