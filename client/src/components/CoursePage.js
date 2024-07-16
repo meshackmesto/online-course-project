@@ -23,7 +23,6 @@ function CoursePage() {
   } 
 
 
-
   return (
     <div className="coursepage">
       <Course onAddCourse={handleAddCourse} courses={courses} />

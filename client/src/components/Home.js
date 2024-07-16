@@ -21,8 +21,8 @@ function Home() {
               innovation
             </h1>
             <p>
-              At [Course Website Name], we are dedicated to providing you with
-              top-quality courses designed to empower and inspire. Whether
+              llll At [Course Website Name], we are dedicated to providing you
+              with top-quality courses designed to empower and inspire. Whether
               you're looking to enhance your professional skills or explore a
               new passion, we have curated a diverse selection of courses
               crafted by experts in their fields.

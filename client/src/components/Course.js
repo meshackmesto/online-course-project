@@ -14,8 +14,7 @@ function Course({ onAddCourse }) {
 
   //fetch courses from db.json
   useEffect(() => {
-    const baseUrl = "http://localhost:5555";
-    fetch(`${baseUrl}/courses`)
+    fetch("http://127.0.0.1:5555/courses")
       .then((response) => response.json())
       .then((coursesArray) => {
         setCourses(coursesArray);
@@ -24,8 +23,7 @@ function Course({ onAddCourse }) {
   }, []);
 
   useEffect(() => {
-    const baseUrl = "http://localhost:5555";
-    fetch(`${baseUrl}/myCourses`)
+    fetch("http://127.0.0.1:5555/mycourses")
       .then((response) => response.json())
       .then((coursesArray) => {
         setMyCourses(coursesArray);
@@ -54,32 +52,38 @@ function Course({ onAddCourse }) {
   const displayedCourses = search.length > 0 ? filteredCourses : courses;
 
   //add course to db.json myCourses
-  const baseUrl = "http://localhost:5555";
   function postCourse(e) {
     e.preventDefault();
     if (
       selectedCourse &&
       !myCourses.some((course) => course.id === selectedCourse.id)
     ) {
-      fetch(`${baseUrl}/myCourses`, {
+      fetch("http://127.0.0.1:5555/mycourses", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          id: selectedCourse.id,
+          //id: selectedCourse.id,
           /* image: selectedCourse.image, */
           title: selectedCourse.title,
           description: selectedCourse.description,
         }),
       })
-        .then((response) => response.json())
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          return response.json();
+        })
         .then((newCourse) => {
           setMyCourses([...myCourses, newCourse]);
+          alert("Course added successfully.");
           setSelectedCourse(null);
           setModal(false);
         })
         .catch((err) => console.log(err));
+      /*  alert("Failed to add course."); */
     } else {
       alert("Course already selected");
     }
@@ -142,11 +146,9 @@ function Course({ onAddCourse }) {
                   } */
                   )
                 }
-  
               />
             ))}
         </div>
-
       </div>
     </div>
   );
