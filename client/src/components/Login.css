@@ -2,6 +2,7 @@ h1 {
   position: relative;
   top: 0;
   padding: 20px;
+  color: white;
 }
 .login {
   display: flex;

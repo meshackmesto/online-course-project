@@ -83,7 +83,7 @@ function Course({ onAddCourse }) {
           setModal(false);
         })
         .catch((err) => console.log(err));
-      alert("Failed to add course.");
+      /*  alert("Failed to add course."); */
     } else {
       alert("Course already selected");
     }

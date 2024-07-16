@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 # Remote library imports
-from flask import Flask, request, jsonify, make_response
+from flask import Flask, request, session, jsonify, make_response
 from flask_restful import Resource
 from flask_migrate import Migrate
 from marshmallow_sqlalchemy import SQLAlchemyAutoSchema
@@ -21,46 +21,59 @@ class ClearSession(Resource):
 
     def delete(self):
     
-        db.session['page_views'] = None
-        db.session['student_id'] = None
+        session['page_views'] = None
+        session['student_id'] = None
 
         return {}, 204
 
 class Signup(Resource):
-    
-    def post(self):
+     def post(self):
         json = request.get_json()
         student = Student(
-            first_name=json['first_name']
-        )
-        student.password_hash = json['password']
+            first_name=json['first_name'],
+            last_name = json['last_name'],
+            email = json['email'],
+            password_hash = json['password']
+            )
         db.session.add(student)
         db.session.commit()
-        return student, 201
+        return student.to_dict(), 201
 
 class CheckSession(Resource):
     def get(self):
-        student_id = db.session.get('student.id')
-        if student_id:
-            student = Student.query.filter_by(id=student_id).first()
-            if student:
-                return jsonify(student_schema.dump(student)), 200
-            return jsonify({}), 204
+         #student = db.session.get('student_id')
+         student = Student.query.filter_by(id=session.get('student_id')).first()
+         if student:
+            response = make_response(jsonify(student.to_dict), 200)
+            return response.to_dict(), 200
+         else:         
+            return {}, 204
         
 
 class Login(Resource):
     def post(self):
-        json = request.get_json()
+        student = Student.query.filter(Student.first_name == request.get_json()['firstname']).first()
+        if student :
+            session['student_id'] = student.id
+            response = make_response(jsonify(student.to_dict()), 200)
+            return response
+        else:
+            return {}, 401
+
+        """ json = request.get_json()
         student = Student.query.filter_by(first_name = json()['first_name']).first()
         if student and student.check_password(json['password']):
             db.session['student_id'] = student.id
             return jsonify(student_schema.dump(student)), 200
         return {'message': 'Invalid credentials'}, 401
-
+ """
 class Logout(Resource):
     def delete(self):
-        db.session.pop('student_id', None) 
-        return {'message': 'Logged out'}, 204
+        session['student_id'] = None
+        return {'message': '204: No Content'}, 204
+    
+        """ db.session.pop('student_id', None) 
+        return {'message': 'Logged out'}, 204 """
 
 # Views go here!
 class StudentSchema(SQLAlchemyAutoSchema):
