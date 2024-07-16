@@ -25,8 +25,6 @@ function Reviews() {
       body: JSON.stringify({
         comment: newReview.comment,
         rating: newReview.rating,
-        user_id: userId,
-        game_id: gameId,
       }),
     })
       .then((response) => response.json())
