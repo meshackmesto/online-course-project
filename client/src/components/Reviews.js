@@ -123,7 +123,9 @@ function Reviews() {
               <p className="ratings">Rating: {review.rating}</p>
               <p className="comments">{review.comment}</p>
               <button onClick={() => handleEditReview(review)}>Edit</button>
-              <button onClick={() => handleDeleteReview(review.id)}>Delete</button>
+              <button onClick={() => handleDeleteReview(review.id)}>
+                Delete
+              </button>
             </div>
           ))}
         </div>
