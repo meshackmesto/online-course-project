@@ -4,8 +4,7 @@ import { Switch, Route } from "react-router-dom";
 import Home from "./Home";
 import Course from "./Course";
 import Students from "./Students";
-import Navbar from "./bar";
-import Sidebar from "./Navbar";
+import Navbar from "./Navbar";
 import Reviews from "./Reviews";
 import Login from "./Login";
 import Signup from "./Signup";
@@ -16,11 +15,15 @@ function App() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    fetch("/check_session").then((r) => {
-      if (r.ok) {
-        r.json().then((user) => setUser(user));
-      }
-    });
+    fetch("/check_session")
+      .then((r) => {
+        if (r.ok) {
+          return r.json();
+        }
+        throw new Error("No session found");
+      })
+      .then((user) => setUser(user))
+      .catch(() => setUser(null));
   }, []);
 
   return (
@@ -45,7 +48,6 @@ function App() {
             <Route path="/students" component={Students} />
             <Route path="/reviews" component={Reviews} />
             <Route path="/navbar" component={Navbar} />
-            <Route path="/sidebar" component={Sidebar} />
             <Route path="/mycourses" component={MyCourses} />
           </Switch>
         )}

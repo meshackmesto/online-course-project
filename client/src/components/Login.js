@@ -2,15 +2,17 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Login.css";
 import Navbar from "./Navbar";
+import { useHistory } from "react-router-dom";
 
 function Login({ setUser }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const baseUrl = "http://localhost:3031";
+  const history = useHistory();
+
   function postLogin(e) {
     e.preventDefault();
-    fetch(`${baseUrl}/login`, {
+    fetch("http://127.0.0.1:5555/students", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -19,13 +21,14 @@ function Login({ setUser }) {
     }).then((r) => {
       if (r.ok) {
         r.json().then((user) => setUser(user));
+        history.push("/course");
       }
     });
   }
 
   return (
     <div>
-      <Navbar/>
+      <Navbar />
       <form className="login bg-dark" onSubmit={postLogin}>
         <h1>Log in</h1>
         <label for="">
@@ -56,7 +59,7 @@ function Login({ setUser }) {
         </label>
         
           <button className="login-button">Log in</button>
-        
+      
       </form>
     </div>
   );

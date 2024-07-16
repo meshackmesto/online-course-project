@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Navbar from "./Navbar";
-import { Link } from "react-router-dom";
 import "./Signup.css";
+import { useHistory } from "react-router-dom";
 
 function Signup({ setUser }) {
   const [firstName, setFirstName] = useState("");
@@ -12,11 +12,13 @@ function Signup({ setUser }) {
   /* const [passwordConfirmation, setPasswordConfirmation] = useState(""); */
   const [formSubmitted, setFormSubmitted] = useState(false);
 
-  const baseUrl = "http://localhost:3031";
+  const history = useHistory();
+
+  //const baseUrl = "http://localhost:3031";
   function postSignup(e) {
     e.preventDefault();
     setFormSubmitted(true);
-    fetch(`${baseUrl}/signup`, {
+    fetch("http://127.0.0.1:5555/students", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -24,14 +26,15 @@ function Signup({ setUser }) {
       body: JSON.stringify({
         first_name: firstName,
         last_name: lastName,
-        /* username: username, */
         email: email,
         password: password,
-        /* password_confirmation: passwordConfirmation, */
       }),
     }).then((r) => {
       if (r.ok) {
-        r.json().then((user) => setUser(user));
+        r.json().then((user) => {
+          setUser(user);
+          history.push("/login");
+        });
       }
     });
   }
@@ -46,7 +49,7 @@ function Signup({ setUser }) {
       <Navbar />
       <form className="signup bg-dark" onSubmit={postSignup}>
         <h1>Sign up</h1>
-        <label for="">
+        <label htmlFor="first_name">
           First Name
           <input
             className="inputs"
@@ -60,7 +63,7 @@ function Signup({ setUser }) {
             required
           />
         </label>
-        <label for="">
+        <label htmlFor="last_name">
           Last Name
           <input
             id="last_name"
@@ -74,7 +77,7 @@ function Signup({ setUser }) {
             required
           />
         </label>
-        {/*  <label for="">
+        {/*  <label htmlFor="username">
           Username
           <input
             id="username"
@@ -87,7 +90,7 @@ function Signup({ setUser }) {
             required
           />
         </label> */}
-        <label for="">
+        <label htmlFor="email">
           Email
           <input
             id="email"
@@ -101,12 +104,12 @@ function Signup({ setUser }) {
             required
           />
         </label>
-        <label for="">
+        <label htmlFor="password">
           Password
           <input
             className="inputs"
             id="password"
-            type="text"
+            type="password"
             autoComplete="off"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -119,6 +122,7 @@ function Signup({ setUser }) {
         <button type="submit" className="signup-button">
           Sign up
         </button>
+
       </form>
       {formSubmitted ? <p>Sign up successful!</p> : null}
     </div>
