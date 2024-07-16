@@ -89,7 +89,8 @@ function Reviews() {
           <textarea
             value={newReview.comment}
             onChange={(e) =>
-              setNewReview({ ...newReview, comment: e.target.value })}
+              setNewReview({ ...newReview, comment: e.target.value })
+            }
             placeholder="Enter your review..."
             rows={4}
             cols={50}
