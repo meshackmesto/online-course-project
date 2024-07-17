@@ -4,8 +4,11 @@
 from flask import Flask, request, session, jsonify, make_response
 from flask_restful import Resource
 from flask_migrate import Migrate
+from flask_cors import CORS
 from marshmallow_sqlalchemy import SQLAlchemyAutoSchema
 
+app = Flask(__name__)
+CORS(app)  # Enable CORS for the entire app
 
 # Local imports
 from config import app, db, api
@@ -115,7 +118,7 @@ enrollments_schema = EnrollmentSchema(many=True)
 class ReviewSchema(SQLAlchemyAutoSchema):
     class Meta:
         model = Review
-        session = db.session
+        sqla_session = db.session
         load_instance = True
 
 review_schema = ReviewSchema()
@@ -301,19 +304,17 @@ class EnrollmentList(Resource):
         return jsonify(enrollment_schema.dump(new_enrollment)), 201
 
 class Reviews(Resource):
-    def get(self, id):
-        review = Review.query.filter_by(id=id).first().to_dict()
-        return make_response(jsonify(review), 200)
+    # def get(self, id):
+    #     review = Review.query.filter_by(id=id).first().to_dict()
+    #     return make_response(jsonify(review), 200)
     
-    def delete(self, id):
-        review = Review.query.filter_by(id=id).first()
+    # def delete(self, id):
+    #     review = Review.query.filter_by(id=id).first()
     def get(self, review_id):
         review = Review.query.get_or_404(review_id)
         return jsonify(review_schema.dump(review))
     def patch(self, review_id):
         review = Review.query.get_or_404(review_id)
-        review.student_id = request.json.get('student_id', review.student_id)
-        review.course_id = request.json.get('course_id', review.course_id)
         review.rating = request.json.get('rating', review.rating)
         review.comment = request.json.get('comment', review.comment)
         db.session.commit()
@@ -331,7 +332,7 @@ class ReviewList(Resource):
         return jsonify(reviews_schema.dump(reviews))
 
     def post(self):
-        new_review = review_schema.load(request.json)
+        new_review = review_schema.load(request.json, session = db.session)
         db.session.add(new_review)
         db.session.commit()
         return jsonify(review_schema.dump(new_review)), 201

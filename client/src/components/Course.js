@@ -78,12 +78,12 @@ function Course({ onAddCourse }) {
         })
         .then((newCourse) => {
           setMyCourses([...myCourses, newCourse]);
-          alert("Course added successfully.");
+          // alert("Course added successfully.");
           setSelectedCourse(null);
           setModal(false);
         })
         .catch((err) => console.log(err));
-      /*  alert("Failed to add course."); */
+        alert("Course added successfully to My Courses.");
     } else {
       alert("Course already selected");
     }
@@ -110,7 +110,7 @@ function Course({ onAddCourse }) {
                 </button>
 
                 <button className="select-course" onClick={postCourse}>
-                  Select Course
+                Select
                 </button>
               </>
             )}
@@ -124,30 +124,32 @@ function Course({ onAddCourse }) {
             type="text"
             value={search}
             onChange={filterCourses}
-            placeholder="search courses"
+            placeholder="search course"
           />
         </div>
 
         {/*check where error is coming from*/}
         <div className="course-container">
-          {displayedCourses &&
-            displayedCourses.map((course) => (
-              <CourseCard
-                key={course.id}
-                title={course.title}
-                image={course.image}
-                description={course.description}
-                onClick={() =>
-                  openCourse(
-                    course /* {
+          <div className="cards">
+            {displayedCourses &&
+              displayedCourses.map((course) => (
+                <CourseCard
+                  key={course.id}
+                  title={course.title}
+                  image={course.image}
+                  description={course.description}
+                  onClick={() =>
+                    openCourse(
+                      course /* {
                     image: course.image,
                     title: course.title,
                     description: course.description,
                   } */
-                  )
-                }
-              />
-            ))}
+                    )
+                  }
+                />
+              ))}
+          </div>
         </div>
       </div>
     </div>
