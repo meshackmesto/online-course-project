@@ -46,24 +46,26 @@ p {
   margin-left: 15px;
   font-size: 20px;
   text-decoration: none;
-  color: rgb(42, 189, 67);
+  color: rgb(40, 80, 212);
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   font-weight: bolder;
   background-color: rgb(255, 255, 255);
-  border: 2px solid rgb(42, 189, 67);
+  border: 2px solid rgb(40, 80, 212);
   border-radius: 10px;
 }
 
-/* styling logo */
-.logo a {
-  width: 100px;
-  height: 100px;
-  margin-left: 15px;
-  font-size: 40px;
-  text-decoration: none;
-  color: rgb(42, 189, 67);
-  font-family: century;
+.signup-btn,
+.login-btn {
+  margin-right: 10px;
+  padding: 5px;
+  color: white;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   font-weight: bolder;
+  background-color: #333;
+  border-radius: 10px;
+  cursor: pointer;
+  width: 8%;
+  height: 10vh;
 }
 
 /*styling navbar*/
@@ -74,6 +76,7 @@ p {
   height: 100vh;
   position: fixed;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  background-color: #333;
 }
 
 nav ul {
@@ -123,17 +126,43 @@ nav li a {
 
 /*styling course card*/
 .card {
-  width: 20%;
   height: 40vh;
   overflow: hidden;
   display: inline-flex;
   flex-direction: column;
   margin: 20px 40px;
+  width: 30%;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
   padding: 10px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 1024px) {
+  .card {
+    flex: 1 1 calc(50% - 20px);
+    max-width: calc(50% - 20px);
+  }
+}
+
+@media (max-width: 768px) {
+  .card {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
 }
 
 .course-container{
-  margin-left: 15vw;
+  margin-left: 20vw;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 15px;
+  margin-top: 0%;
+  flex-direction: row;
+  flex: 1;
 }
 
 /*styling modal*/
@@ -153,40 +182,87 @@ nav li a {
   opacity: 0.3;
 }
 
+h3{
+  padding-top: 0%;
+}
+
+p{
+  padding-top: 0%;
+}
+
 /*styling select-course button*/
 .select-course,
 .close-modal {
   width: 10%;
-  height: 6vh;
+  height: 8vh;
   border-radius: 10px;
-  background-color: gray;
-  font-weight: bold;
-  color: white;
-  border: none;
+  color: rgb(40, 80, 212);
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-weight: bolder;
+  background-color: rgb(255, 255, 255);
+  border: 2px solid rgb(40, 80, 212);
+  border-radius: 10px;
+  padding: 5px;
 }
 .select-course {
   position: absolute;
-  left: 30px;
-  top: 85%;
+  left: 50px;
+  top: 83%;
 }
 
 /*styling close-modal button*/
 .close-modal {
   position: relative;
-  left: 180px;
+  left: 190px;
   top: 65%;
   margin: 10px;
 }
-/*styling my course card*/
+
+/*styling my courses*/
+.heading{
+  width: 80%;
+}
+
+.cards-container{
+  display: flex;
+  position:absolute;
+  flex-wrap: wrap;
+  margin-left: 14vw;
+  gap: 10px;
+  margin-right: 10%;
+  padding: 15px;
+  margin-top: 10%;
+  flex-direction: row;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
 .mycoursecard {
-  width: 25%;
+  width: 30%;
   height: 40vh;
   overflow: hidden;
-  display: inline-flex;
-  flex-direction: column;
   margin: 20px 40px;
   padding: 10px;
   border: 1px solid black;
+  border-radius: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  flex-direction: row;
+  flex: 1;
+}
+
+@media (max-width: 1024px) {
+  .mycoursecard {
+    flex: 1 1 calc(50% - 20px);
+    max-width: calc(50% - 20px);
+  }
+}
+
+@media (max-width: 768px) {
+  .mycoursecard {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
 }
 
 /*styling close button*/
@@ -195,35 +271,9 @@ nav li a {
   border: none;
 }
 
-/* styling enrollement */
-.enrolled {
-  display: flex;
-  height: 100%;
-}
-
-.enrolled h1 {
-  color: #333;
-  margin-top: 20px;
-  padding-left: 20vw;
-}
-
-.names {
-  text-align: center;
-  margin-left: 5vw;
-  padding-left: 10vw;
-  /* list-style: none; */
-}
-
 /*styling my courses*/
 .mycourses {
   display: flex;
-}
-
-/*styling images*/
-.images {
-  width: 20%;
-  height: 40vh;
-  object-fit: cover;
 }
 
 /*styling signup form*/
@@ -285,16 +335,18 @@ h2 {
 .review-card button {
   margin-right: 10px;
   padding: 5px 10px;
-  border: none;
-  border-radius: 5px;
-  background-color: #007bff;
-  color: white;
+  color: rgb(40, 80, 212);
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-weight: bolder;
+  background-color: rgb(255, 255, 255);
+  border: 2px solid rgb(40, 80, 212);
+  border-radius: 10px;
   cursor: pointer;
 }
 
-.review-card button:hover {
+/* .review-card button:hover {
   background-color: #0056b3;
-}
+} */
 
 .ratings{
   padding-top: 5%;
@@ -326,16 +378,18 @@ form input[type="number"] {
 
 form button {
   padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  background-color: #007bff;
-  color: white;
   cursor: pointer;
+  color: rgb(40, 80, 212);
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-weight: bolder;
+  background-color: rgb(255, 255, 255);
+  border: 2px solid rgb(40, 80, 212);
+  border-radius: 10px;
 }
 
-form button:hover {
+/* form button:hover {
   background-color: #0056b3;
-}
+} */
 
 @media (max-width: 1024px) {
   .review-card {

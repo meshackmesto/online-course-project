@@ -2,6 +2,7 @@ h1 {
   position: relative;
   top: 0;
   padding: 20px;
+  color: white;
 }
 .login {
   display: flex;
@@ -50,7 +51,7 @@ label {
   width: 15vw;
   height: 7vh;
   border-radius: 15px;
-  background-color: rgb(42, 189, 67);
+  background-color: rgb(40, 80, 212);;
   border: none;
   color: white;
   font-weight: bold;

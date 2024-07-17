@@ -4,24 +4,26 @@ import MyCourseCard from "./MyCourseCard";
 
 function MyCourses() {
   const [mycourses, setMyCourses] = useState([]);
-  
 
   //return to fetch courses from api endpoint/ database
-  const baseUrl = "http://localhost:5555";
   useEffect(() => {
-    fetch(`${baseUrl}/myCourses`)
+    fetch("http://127.0.0.1:5555/mycourses")
       .then((response) => response.json())
       .then((courses) => setMyCourses(courses))
       .catch((err) => console.log("deleting course failed", err));
   }, []);
 
   function removeCourse(id) {
-    fetch(`http://localhost:5555/myCourses/${id}`, {
+    fetch(`http://127.0.0.1:5555/mycourses/${id}`, {
       method: "DELETE",
     })
-      .then(() => handleDelete(id))
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response error");
+        }
+        handleDelete(id);
+      })
       .catch((err) => console.log(err));
-    //handleDelete(id);
   }
 
   function handleDelete(id) {
@@ -29,16 +31,13 @@ function MyCourses() {
     setMyCourses(updatedCourses);
   }
 
- 
-
   console.log(mycourses);
-  //const courseArr = Object.values(mycourses);
 
   return (
     <div className="mycourses">
       <Navbar />
-      <h2>My Courses</h2>
-      <div className="card-container">
+      <h2 className="heading">My Courses</h2>
+      <div className="cards-container">
         {mycourses &&
           mycourses.map((course) => (
             <MyCourseCard
@@ -46,7 +45,7 @@ function MyCourses() {
               image={course.image}
               title={course.title}
               description={course.description}
-              removeCourse={removeCourse}
+              removeCourse={() => removeCourse(course.id)}
             />
           ))}
       </div>
