@@ -17,7 +17,7 @@ function Reviews() {
   // Add a new review
   function handleAddReview(e) {
     e.preventDefault();
-    fetch("http://localhost:5555/reviews", {
+    fetch("", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -30,7 +30,7 @@ function Reviews() {
       .then((response) => response.json())
       .then((addedReview) => {
         setReviews([...reviews, addedReview]);
-        setNewReview({ comment: "", rating: "0" });
+        setNewReview({ comment: "", rating: "0" ,student_id: "",course_id: ""});
       })
       .catch((error) => console.error("Error adding review:", error));
   }
