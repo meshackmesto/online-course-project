@@ -12,7 +12,7 @@ function Login({ setUser }) {
 
   function postLogin(e) {
     e.preventDefault();
-    fetch("http://127.0.0.1:5555/students", {
+    fetch("", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
