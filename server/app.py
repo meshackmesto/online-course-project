@@ -2,13 +2,10 @@
 
 # Remote library imports
 from flask import Flask, request, session, jsonify, make_response
-from flask_restful import Resource
+from flask_restful import Resource, Api
 from flask_migrate import Migrate
 from flask_cors import CORS
 from marshmallow_sqlalchemy import SQLAlchemyAutoSchema
-
-app = Flask(__name__)
-CORS(app)  # Enable CORS for the entire app
 
 # Local imports
 from config import app, db, api
@@ -18,6 +15,15 @@ from models import Student, Course, MyCourse, Enrollment, Review
 
 migrate = Migrate (app, db)
 
+app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'  # Example for SQLite
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['SECRET_KEY'] = 'your_secret_key'
+CORS(app) 
+
+db.init_app(app)
+
+api = Api(app)
 
 
 class ClearSession(Resource):
@@ -34,9 +40,9 @@ class Signup(Resource):
         json = request.get_json()
         student = Student(
             first_name=json['first_name'],
-            last_name = json['last_name'],
-            email = json['email'],
-            password_hash = json['password']
+            last_name=json['last_name'],
+            email=json['email'],
+            password_hash=json['password']
             )
         db.session.add(student)
         db.session.commit()
@@ -44,11 +50,10 @@ class Signup(Resource):
 
 class CheckSession(Resource):
     def get(self):
-         #student = db.session.get('student_id')
          student = Student.query.filter_by(id=session.get('student_id')).first()
          if student:
-            response = make_response(jsonify(student.to_dict), 200)
-            return response.to_dict(), 200
+            response = make_response(jsonify(student.to_dict()), 200)
+            return response
          else:         
             return {}, 204
         
@@ -135,7 +140,7 @@ class Students(Resource):
         student.first_name = request.json.get('first_name', student.first_name)
         student.last_name = request.json.get('last_name', student.last_name)
         student.email = request.json.get('email', student.email)
-        student._password_hash = request.json.get('_password_hash', student.password_hash)
+        student._password_hash = request.json.get('password_hash', student.password_hash)
         db.session.commit()
         return jsonify(student_schema.dump(student))
 
@@ -156,12 +161,12 @@ class StudentList(Resource):
             first_name=data['first_name'],
             last_name=data['last_name'],
             email=data['email'],
-            password_hash=data['password_hash']
         )
+        new_student.password = data['password'] 
         db.session.add(new_student)
         db.session.commit()
-        return jsonify(student_schema.dump(new_student)), 201
-
+        return jsonify(new_student.to_dict()), 201
+    
 class CourseByID(Resource):
     def get(self, id):
         course = Course.query.filter_by(id=id).first().to_dict()

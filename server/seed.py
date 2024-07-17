@@ -9,7 +9,7 @@ from config import app, db
 
 
 def generate_course_title():
-    subjects = ["Medicine", "Software Engineering", "Law", "Web Development", "Ui/Ux Design", "Musician", "Data Analyst", "Dermatologist", "Botanist", "Economics"]
+    subjects = ["Medicine", "Data Analysis", "Cyber security", "Software Engineering", "Law", "Web Development", "Ui/Ux Design", "Music", "Dermatology", "Botany", "Economics", "Accounting", "Architecture", "Computer Science", "Eductaion"]
     return f"{rc(subjects)}"
 
 if __name__ == '__main__':
