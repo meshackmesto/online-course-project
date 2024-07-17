@@ -30,7 +30,6 @@ function Reviews() {
       .then((response) => response.json())
       .then((addedReview) => {
         setReviews([...reviews, addedReview]);
-        setNewReview({ comment: "", rating: "0" ,student_id: "",course_id: ""});
         setNewReview({ comment: "", rating: "0" });
         alert("Review added successfully")
       })
