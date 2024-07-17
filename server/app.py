@@ -63,20 +63,11 @@ class Login(Resource):
         else:
             return {}, 401
 
-        """ json = request.get_json()
-        student = Student.query.filter_by(first_name = json()['first_name']).first()
-        if student and student.check_password(json['password']):
-            db.session['student_id'] = student.id
-            return jsonify(student_schema.dump(student)), 200
-        return {'message': 'Invalid credentials'}, 401
- """
 class Logout(Resource):
     def delete(self):
         session['student_id'] = None
         return {'message': '204: No Content'}, 204
     
-        """ db.session.pop('student_id', None) 
-        return {'message': 'Logged out'}, 204 """
 
 # Views go here!
 class StudentSchema(SQLAlchemyAutoSchema):
@@ -304,12 +295,6 @@ class EnrollmentList(Resource):
         return jsonify(enrollment_schema.dump(new_enrollment)), 201
 
 class Reviews(Resource):
-    # def get(self, id):
-    #     review = Review.query.filter_by(id=id).first().to_dict()
-    #     return make_response(jsonify(review), 200)
-    
-    # def delete(self, id):
-    #     review = Review.query.filter_by(id=id).first()
     def get(self, review_id):
         review = Review.query.get_or_404(review_id)
         return jsonify(review_schema.dump(review))
