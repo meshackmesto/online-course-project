@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "./Navbar";
 
-function Reviews({ userId, gameId }) {
+function Reviews() {
   const [reviews, setReviews] = useState([]);
   const [editReview, setEditReview] = useState(null);
   const [newReview, setNewReview] = useState({ comment: "", rating: "0" });
@@ -17,7 +17,7 @@ function Reviews({ userId, gameId }) {
   // Add a new review
   function handleAddReview(e) {
     e.preventDefault();
-    fetch("http://localhost:5555/reviews", {
+    fetch("", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -25,14 +25,13 @@ function Reviews({ userId, gameId }) {
       body: JSON.stringify({
         comment: newReview.comment,
         rating: newReview.rating,
-        user_id: userId,
-        game_id: gameId,
       }),
     })
       .then((response) => response.json())
       .then((addedReview) => {
         setReviews([...reviews, addedReview]);
         setNewReview({ comment: "", rating: "0" });
+        alert("Review added successfully")
       })
       .catch((error) => console.error("Error adding review:", error));
   }

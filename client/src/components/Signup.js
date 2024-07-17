@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import Navbar from "./Navbar";
 import "./Signup.css";
-import { useHistory } from "react-router-dom";
+import { Link } from 'react-router-dom'
+// import { useHistory } from "react-router-dom";
 
 function Signup({ setUser }) {
   const [firstName, setFirstName] = useState("");
@@ -12,13 +13,13 @@ function Signup({ setUser }) {
   /* const [passwordConfirmation, setPasswordConfirmation] = useState(""); */
   const [formSubmitted, setFormSubmitted] = useState(false);
 
-  const history = useHistory();
+  // const history = useHistory();
 
   //const baseUrl = "http://localhost:3031";
   function postSignup(e) {
     e.preventDefault();
     setFormSubmitted(true);
-    fetch("http://127.0.0.1:5555/students", {
+    fetch("", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -33,7 +34,7 @@ function Signup({ setUser }) {
       if (r.ok) {
         r.json().then((user) => {
           setUser(user);
-          history.push("/login");
+          // history.push("/course");
         });
       }
     });
@@ -118,11 +119,11 @@ function Signup({ setUser }) {
             required
           />
         </label>
-
+          <Link to='/course'>
         <button type="submit" className="signup-button">
           Sign up
         </button>
-
+        </Link>
       </form>
       {formSubmitted ? <p>Sign up successful!</p> : null}
     </div>
