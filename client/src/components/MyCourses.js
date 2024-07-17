@@ -36,8 +36,8 @@ function MyCourses() {
   return (
     <div className="mycourses">
       <Navbar />
-      <h2>My Courses</h2>
-      <div className="card-container">
+      <h2 className="heading">My Courses</h2>
+      <div className="cards-container">
         {mycourses &&
           mycourses.map((course) => (
             <MyCourseCard

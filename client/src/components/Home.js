@@ -11,17 +11,17 @@ function Home() {
         <div className="row">
           <div className="col-1">
             <NavLink to="/signup">
-              <button className="signup-btn bg-dark">Sign up</button>
+              <button className="signup-btn">Sign up</button>
             </NavLink>
             <NavLink to="/login">
-              <button className="login-btn bg-dark">Log in</button>
+              <button className="login-btn">Log in</button>
             </NavLink>
             <h1>
               Welcome to our Online Course Website, where learning meets
-              innovation
+              innovation.
             </h1>
             <p>
-              llll At [Course Website Name], we are dedicated to providing you
+              We are dedicated to providing you
               with top-quality courses designed to empower and inspire. Whether
               you're looking to enhance your professional skills or explore a
               new passion, we have curated a diverse selection of courses
