@@ -31,6 +31,8 @@ function Reviews() {
       .then((addedReview) => {
         setReviews([...reviews, addedReview]);
         setNewReview({ comment: "", rating: "0" ,student_id: "",course_id: ""});
+        setNewReview({ comment: "", rating: "0" });
+        alert("Review added successfully")
       })
       .catch((error) => console.error("Error adding review:", error));
   }
