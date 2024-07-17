@@ -18,7 +18,7 @@ function Signup({ setUser }) {
   function postSignup(e) {
     e.preventDefault();
     setFormSubmitted(true);
-    fetch("http://127.0.0.1:5555/students", {
+    fetch("", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
