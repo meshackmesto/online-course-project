@@ -13,11 +13,10 @@ class Student(db.Model, SerializerMixin):
     password_hash = db.Column(db.String(255), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime)
     updated_at = db.Column(db.DateTime, default=datetime, onupdate=datetime)
-
-    serialize_rules = ('-courses.students','-enrollments.students','-reviews.students')
     enrollments = db.relationship('Enrollment', back_populates='student', lazy=True)
     reviews = db.relationship('Review', back_populates='student', lazy=True)
-
+    # serialization
+    serialize_rules = ('-courses.students','-enrollments.students','-reviews.students')
 class Course(db.Model, SerializerMixin):
     __tablename__ = 'courses'
 
