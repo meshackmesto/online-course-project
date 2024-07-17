@@ -11,7 +11,7 @@ class Student(db.Model, SerializerMixin):
     first_name = db.Column(db.String(50), nullable=False)
     last_name = db.Column(db.String(50), nullable=False)
     email = db.Column(db.String(100), unique=True, nullable=False)
-    password_hash = db.Column(db.String(255), nullable=False)
+    _password_hash = db.Column('password_hash', db.String(255), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime)
     updated_at = db.Column(db.DateTime, default=datetime, onupdate=datetime)
     enrollments = db.relationship('Enrollment', back_populates='student', lazy=True)
@@ -21,18 +21,26 @@ class Student(db.Model, SerializerMixin):
 
 
     @hybrid_property
-    def password_hash(self):
+    def password(self):
         raise Exception('Password hashes may not be viewed.')
     
-    @password_hash.setter
-    def password_hash(self, password):
-        password_hash = bcrypt.generate_password_hash(
-            password.encode('utf-8'))
-        self._password_hash = password_hash.decode('utf-8')
+    @password.setter
+    def password(self, password):
+        self._password_hash = bcrypt.generate_password_hash(password).decode('utf-8')
 
     def authenticate(self, password):
         return bcrypt.check_password_hash(
-            self._password_hash, password.encode('utf-8'))
+            self._password_hash, password)
+    
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'first_name': self.first_name,
+            'last_name': self.last_name,
+            'email': self.email,
+            'created_at': self.created_at.isoformat() if self.created_at else None,
+            'updated_at': self.updated_at.isoformat() if self.updated_at else None,
+        }
 
 class Course(db.Model, SerializerMixin):
     __tablename__ = 'courses'
