@@ -1,21 +1,38 @@
-# Phase 4 Full-Stack Application Project Template
+# Online Course Platform
 
-## Learning Goals
+#### Date: July 17, 2024
 
-- Discuss the basic directory structure of a full-stack Flask/React application.
-- Carry out the first steps in creating your Phase 4 project.
+#### Team Members: FAITH KIMARU , ALVIN KYLE , BRIDGET MUCHESIA , MESHACK ORINA, DUDLEY KIMANI
 
----
 
 ## Introduction
+### Overview
+ This project is an online course platform where users can explore various courses, enroll in their desired courses, and leave reviews. The application provides functionalities for user authentication (sign-up and log-in), course browsing, enrollment, and review submissions. The platform is built with a Flask backend and a React frontend.
 
-Fork and clone this lesson for a template for your full-stack application. Take
-a look at the directory structure before we begin (NOTE: node_modules will be
-generated in a subsequent step):
+## Key Features
 
-```console
-$ tree -L 2
-$ # the -L argument limits the depth at which we look into the directory structure
+- *User Authentication*: Users can sign up and log in to access their personalized dashboard.
+- *Course Browsing*: Users can view a list of available courses.
+- *Course Enrollment*: Users can enroll in courses and view them in the "My Courses" section.
+- *Course Reviews*: Users can leave reviews for the courses they have taken.
+
+### User Authentication
+User authentication allows users to sign up and log in securely to access their personalized dashboard. This involves creating an account with a username, email, and password, and then logging in with those credentials. Security measures like password hashing and email verification are implemented to ensure user data is protected and only authorized users can access their information and course materials.
+
+### Course Browsing
+Course browsing enables users to view a list of available courses with essential details like title, description, instructor, and duration. It includes search and filter options to help users find courses that match their interests. Course previews provide snippets of content, aiding users in making informed decisions about enrollment.
+
+### Course Enrollment
+Course enrollment allows users to enroll in courses and view them in a personalized "My Courses" section. Users can easily sign up for courses, receive confirmation, and gain access to the course content. This feature helps users organize their learning and track their progress, making it easy to resume learning at any time.
+
+### Course Reviews
+Course reviews enable users to leave feedback and ratings for the courses they have taken. Reviews are displayed on the course page, helping prospective students gauge the quality and relevance of the course. This feature provides valuable feedback to instructors and builds trust and credibility within the learning community.
+
+## Directory Structure
+
+The project follows a typical full-stack structure with separate directories for the frontend and backend code.
+
+
 .
 ├── CONTRIBUTING.md
 ├── LICENSE.md
@@ -31,146 +48,44 @@ $ # the -L argument limits the depth at which we look into the directory structu
     ├── config.py
     ├── models.py
     └── seed.py
-```
 
-A `migrations` folder will be added to the `server` directory in a later step.
 
-The `client` folder contains a basic React application, while the `server`
-folder contains a basic Flask application. You will adapt both folders to
-implement the code for your project .
+## Technologies used
+React.js
+Python
+Flask 
+CSS
+SQLITE
 
-NOTE: If you did not previously install `tree` in your environment setup, MacOS
-users can install this with the command `brew install tree`. WSL and Linux users
-can run `sudo apt-get install tree` to download it as well.
+ ## Backend Setup
 
-## Where Do I Start?
+ ### Navigate to the server directory 
+ cd server/backend
 
-Just as with your Phase 3 Project, this will likely be one of the biggest
-projects you've undertaken so far. Your first task should be creating a Git
-repository to keep track of your work and roll back any undesired changes.
+ ### Install dependencies
+ pipenv install
+ pipenv shell
 
-### Removing Existing Git Configuration
+ ### Run the flask server
+ python app.py
 
-If you're using this template, start off by removing the existing metadata for
-Github and Canvas. Run the following command to carry this out:
 
-```console
-$ rm -rf .git .canvas
-```
+ ## Frontend Setup
 
-The `rm` command removes files from your computer's memory. The `-r` flag tells
-the console to remove _recursively_, which allows the command to remove
-directories and the files within them. `-f` removes them permanently.
+ ### Navigate to the client directory
+ cd client 
 
-`.git` contains this directory's configuration to track changes and push to
-Github (you want to track and push _your own_ changes instead), and `.canvas`
-contains the metadata to create a Canvas page from your Git repo. You don't have
-the permissions to edit our Canvas course, so it's not worth keeping around.
+ ### Install dependencies
+ npm install --prefix client
 
-### Creating Your Own Git Repo
+ ### Run the React application
+ npm start --prefix client
 
-First things first- rename this directory! Once you have an idea for a name,
-move one level up with `cd ..` and run
-`mv python-p4-project-template <new-directory-name>` to change its name (replace
-<new-directory-name> with an appropriate project directory name).
+  ## Database Setup
+ ### Database Initialization
 
-> **Note: If you typed the `mv` command in a terminal within VS Code, you should
-> close VS Code then reopen it.**
-
-> **Note: `mv` actually stands for "move", but your computer interprets this
-> rename as a move from a directory with the old name to a directory with a new
-> name.**
-
-`cd` back into your new directory and run `git init` to create a local git
-repository. Add all of your local files to version control with `git add --all`,
-then commit them with `git commit -m'initial commit'`. (You can change the
-message here- this one is just a common choice.)
-
-Navigate to [GitHub](https://github.com). In the upper-right corner of the page,
-click on the "+" dropdown menu, then select "New repository". Enter the name of
-your local repo, choose whether you would like it to be public or private, make
-sure "Initialize this repository with a README" is unchecked (you already have
-one), then click "Create repository".
-
-Head back to the command line and enter
-`git remote add origin git@github.com:github-username/new-repository-name.git`.
-NOTE: Replace `github-username` with your github username, and
-`new-repository-name` with the name of your new repository. This command will
-map the remote repository to your local repository. Finally, push your first
-commit with `git push -u origin main`.
-
-Your project is now version-controlled locally and online. This will allow you
-to create different versions of your project and pick up your work on a
-different machine if the need arises.
-
----
-
-## Setup
-
-### `server/`
-
-The `server/` directory contains all of your backend code.
-
-`app.py` is your Flask application. You'll want to use Flask to build a simple
-API backend like we have in previous modules. You should use Flask-RESTful for
-your routes. You should be familiar with `models.py` and `seed.py` by now, but
-remember that you will need to use Flask-SQLAlchemy, Flask-Migrate, and
-SQLAlchemy-Serializer instead of SQLAlchemy and Alembic in your models.
-
-The project contains a default `Pipfile` with some basic dependencies. You may
-adapt the `Pipfile` if there are additional dependencies you want to add for
-your project.
-
-To download the dependencies for the backend server, run:
-
-```console
-pipenv install
-pipenv shell
-```
-
-You can run your Flask API on [`localhost:5555`](http://localhost:5555) by
-running:
-
-```console
-python server/app.py
-```
-
-Check that your server serves the default route `http://localhost:5555`. You
-should see a web page with the heading "Project Server".
-
-### `client/`
-
-The `client/` directory contains all of your frontend code. The file
-`package.json` has been configured with common React application dependencies,
-include `react-router-dom`. The file also sets the `proxy` field to forward
-requests to `"http://localhost:5555". Feel free to change this to another port-
-just remember to configure your Flask app to use another port as well!
-
-To download the dependencies for the frontend client, run:
-
-```console
-npm install --prefix client
-```
-
-You can run your React app on [`localhost:3000`](http://localhost:3000) by
-running:
-
-```sh
-npm start --prefix client
-```
-
-Check that your the React client displays a default page
-`http://localhost:3000`. You should see a web page with the heading "Project
-Client".
-
-## Generating Your Database
-
-NOTE: The initial project directory structure does not contain the `instance` or
-`migrations` folders. Change into the `server` directory:
-
-```console
+#### Navigate to the server directory
 cd server
-```
 
 Then enter the commands to create the `instance` and `migrations` folders and
 the database `app.db` file:
