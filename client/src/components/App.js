@@ -40,9 +40,7 @@ function App() {
             <Route path="/signup" component={Signup}>
               <Signup setUser={setUser} />
             </Route>
-            <Route path="/login" component={Login}>
-              <Login setUser={setUser} />
-            </Route>
+            <Route path="/login" render={() => <Login setUser={setUser} />} />
             <Route exact path="/" component={Home} />
             <Route path="/course" component={Course} />
             <Route path="/students" component={Students} />
