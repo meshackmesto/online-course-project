@@ -168,6 +168,13 @@
       "last_name": "def",
       "email": "ader@gmail.com",
       "password": "ret1"
+    },
+    {
+      "id": "6cba",
+      "first_name": "Meshack",
+      "last_name": "Orina",
+      "email": "orina@gmail.com",
+      "password": "orina"
     }
   ],
   "login": [
