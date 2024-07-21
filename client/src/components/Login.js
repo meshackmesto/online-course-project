@@ -25,7 +25,7 @@ function Login({ setUser }) {
         return response.json();
       })
       .then((data) => {
-        console.log(data);
+        setUser(data);
         history.push("/course");
       })
       .catch((err) => {

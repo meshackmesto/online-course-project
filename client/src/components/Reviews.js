@@ -4,12 +4,7 @@ import Navbar from "./Navbar";
 function Reviews() {
   const [reviews, setReviews] = useState([]);
   const [editReview, setEditReview] = useState(null);
-  const [newReview, setNewReview] = useState({
-    comment: "",
-    rating: "0",
-    studentId: null,
-    courseId: null,
-  });
+  const [newReview, setNewReview] = useState({ comment: "", rating: "0" });
 
   // Fetch all reviews on component mount
   useEffect(() => {
@@ -22,7 +17,7 @@ function Reviews() {
   // Add a new review
   function handleAddReview(e) {
     e.preventDefault();
-    fetch("", {
+    fetch("http://localhost:5555/reviews", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -30,20 +25,13 @@ function Reviews() {
       body: JSON.stringify({
         comment: newReview.comment,
         rating: newReview.rating,
-        student_id: newReview.studentId,
-        course_id: newReview.courseId,
       }),
     })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Failed to add review");
-        }
-        return response.json();
-      })
+      .then((response) => response.json())
       .then((addedReview) => {
         setReviews([...reviews, addedReview]);
         setNewReview({ comment: "", rating: "0" });
-        alert("Review added successfully")
+        alert("Review added successfully");
       })
       .catch((error) => console.error("Error adding review:", error));
   }

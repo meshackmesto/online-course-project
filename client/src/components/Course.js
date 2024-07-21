@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Navbar from "./Navbar";
 import CourseCard from "./CourseCard";
+import { Link, useHistory } from "react-router-dom";
+import { UserContext } from "./UserProvider";
 
 //import CoursePage from "./CoursePage";
 
@@ -11,6 +13,9 @@ function Course({ onAddCourse }) {
   const [filteredCourses, setFilteredCourses] = useState([]);
   const [search, setSearch] = useState("");
   const [myCourses, setMyCourses] = useState([]);
+  const { user } = useContext(UserContext);
+
+  const history = useHistory();
 
   //fetch courses from db.json
   useEffect(() => {
@@ -83,9 +88,17 @@ function Course({ onAddCourse }) {
           setModal(false);
         })
         .catch((err) => console.log(err));
-        alert("Course added successfully to My Courses.");
+      alert("Course added successfully to My Courses.");
     } else {
       alert("Course already selected");
+    }
+  }
+
+  function handleLoggedIn() {
+    if (user) {
+      postCourse();
+    } else {
+      history.push("/login");
     }
   }
 
@@ -110,7 +123,7 @@ function Course({ onAddCourse }) {
                 </button>
 
                 <button className="select-course" onClick={postCourse}>
-                Select
+                  Select
                 </button>
               </>
             )}
@@ -128,6 +141,10 @@ function Course({ onAddCourse }) {
           />
         </div>
 
+        <p className="link_to_login">
+          You need to <Link to="/login">Login</Link> to select a course
+        </p>
+
         {/*check where error is coming from*/}
         <div className="course-container">
           <div className="cards">
@@ -136,17 +153,9 @@ function Course({ onAddCourse }) {
                 <CourseCard
                   key={course.id}
                   title={course.title}
-                  image={course.image}
+                  /* image={course.image} */
                   description={course.description}
-                  onClick={() =>
-                    openCourse(
-                      course /* {
-                    image: course.image,
-                    title: course.title,
-                    description: course.description,
-                  } */
-                    )
-                  }
+                  onClick={() => openCourse(course)}
                 />
               ))}
           </div>

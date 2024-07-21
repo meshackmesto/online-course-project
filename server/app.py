@@ -318,28 +318,10 @@ class Reviews(Resource):
         review = Review.query.get_or_404(review_id)
         return jsonify(review_schema.dump(review))
 
-    def post(self):
-        try:
-            data = request.json
-            if 'student_id' not in data or 'course_id' not in data or 'rating' not in data or 'comment' not in data:
-                return {"error": "Missing required fields"}, 400
-            
-            new_review = review_schema.load(data)
-            db.session.add(new_review)
-            db.session.commit()
-            return jsonify(review_schema.dump(new_review)), 201
-        except Exception as e:
-            print(f"Error: {e}")
-            return {"error": str(e)}, 400
-        
-
     def patch(self, review_id):
-        data = request.get_json()
         review = Review.query.get_or_404(review_id)
-        review.student_id = data('student_id', review.student_id)
-        review.course_id = data('course_id', review.course_id)
-        review.rating = data('rating', review.rating)
-        review.comment = data('comment', review.comment)
+        review.rating = request.json.get('rating', review.rating)
+        review.comment = request.json.get('comment', review.comment)
         db.session.commit()
         return jsonify(review_schema.dump(review))
 
@@ -347,7 +329,7 @@ class Reviews(Resource):
         review = Review.query.get_or_404(review_id)
         db.session.delete(review)
         db.session.commit()
-        return jsonify({'message': 'Review deleted'}), 204
+        return make_response(jsonify({'message': 'Review deleted'}), 204)
 
 class ReviewList(Resource):
     def get(self):
@@ -355,15 +337,10 @@ class ReviewList(Resource):
         return jsonify(reviews_schema.dump(reviews))
 
     def post(self):
-        data = request.json
-        try:
-            new_review = review_schema.load(data)
-            db.session.add(new_review)
-            db.session.commit()
-            return jsonify(review_schema.dump(new_review)), 201
-        except Exception as e:
-            print(f"Error: {e}")
-            return {"error": str(e)}, 400
+        new_review = review_schema.load(request.json, session = db.session)
+        db.session.add(new_review)
+        db.session.commit()
+        return jsonify(review_schema.dump(new_review)), 201
         
 api.add_resource(Login, '/login', endpoint='login')
 api.add_resource(CheckSession, '/check_session', endpoint='check_session')
