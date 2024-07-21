@@ -31,7 +31,7 @@ function Reviews() {
       .then((addedReview) => {
         setReviews([...reviews, addedReview]);
         setNewReview({ comment: "", rating: "0" });
-        alert("Review added successfully")
+        alert("Review added successfully");
       })
       .catch((error) => console.error("Error adding review:", error));
   }

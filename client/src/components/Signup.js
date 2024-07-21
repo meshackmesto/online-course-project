@@ -6,10 +6,8 @@ import { useHistory } from "react-router-dom";
 function Signup({ setUser }) {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  /*  const [username, setUsername] = useState(""); */
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  /* const [passwordConfirmation, setPasswordConfirmation] = useState(""); */
   const [formSubmitted, setFormSubmitted] = useState(false);
 
   const history = useHistory();
@@ -18,7 +16,8 @@ function Signup({ setUser }) {
   function postSignup(e) {
     e.preventDefault();
     setFormSubmitted(true);
-    fetch("http://127.0.0.1:5555/students", {
+
+    fetch("http://127.0.0.1:5555/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -38,11 +37,6 @@ function Signup({ setUser }) {
       }
     });
   }
-
-  /* const submitForm = (e) => {
-    e.preventDefault();
-    setFormSubmitted(true);
-  }; */
 
   return (
     <div>
@@ -77,19 +71,7 @@ function Signup({ setUser }) {
             required
           />
         </label>
-        {/*  <label htmlFor="username">
-          Username
-          <input
-            id="username"
-            className="inputs"
-            type="text"
-            autoComplete="off"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            pattern="^[A-Za-z\-']+$"
-            required
-          />
-        </label> */}
+
         <label htmlFor="email">
           Email
           <input
@@ -122,7 +104,6 @@ function Signup({ setUser }) {
         <button type="submit" className="signup-button">
           Sign up
         </button>
-
       </form>
       {formSubmitted ? <p>Sign up successful!</p> : null}
     </div>

@@ -170,38 +170,4 @@
       "password": "ret1"
     },
     {
-      "id": "6cba",
-      "first_name": "Meshack",
-      "last_name": "Orina",
-      "email": "orina@gmail.com",
-      "password": "orina"
-    }
-  ],
-  "login": [
-    {
-      "id": "a8fb",
-      "username": "pass",
-      "password": "pass"
-    },
-    {
-      "id": "8ad3",
-      "username": "",
-      "password": ""
-    },
-    {
-      "id": "744d",
-      "username": "de123",
-      "password": "dersf"
-    },
-    {
-      "id": "ab7b",
-      "username": "hanifa",
-      "password": "123"
-    },
-    {
-      "id": "7ac7",
-      "username": "faith",
-      "password": "rete"
-    }
-  ]
-}
+ }
