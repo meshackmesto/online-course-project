@@ -17,15 +17,14 @@ function Home() {
               <button className="login-btn">Log in</button>
             </NavLink>
             <h1>
-              Welcome to our Online Course Website, where learning meets
-              innovation.
+              Welcome to our Online Course Registration App, where learning
+              meets innovation.
             </h1>
             <p>
-              We are dedicated to providing you
-              with top-quality courses designed to empower and inspire. Whether
-              you're looking to enhance your professional skills or explore a
-              new passion, we have curated a diverse selection of courses
-              crafted by experts in their fields.
+              We are dedicated to providing you with top-quality courses
+              designed to empower and inspire. Whether you're looking to enhance
+              your professional skills or explore a new passion, we have curated
+              a diverse selection of courses crafted by experts in their fields.
             </p>
           </div>
           <div className="col-2">

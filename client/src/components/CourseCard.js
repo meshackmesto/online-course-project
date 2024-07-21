@@ -1,4 +1,5 @@
 import React from "react";
+
 function CourseCard({ id, image, title, description, onClick }) {
   return (
     <div className="card" onClick={onClick}>
@@ -7,11 +8,11 @@ function CourseCard({ id, image, title, description, onClick }) {
         <h3>{title}</h3>
       </div>
       <div className="card-body">
-      {/*  <img
-          src={require(`../images/${image}`).default}
+        {/*   <img
+          src={image ? require(`../images/${image}`).default : defaultImage}
           alt={title}
           className="images"
-        />  */}
+        /> */}
         <p>{description}</p>
       </div>
     </div>

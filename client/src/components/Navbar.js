@@ -6,11 +6,14 @@ function Navbar() {
   return (
     <nav className="navbar">
       <div className="logo">
-        <img src={onlinecourse} alt="" to="/"/>
+        <img src={onlinecourse} alt="" to="/" />
       </div>
       <ul>
         <li>
-          <NavLink to="/">Home</NavLink>
+          <NavLink to="/">
+            Home
+            {/* <img src="../icons/icons8-home-80.png" alt="home"/> */}
+          </NavLink>
         </li>
         <li>
           <NavLink to="/course">Courses</NavLink>

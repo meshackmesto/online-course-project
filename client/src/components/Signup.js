@@ -1,25 +1,23 @@
 import React, { useState } from "react";
 import Navbar from "./Navbar";
 import "./Signup.css";
-import { Link } from 'react-router-dom'
-// import { useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 function Signup({ setUser }) {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  /*  const [username, setUsername] = useState(""); */
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  /* const [passwordConfirmation, setPasswordConfirmation] = useState(""); */
   const [formSubmitted, setFormSubmitted] = useState(false);
 
-  // const history = useHistory();
+  const history = useHistory();
 
   //const baseUrl = "http://localhost:3031";
   function postSignup(e) {
     e.preventDefault();
     setFormSubmitted(true);
-    fetch("", {
+
+    fetch("http://127.0.0.1:5555/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -34,16 +32,11 @@ function Signup({ setUser }) {
       if (r.ok) {
         r.json().then((user) => {
           setUser(user);
-          // history.push("/course");
+          history.push("/login");
         });
       }
     });
   }
-
-  /* const submitForm = (e) => {
-    e.preventDefault();
-    setFormSubmitted(true);
-  }; */
 
   return (
     <div>
@@ -78,19 +71,7 @@ function Signup({ setUser }) {
             required
           />
         </label>
-        {/*  <label htmlFor="username">
-          Username
-          <input
-            id="username"
-            className="inputs"
-            type="text"
-            autoComplete="off"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            pattern="^[A-Za-z\-']+$"
-            required
-          />
-        </label> */}
+
         <label htmlFor="email">
           Email
           <input
@@ -119,11 +100,10 @@ function Signup({ setUser }) {
             required
           />
         </label>
-          <Link to='/course'>
+
         <button type="submit" className="signup-button">
           Sign up
         </button>
-        </Link>
       </form>
       {formSubmitted ? <p>Sign up successful!</p> : null}
     </div>

@@ -2,10 +2,12 @@
 
 # Remote library imports
 from flask import Flask, request, session, jsonify, make_response
-from flask_restful import Resource, Api
+from flask_restful import Resource
 from flask_migrate import Migrate
 from flask_cors import CORS
 from marshmallow_sqlalchemy import SQLAlchemyAutoSchema
+from flask_bcrypt import generate_password_hash
+from flask_cors import CORS
 
 # Local imports
 from config import app, db, api
@@ -15,16 +17,7 @@ from models import Student, Course, MyCourse, Enrollment, Review
 
 migrate = Migrate (app, db)
 
-app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'  # Example for SQLite
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SECRET_KEY'] = 'your_secret_key'
-CORS(app) 
-
-db.init_app(app)
-
-api = Api(app)
-
+CORS(app)
 
 class ClearSession(Resource):
 
@@ -36,23 +29,35 @@ class ClearSession(Resource):
         return {}, 204
 
 class Signup(Resource):
+     def get(self):
+        return {}, 200
+     
      def post(self):
-        json = request.get_json()
-        student = Student(
-            first_name=json['first_name'],
-            last_name=json['last_name'],
-            email=json['email'],
-            password_hash=json['password']
+        data = request.get_json()
+        if not data:
+            return {'error': 'No data provided'}, 400
+        try:
+            hashed_password = generate_password_hash(data['password'])
+            student = Student(
+                first_name=data['first_name'],
+                last_name = data['last_name'],
+                email = data['email'],
+                password_hash = hashed_password
             )
-        db.session.add(student)
-        db.session.commit()
-        return student.to_dict(), 201
+            db.session.add(student)
+            db.session.commit()
+            return student_schema.dump(student), 201
+        except Exception as e:
+            print("Error:", e) 
+            db.session.rollback()
+            return {'error': str(e)}, 400
 
 class CheckSession(Resource):
     def get(self):
+         #student = db.session.get('student_id')
          student = Student.query.filter_by(id=session.get('student_id')).first()
          if student:
-            response = make_response(jsonify(student.to_dict()), 200)
+            response = jsonify(student.to_dict), 200
             return response
          else:         
             return {}, 204
@@ -68,11 +73,20 @@ class Login(Resource):
         else:
             return {}, 401
 
+        """ json = request.get_json()
+        student = Student.query.filter_by(first_name = json()['first_name']).first()
+        if student and student.check_password(json['password']):
+            db.session['student_id'] = student.id
+            return jsonify(student_schema.dump(student)), 200
+        return {'message': 'Invalid credentials'}, 401
+ """
 class Logout(Resource):
     def delete(self):
         session['student_id'] = None
         return {'message': '204: No Content'}, 204
     
+        """ db.session.pop('student_id', None) 
+        return {'message': 'Logged out'}, 204 """
 
 # Views go here!
 class StudentSchema(SQLAlchemyAutoSchema):
@@ -87,7 +101,7 @@ students_schema = StudentSchema(many=True)
 class CourseSchema(SQLAlchemyAutoSchema):
     class Meta:
         model = Course
-        session = db.session
+        sqla_session = db.session
         load_instance = True
 
 course_schema = CourseSchema()
@@ -105,7 +119,7 @@ mycourses_schema = MyCourseSchema(many=True)
 class EnrollmentSchema(SQLAlchemyAutoSchema):
     class Meta:
         model = Enrollment
-        session = db.session
+        sqla_session = db.session
         load_instance = True
 
 enrollment_schema = EnrollmentSchema()
@@ -131,7 +145,7 @@ class Students(Resource):
         student.first_name = request.json.get('first_name', student.first_name)
         student.last_name = request.json.get('last_name', student.last_name)
         student.email = request.json.get('email', student.email)
-        student._password_hash = request.json.get('password_hash', student.password_hash)
+        student._password_hash = request.json.get('_password_hash', student.password_hash)
         db.session.commit()
         return jsonify(student_schema.dump(student))
 
@@ -152,12 +166,12 @@ class StudentList(Resource):
             first_name=data['first_name'],
             last_name=data['last_name'],
             email=data['email'],
+            password_hash=data['password_hash']
         )
-        new_student.password = data['password'] 
         db.session.add(new_student)
         db.session.commit()
-        return jsonify(new_student.to_dict()), 201
-    
+        return jsonify(student_schema.dump(new_student)), 201
+
 class CourseByID(Resource):
     def get(self, id):
         course = Course.query.filter_by(id=id).first().to_dict()
@@ -303,6 +317,7 @@ class Reviews(Resource):
     def get(self, review_id):
         review = Review.query.get_or_404(review_id)
         return jsonify(review_schema.dump(review))
+
     def patch(self, review_id):
         review = Review.query.get_or_404(review_id)
         review.rating = request.json.get('rating', review.rating)
@@ -326,7 +341,7 @@ class ReviewList(Resource):
         db.session.add(new_review)
         db.session.commit()
         return jsonify(review_schema.dump(new_review)), 201
-
+        
 api.add_resource(Login, '/login', endpoint='login')
 api.add_resource(CheckSession, '/check_session', endpoint='check_session')
 api.add_resource(Logout, '/logout', endpoint='logout')
