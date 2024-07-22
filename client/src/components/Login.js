@@ -40,7 +40,7 @@ function Login({ setUser }) {
       <form className="login bg-dark" onSubmit={postLogin}>
         <h1>Log in</h1>
         <label for="">
-          First Name
+          Email
           <input
             type="text"
             id="username"
