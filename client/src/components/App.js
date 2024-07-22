@@ -2,6 +2,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useEffect, useContext } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import Home from "./Home";
+import AdminRegistrationForm from "./AdminRegistrationForm";
 import Course from "./Course";
 import Students from "./Students";
 import Navbar from "./Navbar";
@@ -29,6 +30,7 @@ function App() {
 
   return (
     <div>
+    <AdminRegistrationForm/>
       <main>
         <Switch>
           {/* Public routes accessible to anyone*/}
