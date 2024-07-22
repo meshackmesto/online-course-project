@@ -77,3 +77,6 @@ class Review(db.Model, SerializerMixin):
     serialize_rules = ('-course.reviews', '-student.reviews')
     student = db.relationship('Student', back_populates='reviews')
     course = db.relationship('Course', back_populates='reviews')
+
+
+# class Admin(db.model  , SerializerMixin)

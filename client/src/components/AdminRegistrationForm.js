@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './AdminRegistrationForm.css';
+import Navbar from "./Navbar";
 
 function AdminRegistrationForm() {
   const [username, setUsername] = useState('');
@@ -31,8 +32,9 @@ function AdminRegistrationForm() {
 
   return (
     <div>
+      <Navbar />
       <h2>Admin Registration</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className='admin bg-dark'>
         <label>
           Username:
           <input
@@ -60,7 +62,7 @@ function AdminRegistrationForm() {
           />
         </label>
         <br />
-        <button type="submit">Register as Admin</button>
+        <button type="submit">Register Admin</button>
       </form>
     </div>
   );

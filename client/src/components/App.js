@@ -30,7 +30,6 @@ function App() {
 
   return (
     <div>
-    <AdminRegistrationForm/>
       <main>
         <Switch>
           {/* Public routes accessible to anyone*/}
@@ -48,6 +47,7 @@ function App() {
               <Route path="/reviews" component={Reviews} />
               <Route path="/navbar" component={Navbar} />
               <Route path="/mycourses" component={MyCourses} />
+              <Route path="/admin" component={AdminRegistrationForm} />
             </>
           ) : (
             // If not logged in
