@@ -79,4 +79,10 @@ class Review(db.Model, SerializerMixin):
     course = db.relationship('Course', back_populates='reviews')
 
 
-# class Admin(db.model  , SerializerMixin)
+class Admin(db.model  , SerializerMixin):
+    __tablename__ = 'admins'
+
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(50), unique=True, nullable=False)
+    _password_hash = db.Column(db.String(255), nullable=False)  # Internal storage for password hash
+    

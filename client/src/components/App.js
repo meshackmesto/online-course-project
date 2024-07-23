@@ -48,7 +48,6 @@ function App() {
               <Route path="/reviews" component={Reviews} />
               <Route path="/navbar" component={Navbar} />
               <Route path="/mycourses" component={MyCourses} />
-             
             </>
           ) : (
             // If not logged in

@@ -16,7 +16,7 @@ function Home() {
             <NavLink to="/login">
               <button className="login-btn">Log in</button>
             </NavLink>
-            <NavLink to="/admin_signup">
+            <NavLink to="/admin">
               <button className="admin-btn">Admin</button>
             </NavLink>
             <h1>
