@@ -38,6 +38,7 @@ function App() {
             <Signup setUser={setUser} />
           </Route>
           <Route path="/login" render={() => <Login setUser={setUser} />} />
+          <Route path="/admin" component={AdminRegistrationForm} />
 
           {/* Private routes when logged in*/}
           {user ? (
@@ -47,7 +48,7 @@ function App() {
               <Route path="/reviews" component={Reviews} />
               <Route path="/navbar" component={Navbar} />
               <Route path="/mycourses" component={MyCourses} />
-              <Route path="/admin" component={AdminRegistrationForm} />
+             
             </>
           ) : (
             // If not logged in
