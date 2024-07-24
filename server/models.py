@@ -33,13 +33,14 @@ class Student(db.Model, SerializerMixin):
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     
     enrollments = relationship('Enrollment', back_populates='student', lazy=True)
+    reviews = relationship('Review', back_populates='student', lazy=True)
 
     # Relationship with Admin
     admin_id = db.Column(db.Integer, db.ForeignKey('admins.id'))
     admin = db.relationship('Admin', back_populates='managed_students')
 
     # Serialization rules
-    serialize_rules = ('-courses.students', '-enrollments.student',)
+    serialize_rules = ('-courses.students', '-enrollments.student', '-reviews.student',)
 
     @property
     def password_hash(self):
@@ -60,6 +61,7 @@ class Course(db.Model, SerializerMixin):
     description = db.Column(db.Text, nullable=True)
     serialize_rules = ('-enrollments.course', '-reviews.course',)
     enrollments = db.relationship('Enrollment', back_populates='course', lazy=True)
+    reviews = db.relationship('Review', back_populates='course', lazy=True)
 
     # Relationship with Admin
     admin_id = db.Column(db.Integer, db.ForeignKey('admins.id'))
@@ -79,6 +81,12 @@ class Review(db.Model, SerializerMixin):
     rating = db.Column(db.Integer, nullable=False)
     comment = db.Column(db.String(255), nullable=False)
 
+    student_id = db.Column(db.Integer, db.ForeignKey('students.id'))
+    student = db.relationship('Student', back_populates='reviews')
+
+    course_id = db.Column(db.Integer, db.ForeignKey('courses.id'))
+    course = db.relationship('Course', back_populates='reviews')
+
     # Relationship with Admin
     admin_id = db.Column(db.Integer, db.ForeignKey('admins.id'))
     admin = db.relationship('Admin', back_populates='managed_reviews')
@@ -97,7 +105,7 @@ class Admin(db.Model, SerializerMixin):
     managed_reviews = db.relationship('Review', back_populates='admin', lazy=True)
 
     # Serialization rules
-    serialize_rules = ('-courses.students', '-enrollments.student', '-students.enrollments',)
+    serialize_rules = ('-courses.students', '-enrollments.student', '-students.enrollments', '-students.reviews', '-reviews.course',)
     
     @property
     def password_hash(self):
