@@ -1,6 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useEffect, useState } from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 import Home from "./Home";
 import AdminRegistrationForm from "./AdminRegistrationForm";
 import Course from "./Course";
