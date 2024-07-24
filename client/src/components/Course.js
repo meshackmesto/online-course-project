@@ -141,10 +141,6 @@ function Course({ onAddCourse }) {
           />
         </div>
 
-        <p className="link_to_login">
-          You need to <Link to="/login">Login</Link> to select a course
-        </p>
-
         {/*check where error is coming from*/}
         <div className="course-container">
           <div className="cards">

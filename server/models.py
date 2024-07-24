@@ -32,7 +32,6 @@ class Student(db.Model, SerializerMixin):
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     
     enrollments = relationship('Enrollment', back_populates='student', lazy=True)
-    reviews = relationship('Review', back_populates='student', lazy=True)
 
     # Serialization rules
     serialize_rules = ('-courses.students','-enrollments.students',)
@@ -56,7 +55,6 @@ class Course(db.Model, SerializerMixin):
     description = db.Column(db.Text, nullable=True)
     serialize_rules = ('-enrollments.course', '-reviews.course',)
     enrollments = db.relationship('Enrollment', back_populates='course', lazy=True)
-    reviews = db.relationship('Review', back_populates='course', lazy=True)
 
 class MyCourse(db.Model, SerializerMixin):
     __tablename__= 'mycourses'
@@ -72,8 +70,4 @@ class Review(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key=True)
     rating = db.Column(db.Integer, nullable=False)
     comment = db.Column(db.String(255), nullable=False)
-    student_id = db.Column(db.Integer, db.ForeignKey('students.id'), nullable=False)
-    course_id = db.Column(db.Integer, db.ForeignKey('courses.id'), nullable=False)
     serialize_rules = ('-course.reviews', '-student.reviews')
-    student = db.relationship('Student', back_populates='reviews')
-    course = db.relationship('Course', back_populates='reviews')
