@@ -2,6 +2,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useEffect, useContext } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import Home from "./Home";
+import AdminRegistrationForm from "./AdminRegistrationForm";
 import Course from "./Course";
 import Students from "./Students";
 import Navbar from "./Navbar";
@@ -37,6 +38,7 @@ function App() {
             <Signup setUser={setUser} />
           </Route>
           <Route path="/login" render={() => <Login setUser={setUser} />} />
+          <Route path="/admin" component={AdminRegistrationForm} />
 
           {/* Private routes when logged in*/}
           {user ? (
