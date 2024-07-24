@@ -33,7 +33,6 @@ class Student(db.Model, SerializerMixin):
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     
     enrollments = relationship('Enrollment', back_populates='student', lazy=True)
-    reviews = relationship('Review', back_populates='student', lazy=True)
 
     # Relationship with Admin
     admin_id = db.Column(db.Integer, db.ForeignKey('admins.id'))

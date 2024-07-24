@@ -8,7 +8,6 @@ function Login({ setUser }) {
   const [password, setPassword] = useState("");
   const history = useHistory();
 
-  //const baseUrl = "http://localhost:3031";
   function postLogin(e) {
     e.preventDefault();
     fetch("http://localhost:5555/login", {
@@ -37,10 +36,12 @@ function Login({ setUser }) {
   return (
     <div>
       <Navbar />
-      <form className="login bg-dark" onSubmit={postLogin}>
-        <h1>Log in</h1>
-        <label for="">
-          Email
+      <h1>Log in</h1>
+      <form className="login" onSubmit={postLogin}>
+        <div className="form-group">
+          <label>
+            Email
+          </label>
           <input
             type="text"
             id="username"
@@ -50,9 +51,11 @@ function Login({ setUser }) {
             placeholder="Enter firstname"
             required
           />
-        </label>
-        <label for="">
-          Password
+        </div>
+        <div className="form-group">
+          <label>
+            Password
+          </label>
           <input
             type="password"
             id="password"
@@ -62,9 +65,10 @@ function Login({ setUser }) {
             placeholder="Enter password"
             required
           />
-        </label>
-
-        <button className="login-button">Log in</button>
+        </div>
+        <div className="form-group">
+          <button className="login-button">Log in</button>
+        </div>
       </form>
     </div>
   );
