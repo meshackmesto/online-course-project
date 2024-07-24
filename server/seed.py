@@ -105,8 +105,6 @@ def seed_data():
         reviews = []
         for _ in range(30):  # Number of reviews to generate
             review = Review(
-                student_id=randint(1, len(students)),
-                course_id=randint(1, len(courses)),
                 rating=randint(1, 5),
                 comment=fake.text()
             )

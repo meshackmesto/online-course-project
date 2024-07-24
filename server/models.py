@@ -33,7 +33,6 @@ class Student(db.Model, SerializerMixin):
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
     
     enrollments = relationship('Enrollment', back_populates='student', lazy=True)
-    reviews = relationship('Review', back_populates='student', lazy=True)
 
     # Relationship with Admin
     admin_id = db.Column(db.Integer, db.ForeignKey('admins.id'))
@@ -61,7 +60,6 @@ class Course(db.Model, SerializerMixin):
     description = db.Column(db.Text, nullable=True)
     serialize_rules = ('-enrollments.course', '-reviews.course',)
     enrollments = db.relationship('Enrollment', back_populates='course', lazy=True)
-    reviews = db.relationship('Review', back_populates='course', lazy=True)
 
     # Relationship with Admin
     admin_id = db.Column(db.Integer, db.ForeignKey('admins.id'))
@@ -80,12 +78,6 @@ class Review(db.Model, SerializerMixin):
     id = db.Column(db.Integer, primary_key=True)
     rating = db.Column(db.Integer, nullable=False)
     comment = db.Column(db.String(255), nullable=False)
-
-    student_id = db.Column(db.Integer, db.ForeignKey('students.id'))
-    student = db.relationship('Student', back_populates='reviews')
-
-    course_id = db.Column(db.Integer, db.ForeignKey('courses.id'))
-    course = db.relationship('Course', back_populates='reviews')
 
     # Relationship with Admin
     admin_id = db.Column(db.Integer, db.ForeignKey('admins.id'))
