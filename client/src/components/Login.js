@@ -29,10 +29,12 @@ function Login({ setUser }) {
   return (
     <div>
       <Navbar />
-      <form className="login bg-dark" onSubmit={postLogin}>
-        <h1>Log in</h1>
-        <label for="">
-          Username
+      <h1>Log in</h1>
+      <form className="login" onSubmit={postLogin}>
+        <div className="form-group">
+          <label>
+            Email
+          </label>
           <input
             type="text"
             id="username"
@@ -43,9 +45,11 @@ function Login({ setUser }) {
             placeholder="Enter username"
             required
           />
-        </label>
-        <label for="">
-          Password
+        </div>
+        <div className="form-group">
+          <label>
+            Password
+          </label>
           <input
             type="password"
             id="password"
@@ -56,10 +60,10 @@ function Login({ setUser }) {
             pattern="^[a-z0-9_]{3,}$"
             required
           />
-        </label>
-        
+        </div>
+        <div className="form-group">
           <button className="login-button">Log in</button>
-      
+        </div>
       </form>
     </div>
   );

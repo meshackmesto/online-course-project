@@ -2,6 +2,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useEffect, useState } from "react";
 import { Switch, Route } from "react-router-dom";
 import Home from "./Home";
+import AdminRegistrationForm from "./AdminRegistrationForm";
 import Course from "./Course";
 import Students from "./Students";
 import Navbar from "./Navbar";
@@ -29,28 +30,32 @@ function App() {
   return (
     <div>
       <main>
-        {user ? (
-          <Switch>
-            <Route exact path="/" component={Home}>
-              <Home user={user} />
-            </Route>
-          </Switch>
-        ) : (
-          <Switch>
-            <Route path="/signup" component={Signup}>
-              <Signup setUser={setUser} />
-            </Route>
-            <Route path="/login" component={Login}>
-              <Login setUser={setUser} />
-            </Route>
-            <Route exact path="/" component={Home} />
-            <Route path="/course" component={Course} />
-            <Route path="/students" component={Students} />
-            <Route path="/reviews" component={Reviews} />
-            <Route path="/navbar" component={Navbar} />
-            <Route path="/mycourses" component={MyCourses} />
-          </Switch>
-        )}
+        <Switch>
+          {/* Public routes accessible to anyone*/}
+          <Route exact path="/" component={Home} />
+          <Route path="/signup" component={Signup}>
+            <Signup setUser={setUser} />
+          </Route>
+          <Route path="/login" render={() => <Login setUser={setUser} />} />
+          <Route path="/admin" component={AdminRegistrationForm} />
+
+          {/* Private routes when logged in*/}
+          {user ? (
+            <>
+              <Route path="/course" component={Course} />
+              <Route path="/students" component={Students} />
+              <Route path="/reviews" component={Reviews} />
+              <Route path="/navbar" component={Navbar} />
+              <Route path="/mycourses" component={MyCourses} />
+            </>
+          ) : (
+            // If not logged in
+            <Redirect to="/login" />
+          )}
+
+          {/* Catch all unmatched routes */}
+          <Redirect to="/" />
+        </Switch>
       </main>
     </div>
   );

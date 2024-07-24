@@ -59,8 +59,8 @@ if __name__ == '__main__':
         reviews = []
         for _ in range(30):  # Change the range for more reviews
             review = Review(
-                student_id=randint(1, len(students)),  # Use correct randint usage
-                course_id=randint(1, len(courses)),  # Use correct randint usage
+                # student_id=randint(1, len(students)),
+                # course_id=randint(1, len(courses)),
                 rating=randint(1, 5),
                 comment=fake.text()
             )

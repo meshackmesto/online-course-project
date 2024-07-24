@@ -102,11 +102,10 @@ tree -L 2
 ## Support and Contact Details
 For any questions, feedback, or support inquiries, please don't hesitate to reach out to us via:
 
-GitHub: meshackmesto, alvinKyle, Dudley-hue, One-G-Row and VenusBridget
+GitHub: meshackmesto,alvinKyle,Dudley-hue,One-G-Row and VenusBridget
 Email: info@Online-Course-Platform.com
 
 Thank you for choosing Online-Course-Platform.
-
 ### License
 The content of this site is licensed under the MIT license
-Copyright (c) 2018.
+Copyright (c) 2024.

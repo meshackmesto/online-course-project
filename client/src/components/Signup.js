@@ -47,10 +47,12 @@ function Signup({ setUser }) {
   return (
     <div>
       <Navbar />
-      <form className="signup bg-dark" onSubmit={postSignup}>
-        <h1>Sign up</h1>
-        <label htmlFor="first_name">
-          First Name
+      <h1>Sign up</h1>
+      <form className="signup" onSubmit={postSignup}>
+        <div className="form-group">
+          <label htmlFor="first_name">
+            First Name
+          </label>
           <input
             className="inputs"
             id="first_name"
@@ -62,9 +64,11 @@ function Signup({ setUser }) {
             placeholder="John"
             required
           />
-        </label>
-        <label htmlFor="last_name">
-          Last Name
+        </div>
+        <div className="form-group">
+          <label htmlFor="last_name">
+            Last Name
+          </label>
           <input
             id="last_name"
             className="inputs"
@@ -76,22 +80,11 @@ function Signup({ setUser }) {
             placeholder="Doe"
             required
           />
-        </label>
-        {/*  <label htmlFor="username">
-          Username
-          <input
-            id="username"
-            className="inputs"
-            type="text"
-            autoComplete="off"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            pattern="^[A-Za-z\-']+$"
-            required
-          />
-        </label> */}
-        <label htmlFor="email">
-          Email
+        </div>
+        <div className="form-group">
+          <label htmlFor="email">
+            Email
+          </label>
           <input
             id="email"
             className="inputs"
@@ -103,9 +96,11 @@ function Signup({ setUser }) {
             placeholder="hunni@gmail"
             required
           />
-        </label>
-        <label htmlFor="password">
-          Password
+        </div>
+        <div className="form-group">
+          <label htmlFor="password">
+            Password
+          </label>
           <input
             className="inputs"
             id="password"
@@ -117,12 +112,12 @@ function Signup({ setUser }) {
             placeholder="Password"
             required
           />
-        </label>
-
-        <button type="submit" className="signup-button">
-          Sign up
-        </button>
-
+        </div>
+        <div className="form-group">
+          <button type="submit" className="signup-button">
+            Sign up
+          </button>
+        </div>
       </form>
       {formSubmitted ? <p>Sign up successful!</p> : null}
     </div>
