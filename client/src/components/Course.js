@@ -3,6 +3,7 @@ import Navbar from "./Navbar";
 import CourseCard from "./CourseCard";
 import { Link, useHistory } from "react-router-dom";
 import { UserContext } from "./UserProvider";
+import angularImage from "../assets/image/angular.jpg";
 
 //import CoursePage from "./CoursePage";
 
@@ -13,6 +14,7 @@ function Course({ onAddCourse }) {
   const [filteredCourses, setFilteredCourses] = useState([]);
   const [search, setSearch] = useState("");
   const [myCourses, setMyCourses] = useState([]);
+  const [responseMessage, setResponseMessage] = useState("");
   const { user } = useContext(UserContext);
 
   const history = useHistory();
@@ -83,14 +85,15 @@ function Course({ onAddCourse }) {
         })
         .then((newCourse) => {
           setMyCourses([...myCourses, newCourse]);
+          setResponseMessage("Course added successfully to My Courses!");
           // alert("Course added successfully.");
           setSelectedCourse(null);
           setModal(false);
         })
         .catch((err) => console.log(err));
-      alert("Course added successfully to My Courses.");
+      setResponseMessage("Course added successfully to My Courses!");
     } else {
-      alert("Course already selected");
+      setResponseMessage("Course already selected!");
     }
   }
 
@@ -112,19 +115,45 @@ function Course({ onAddCourse }) {
           <div className="modal-content">
             {selectedCourse && (
               <>
-                <CourseCard
-                  /* image={selectedCourse.image}
-              alt={selectedCourse.title} */
+                {/*  <CourseCard
                   title={selectedCourse.title}
                   description={selectedCourse.description}
-                />
-                <button className="close-modal" onClick={() => setModal(false)}>
-                  Close
-                </button>
+                /> */}
 
-                <button className="select-course" onClick={postCourse}>
-                  Select
-                </button>
+                <div className="course-image">
+                  <img
+                    className="angularImage"
+                    src={angularImage}
+                    alt="angular"
+                  />
+                </div>
+
+                <div className="course-info">
+                  <h3>{selectedCourse.title}</h3>
+                  <p className="description">{selectedCourse.description}</p>
+                  <p className="visit">Click this link to visit the course</p>
+                  <a
+                    className="link"
+                    href="https://www.freecodecamp.org/learn/python-for-everybody/"
+                  >
+                    https://www.freecodecamp.org/learn/python-for-everybody/
+                  </a>
+                  <br />
+                  <span className="duration"> Duration: 6 months</span>
+                  <button
+                    className="close-modal"
+                    onClick={() => setModal(false)}
+                  >
+                    Close
+                  </button>
+
+                  <button className="select-course" onClick={postCourse}>
+                    Register
+                  </button>
+                </div>
+                {responseMessage && (
+                  <p className="response">{responseMessage}</p>
+                )}
               </>
             )}
           </div>
