@@ -39,7 +39,7 @@ function App() {
           <Route path="/login" render={() => <Login setUser={setUser} />} />
 
           {/* Private routes when logged in*/}
-          {user ? (
+         {/*  {user ? ( */}
             <>
               <Route path="/course" component={Course} />
               <Route path="/students" component={Students} />
@@ -47,13 +47,13 @@ function App() {
               <Route path="/navbar" component={Navbar} />
               <Route path="/mycourses" component={MyCourses} />
             </>
-          ) : (
+          {/* ) : (
             // If not logged in
             <Redirect to="/login" />
           )}
-
+            */}
           {/* Catch all unmatched routes */}
-          <Redirect to="/" />
+         {/*  <Redirect to="/" />  */}
         </Switch>
       </main>
     </div>
