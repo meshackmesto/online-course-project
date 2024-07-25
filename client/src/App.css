@@ -291,8 +291,8 @@ p {
 }
 
 .mycoursecard {
-  width: 30%;
-  height: 40vh;
+  width: 5%;
+  height: 60vh;
   overflow: hidden;
   margin: 20px 40px;
   padding: 10px;
@@ -331,7 +331,7 @@ p {
 }
 
 /*styling signup form*/
-.signup {
+/* .signup {
   display: flex;
   flex-direction: column;
   position: absolute;
@@ -339,7 +339,7 @@ p {
   left: 30%;
   width: 50%;
   height: 75%;
-}
+} */
 
 .inputs {
   margin: 20px;

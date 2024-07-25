@@ -1,4 +1,5 @@
 import React from "react";
+import images from "../assets/image/angular.jpg";
 function MyCourseCard({ id, image, title, description, removeCourse }) {
   const handleDelete = () => {
     removeCourse(id);
@@ -14,11 +15,11 @@ function MyCourseCard({ id, image, title, description, removeCourse }) {
         <h3>{title}</h3>
       </div>
       <div className="card-body">
-        {/*  <img
-          src={require(`../images/${image}`).default}
+        <img
+          src={images}
           alt={title}
           className="images"
-        /> */}
+        /> 
         <p>{description}</p>
       </div>
     </div>
