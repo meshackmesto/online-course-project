@@ -1,18 +1,20 @@
-import React, { useState } from 'react';
-import './AdminRegistrationForm.css';
-import Navbar from './Navbar';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import "./AdminRegistrationForm.css";
+import Navbar from "./Navbar";
+import coverImage from "../assets/image/pexels-pixabay-159751.jpg";
 
 function AdminRegistrationForm() {
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch('/admin_signup', {
-      method: 'POST',
+    fetch("/admin_signup", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({ username, password, email }),
     })
@@ -20,24 +22,27 @@ function AdminRegistrationForm() {
         if (r.ok) {
           return r.json();
         }
-        throw new Error('Failed to register admin');
+        throw new Error("Failed to register admin");
       })
       .then((data) => {
-        console.log('Admin registered:', data);
+        console.log("Admin registered:", data);
       })
       .catch((error) => {
-        console.error('Error:', error);
+        console.error("Error:", error);
       });
   };
 
   return (
-    <div>
+    <div className="admin-registration-form">
       <Navbar />
-      <h2>Admin Registration</h2>
+      <div className="admin-image-container">
+        <img src={coverImage} className="admin-cover-image" alt="pexels" />
+      </div>
       <div className="form-container">
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="admin-form">
           <div className="form-group">
-            <label>Username:</label>
+            <h2 className="admin-title">Admin Registration</h2>
+            <label id="labels">Username:</label>
             <input
               type="text"
               value={username}
@@ -45,7 +50,7 @@ function AdminRegistrationForm() {
             />
           </div>
           <div className="form-group">
-            <label>Email:</label>
+            <label id="labels">Email:</label>
             <input
               type="email"
               value={email}
@@ -53,7 +58,7 @@ function AdminRegistrationForm() {
             />
           </div>
           <div className="form-group">
-            <label>Password:</label>
+            <label id="labels">Password:</label>
             <input
               type="password"
               value={password}
@@ -61,7 +66,9 @@ function AdminRegistrationForm() {
             />
           </div>
           <div className="form-group">
-            <button type="submit">Register Admin</button>
+            <Link to="/login">
+              <button type="submit">Register Admin</button>
+            </Link>
           </div>
         </form>
       </div>

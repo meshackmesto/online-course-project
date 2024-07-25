@@ -1,9 +1,29 @@
 h1 {
   text-align: center;
+  margin-top: 20px;
   margin-bottom: 20px;
+  margin-left: 2%;
+  color: #fff;
 }
 
-form{
+.login-form-container {
+  background-color: #6388af;
+  width: 50%;
+  height: 100vh;
+  position: relative;
+  top: 0;
+  left: 50%;
+  opacity: 0.9;
+}
+
+.cover-image {
+  position: absolute;
+  top: 0;
+  width: 50%;
+  height: 100%;
+}
+
+form {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -11,33 +31,36 @@ form{
 }
 
 .login {
-  max-width: 400px;
+  max-width: 450px;
   margin: 50px auto;
-  padding: 20px;
-  border: 1px solid #ccc;
+  padding-left: 20px;
+  padding-right: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 15px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  background-color: #f9f9f9;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 35%;
-  height: 50vh;
+  width: 60%;
+  height: 70vh;
   position: absolute;
   top: 50px;
-  left: 30%;
+  right: 20%;
   opacity: 0.9;
 }
 
 .form-group {
-  width: 100%;
+  width: 50%;
   margin-bottom: 15px;
 }
 
 .form-group label {
   display: block;
   margin-bottom: 5px;
+  margin-left: 10px;
   font-weight: bold;
   color: black;
 }
@@ -50,7 +73,7 @@ form{
   box-sizing: border-box;
 }
 
-#text{
+#text {
   color: black;
 }
 
