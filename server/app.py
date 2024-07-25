@@ -13,7 +13,7 @@ from flask_cors import CORS
 from config import app, db, api
 
 # Add your model imports
-from models import Student, Course, MyCourse, Enrollment, Review
+from models import Student, Course, MyCourse, Enrollment, Review, Admin
 
 migrate = Migrate (app, db)
 
@@ -133,6 +133,15 @@ class ReviewSchema(SQLAlchemyAutoSchema):
 
 review_schema = ReviewSchema()
 reviews_schema = ReviewSchema(many=True)
+
+class AdminSchema(SQLAlchemyAutoSchema):
+    class Meta:
+        model = Admin
+        sqla_session = db.session
+        load_instance = True
+
+admin_schema = AdminSchema()
+admin_schema = AdminSchema(many=True)
 
 
 class Students(Resource):
@@ -341,7 +350,52 @@ class ReviewList(Resource):
         db.session.add(new_review)
         db.session.commit()
         return jsonify(review_schema.dump(new_review)), 201
-        
+
+class Admins(Resource):
+    def get(self, admin_id):
+        admin = Admin.query.get_or_404(admin_id)
+        return jsonify(admin_schema.dump(admin))
+
+    def patch(self, admin_id):
+        admin = Admin.query.get_or_404(admin_id)
+        admin.username = request.json.get('username', admin.username)
+        admin.password_hash = request.json.get('password_hash', admin.password_hash)
+        db.session.commit()
+        return jsonify(admin_schema.dump(admin))
+    
+    def delete(self, admin_id):
+        admin = Admin.query.get_or_404(admin_id)
+        db.session.delete(admin)
+        db.session.commit()
+        return make_response(jsonify({'message': 'Admin deleted'}), 204)
+
+class AdminList(Resource):
+    def get(self):
+        admins = Admin.query.all()
+        return jsonify(admin_schema.dump(admins))
+
+    def post(self):
+        data = request.get_json()
+        if not data:
+            return {'error': 'No data provided'}, 400
+        if 'password' not in data:
+            return {'error': 'Password not provided'}, 400
+
+        try:
+            hashed_password = generate_password_hash(data['password'])
+            new_admin = Admin(
+            username=data['username'],
+            password_hash=data['password_hash']
+        )
+            db.session.add(new_admin)
+            db.session.commit()
+            return jsonify(admin_schema.dump(new_admin)), 201
+    
+        except Exception as e:
+            print("Error:", e) 
+            db.session.rollback()
+            return {'error': str(e)}, 400
+    
 api.add_resource(Login, '/login', endpoint='login')
 api.add_resource(CheckSession, '/check_session', endpoint='check_session')
 api.add_resource(Logout, '/logout', endpoint='logout')
@@ -357,7 +411,8 @@ api.add_resource(EnrollmentList, '/enrollments')
 api.add_resource(Enrollments, '/enrollments/<int:enrollment_id>')
 api.add_resource(ReviewList, '/reviews')
 api.add_resource(Reviews, '/reviews/<int:review_id>')
-        
+api.add_resource(AdminList, '/admins')
+api.add_resource(Admins, '/admins/<int:admin_id>')       
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)

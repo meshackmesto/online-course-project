@@ -3,20 +3,27 @@ import { Link } from "react-router-dom";
 import "./AdminRegistrationForm.css";
 import Navbar from "./Navbar";
 import coverImage from "../assets/image/pexels-pixabay-159751.jpg";
+import { useHistory } from "react-router-dom";
 
 function AdminRegistrationForm() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const history = useHistory();
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch("/admin_signup", {
+    fetch("/admins", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ username, password, email }),
+      body: JSON.stringify({
+        username: username,
+        password: password,
+
+      }),
     })
       .then((r) => {
         if (r.ok) {
@@ -26,6 +33,7 @@ function AdminRegistrationForm() {
       })
       .then((data) => {
         console.log("Admin registered:", data);
+        history.push("/login");
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -66,9 +74,9 @@ function AdminRegistrationForm() {
             />
           </div>
           <div className="form-group">
-            <Link to="/login">
+            {/* <Link to="/login"> */}
               <button type="submit">Register Admin</button>
-            </Link>
+            {/* </Link> */}
           </div>
         </form>
       </div>
