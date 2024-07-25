@@ -2,7 +2,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useEffect, useContext } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import Home from "./Home";
-import AdminRegistrationForm from "./AdminRegistrationForm";
 import Course from "./Course";
 import Students from "./Students";
 import Navbar from "./Navbar";
@@ -10,6 +9,7 @@ import Reviews from "./Reviews";
 import Login from "./Login";
 import Signup from "./Signup";
 import MyCourses from "./MyCourses";
+import Admin from "./AdminRegistrationForm";
 import { UserContext } from "./UserProvider";
 import "../App.css";
 
@@ -38,24 +38,24 @@ function App() {
             <Signup setUser={setUser} />
           </Route>
           <Route path="/login" render={() => <Login setUser={setUser} />} />
-          <Route path="/admin" component={AdminRegistrationForm} />
+          <Route path="/admin" render={() => <Admin setUser={setUser} />} />
 
           {/* Private routes when logged in*/}
-          {user ? (
-            <>
-              <Route path="/course" component={Course} />
-              <Route path="/students" component={Students} />
-              <Route path="/reviews" component={Reviews} />
-              <Route path="/navbar" component={Navbar} />
-              <Route path="/mycourses" component={MyCourses} />
-            </>
-          ) : (
+          {/*  {user ? ( */}
+          <>
+            <Route path="/course" component={Course} />
+            <Route path="/students" component={Students} />
+            <Route path="/reviews" component={Reviews} />
+            <Route path="/navbar" component={Navbar} />
+            <Route path="/mycourses" component={MyCourses} />
+          </>
+          {/* ) : (
             // If not logged in
             <Redirect to="/login" />
           )}
-
+            */}
           {/* Catch all unmatched routes */}
-          <Redirect to="/" />
+          {/*  <Redirect to="/" />  */}
         </Switch>
       </main>
     </div>

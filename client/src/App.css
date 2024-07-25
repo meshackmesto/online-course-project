@@ -126,7 +126,7 @@ nav li a {
 
 /*styling course card*/
 .card {
-  height: 40vh;
+  height: 60vh;
   overflow: hidden;
   display: inline-flex;
   flex-direction: column;
@@ -139,7 +139,11 @@ nav li a {
   margin-bottom: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
-
+.images {
+  width: 40vh;
+  height: 20vh;
+  object-fit: cover;
+}
 @media (max-width: 1024px) {
   .card {
     flex: 1 1 calc(50% - 20px);
@@ -182,6 +186,47 @@ nav li a {
   opacity: 0.3;
 }
 
+.modal-content {
+  height: 90vh;
+  width: 80%;
+  position: relative;
+  top: 5%;
+  left: 10%;
+  justify-content: center;
+}
+
+.course-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: absolute;
+  top: 15%;
+  left: 40%;
+  padding: 20px;
+}
+
+.description {
+  width: 40vw;
+}
+.visit {
+  font-weight: bold;
+}
+
+.link {
+  width: 20vw;
+  text-decoration: none;
+}
+.angularImage {
+  width: 30vw;
+  height: 50vh;
+  position: relative;
+  left: 20px;
+}
+
+.duration {
+  font-weight: bold;
+}
+
 h3 {
   padding-top: 0%;
 }
@@ -193,7 +238,8 @@ p {
 /*styling select-course button*/
 .select-course,
 .close-modal {
-  width: 10%;
+  display: inline-flex;
+  width: 20%;
   height: 8vh;
   border-radius: 10px;
   color: rgb(40, 80, 212);
@@ -201,21 +247,29 @@ p {
   font-weight: bolder;
   background-color: rgb(255, 255, 255);
   border: 2px solid rgb(40, 80, 212);
-  border-radius: 10px;
-  padding: 5px;
+  padding: 10px;
+  align-items: center;
+  justify-content: center;
 }
 .select-course {
-  position: absolute;
-  left: 50px;
-  top: 83%;
+  position: relative;
+  left: 10%;
+  top: 5vh;
 }
 
 /*styling close-modal button*/
 .close-modal {
+  position: absolute;
+  left: 40%;
+  top: 89%;
+}
+
+.response {
+  color: green;
+  font-weight: bold;
   position: relative;
-  left: 190px;
-  top: 65%;
-  margin: 10px;
+  left: 50%;
+  top: 50px;
 }
 
 /*styling my courses*/
@@ -237,8 +291,8 @@ p {
 }
 
 .mycoursecard {
-  width: 30%;
-  height: 40vh;
+  width: 5%;
+  height: 60vh;
   overflow: hidden;
   margin: 20px 40px;
   padding: 10px;
@@ -277,7 +331,7 @@ p {
 }
 
 /*styling signup form*/
-.signup {
+/* .signup {
   display: flex;
   flex-direction: column;
   position: absolute;
@@ -285,7 +339,7 @@ p {
   left: 30%;
   width: 50%;
   height: 75%;
-}
+} */
 
 .inputs {
   margin: 20px;
