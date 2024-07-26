@@ -20,7 +20,7 @@
   align-items: center;
   position: absolute;
   top: 1%;
-  left: 35%;
+  left: 10%;
   opacity: 0.9;
 }
 .admin-cover-image {
@@ -97,4 +97,9 @@ form {
   border-radius: 12px;
   margin: 0px 10px 0px 0px;
   padding: 5px;
+}
+
+.response-admin {
+  color: green;
+  font-weight: bold;
 }
