@@ -27,7 +27,6 @@ class Student(db.Model, SerializerMixin):
     id = Column(Integer, primary_key=True)
     first_name = Column(String(50), nullable=False)
     last_name = Column(String(50), nullable=False)
-    course_title = db.Column(db.String(100))
     email = Column(String(100), unique=True, nullable=False)
     _password_hash = Column(String(255), nullable=False)  # Internal storage for password hash
     created_at = Column(DateTime, default=datetime.utcnow)

@@ -197,38 +197,39 @@ class CourseByID(Resource):
 
 class Courses(Resource):
     def get(self, course_id):
-       courses = Course.query.get_or_404(course_id)
-       response = course_schema.dump(courses)
-       return jsonify(response), 200
+        course = Course.query.get_or_404(course_id)
+        return jsonify(course_schema.dump(course))
 
     def post(self):
+        admin_id = session.get('admin_id')
+        if not admin_id:
+            return {'error': 'Admin privileges required'}, 403
+        
         new_course = course_schema.load(request.json)
         db.session.add(new_course)
         db.session.commit()
-        response = course_schema.dump(new_course)
-        response.headers.add('Access-Control-Allow-Origin', 'http://localhost:3000')
-        return jsonify(response), 201
+        return jsonify(course_schema.dump(new_course)), 201
     
-    def delete(self, id):
-        course = Course.query.filter_by(id=id).first()
-        response = course_schema.dump(course)
-        response.headers.add('Access-Control-Allow-Origin', 'http://localhost:3000')
-        return jsonify(response), 201
-
-    def patch(self, course_id):
-        course = Course.query.get_or_404(course_id)
-        course.title = request.json.get('title', course.title)
-        course.description = request.json.get('description', course.description)
-        db.session.commit()
-        response = course_schema.dump(course)
-        response.headers.add('Access-Control-Allow-Origin', 'http://localhost:3000')
-        return jsonify(response)
-
     def delete(self, course_id):
+        admin_id = session.get('admin_id')
+        if not admin_id:
+            return {'error': 'Admin privileges required'}, 403
+        
         course = Course.query.get_or_404(course_id)
         db.session.delete(course)
         db.session.commit()
         return '', 204
+
+    def patch(self, course_id):
+        admin_id = session.get('admin_id')
+        if not admin_id:
+            return {'error': 'Admin privileges required'}, 403
+        
+        course = Course.query.get_or_404(course_id)
+        course.title = request.json.get('title', course.title)
+        course.description = request.json.get('description', course.description)
+        db.session.commit()
+        return jsonify(course_schema.dump(course))
 
 class EnrollmentResource(Resource):
     def get(self, id):
@@ -331,6 +332,10 @@ class Reviews(Resource):
         return jsonify(review_schema.dump(review))
 
     def patch(self, review_id):
+        admin_id = session.get('admin_id')
+        if not admin_id:
+            return {'error': 'Admin privileges required'}, 403
+        
         review = Review.query.get_or_404(review_id)
         review.rating = request.json.get('rating', review.rating)
         review.comment = request.json.get('comment', review.comment)
@@ -338,6 +343,10 @@ class Reviews(Resource):
         return jsonify(review_schema.dump(review))
 
     def delete(self, review_id):
+        admin_id = session.get('admin_id')
+        if not admin_id:
+            return {'error': 'Admin privileges required'}, 403
+        
         review = Review.query.get_or_404(review_id)
         db.session.delete(review)
         db.session.commit()
@@ -348,21 +357,24 @@ class ReviewList(Resource):
         reviews = Review.query.all()
         return jsonify(reviews_schema.dump(reviews))
 
-    """ work on reviews later """
     def post(self):
+        student_id = session.get('student_id')
+        if not student_id:
+            return {'error': 'Student privileges required'}, 403
+        
         data = request.get_json()
         if not data:
             return {'error': 'No data provided'}, 400
         try:
             review = Review(
-                comment = data['comment'],
-                rating = data['rating']
+                rating=data['rating'],
+                comment=data['comment'],
+                student_id=student_id
             )
             db.session.add(review)
             db.session.commit()
-            return admin_schema.dump(Review), 201
+            return review_schema.dump(review), 201
         except Exception as e:
-            print("Error:", e) 
             db.session.rollback()
             return {'error': str(e)}, 400
         
