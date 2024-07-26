@@ -44,11 +44,11 @@ function AdminRegistrationForm({ setAdmin }) {
 
   return (
     <div className="admin-registration-form">
-      <LoginAdmin />
       <div className="admin-image-container">
         <img src={coverImage} className="admin-cover-image" alt="pexels" />
       </div>
       <Navbar />
+      <LoginAdmin />
       <div className="form-container">
         <form onSubmit={handleSubmit} className="admin-form">
           <div className="form-group">
