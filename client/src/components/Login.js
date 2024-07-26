@@ -46,7 +46,7 @@ function Login({ setUser }) {
         <form className="login" onSubmit={postLogin}>
           <div className="form-group">
             <h1>Log in</h1>
-            <label>Email</label>
+            <label>Username</label>
             <input
               type="text"
               id="username"

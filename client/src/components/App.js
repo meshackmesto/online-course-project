@@ -10,23 +10,33 @@ import Login from "./Login";
 import Signup from "./Signup";
 import MyCourses from "./MyCourses";
 import Admin from "./AdminRegistrationForm";
+import LoginAdmin from "./LoginAdmin";
 import { UserContext } from "./UserProvider";
 import "../App.css";
 
 function App() {
   const [user, setUser] = useContext(UserContext);
+  /* const [admin, setAdmin] = useContext(UserContext); */
 
-  useEffect(() => {
-    fetch("/check_session")
-      .then((r) => {
-        if (r.ok) {
-          return r.json();
-        }
-        throw new Error("No session found");
-      })
-      .then((user) => setUser(user))
-      .catch(() => setUser(null));
-  }, [setUser]);
+  useEffect(
+    () => {
+      fetch("/check_session")
+        .then((r) => {
+          if (r.ok) {
+            return r.json();
+          }
+          throw new Error("No session found");
+        })
+        .then((user, admin) => {
+          setUser(user);
+          /* setAdmin(admin) */;
+        })
+        .catch(() => setUser(null));
+    },
+    /* [setAdmin], */
+    [setUser],
+    
+  );
 
   return (
     <div>
@@ -38,8 +48,11 @@ function App() {
             <Signup setUser={setUser} />
           </Route>
           <Route path="/login" render={() => <Login setUser={setUser} />} />
-          <Route path="/admin" render={() => <Admin setUser={setUser} />} />
-
+          <Route path="/admin" render={() => <Admin /* setAdmin={setAdmin} */ />} />
+          <Route
+            path="/admin"
+            render={() => <LoginAdmin /* setAdmin={setAdmin}  *//>}
+          />
           {/* Private routes when logged in*/}
           {/*  {user ? ( */}
           <>
