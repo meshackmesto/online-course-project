@@ -73,13 +73,16 @@ class Login(Resource):
         else:
             return {}, 401
 
-        """ json = request.get_json()
-        student = Student.query.filter_by(first_name = json()['first_name']).first()
-        if student and student.check_password(json['password']):
-            db.session['student_id'] = student.id
-            return jsonify(student_schema.dump(student)), 200
-        return {'message': 'Invalid credentials'}, 401
- """
+class LoginAdmin(Resource):
+    def post(self):
+        admin = Admin.query.filter(Admin.username == request.get_json()['username']).first()
+        if admin :
+            session['admin_id'] = admin.id
+            response = make_response(jsonify(admin.to_dict()), 200)
+            return response
+        else:
+            return {}, 401
+
 class Logout(Resource):
     def delete(self):
         session['student_id'] = None
@@ -141,7 +144,7 @@ class AdminSchema(SQLAlchemyAutoSchema):
         load_instance = True
 
 admin_schema = AdminSchema()
-admin_schema = AdminSchema(many=True)
+admins_schema = AdminSchema(many=True)
 
 
 class Students(Resource):
@@ -345,12 +348,24 @@ class ReviewList(Resource):
         reviews = Review.query.all()
         return jsonify(reviews_schema.dump(reviews))
 
+    """ work on reviews later """
     def post(self):
-        new_review = review_schema.load(request.json, session = db.session)
-        db.session.add(new_review)
-        db.session.commit()
-        return jsonify(review_schema.dump(new_review)), 201
-
+        data = request.get_json()
+        if not data:
+            return {'error': 'No data provided'}, 400
+        try:
+            review = Review(
+                comment = data['comment'],
+                rating = data['rating']
+            )
+            db.session.add(review)
+            db.session.commit()
+            return admin_schema.dump(Review), 201
+        except Exception as e:
+            print("Error:", e) 
+            db.session.rollback()
+            return {'error': str(e)}, 400
+        
 class Admins(Resource):
     def get(self, admin_id):
         admin = Admin.query.get_or_404(admin_id)
@@ -359,44 +374,43 @@ class Admins(Resource):
     def patch(self, admin_id):
         admin = Admin.query.get_or_404(admin_id)
         admin.username = request.json.get('username', admin.username)
-        admin.password_hash = request.json.get('password_hash', admin.password_hash)
+        admin._password_hash = request.json.get('_password_hash', admin.password_hash)
         db.session.commit()
-        return jsonify(admin_schema.dump(admin))
+        return jsonify(student_schema.dump(admin))
     
     def delete(self, admin_id):
         admin = Admin.query.get_or_404(admin_id)
         db.session.delete(admin)
         db.session.commit()
-        return make_response(jsonify({'message': 'Admin deleted'}), 204)
+        return '', 204
 
 class AdminList(Resource):
     def get(self):
-        admins = Admin.query.all()
-        return jsonify(admin_schema.dump(admins))
+        admins = [admin.to_dict() for admin in Admin.query.all()]
+        return make_response(jsonify(admins), 200)
 
     def post(self):
         data = request.get_json()
         if not data:
             return {'error': 'No data provided'}, 400
-        if 'password' not in data:
-            return {'error': 'Password not provided'}, 400
-
         try:
             hashed_password = generate_password_hash(data['password'])
-            new_admin = Admin(
-            username=data['username'],
-            password_hash=data['password_hash']
-        )
-            db.session.add(new_admin)
+            admin = Admin(
+                username=data['username'],
+                password_hash = hashed_password
+            )
+            db.session.add(admin)
             db.session.commit()
-            return jsonify(admin_schema.dump(new_admin)), 201
-    
+            return admin_schema.dump(admin), 201
         except Exception as e:
             print("Error:", e) 
             db.session.rollback()
             return {'error': str(e)}, 400
-    
+        
+
+
 api.add_resource(Login, '/login', endpoint='login')
+api.add_resource(LoginAdmin, '/loginadmin', endpoint='loginadmin')
 api.add_resource(CheckSession, '/check_session', endpoint='check_session')
 api.add_resource(Logout, '/logout', endpoint='logout')
 api.add_resource(ClearSession, '/clear', endpoint='clear')
