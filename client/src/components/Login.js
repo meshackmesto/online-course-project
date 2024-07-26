@@ -36,11 +36,12 @@ function Login({ setUser }) {
 
   return (
     <div>
-      <Navbar />
 
       <div className="login-image-container">
         <img src={coverImage} className="cover-image" alt="pexels" />
       </div>
+
+      <Navbar />
 
       <div className="login-form-container">
         <form className="login" onSubmit={postLogin}>

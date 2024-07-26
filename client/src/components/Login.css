@@ -8,18 +8,18 @@ h1 {
 
 .login-form-container {
   background-color: #6388af;
-  width: 50%;
+  width: 45%;
   height: 100vh;
   position: relative;
   top: 0;
-  left: 50%;
+  left: 55%;
   opacity: 0.9;
 }
 
 .cover-image {
   position: absolute;
   top: 0;
-  width: 50%;
+  width: 55%;
   height: 100%;
 }
 

@@ -42,10 +42,11 @@ function AdminRegistrationForm() {
 
   return (
     <div className="admin-registration-form">
-      <Navbar />
+     
       <div className="admin-image-container">
         <img src={coverImage} className="admin-cover-image" alt="pexels" />
       </div>
+      <Navbar />
       <div className="form-container">
         <form onSubmit={handleSubmit} className="admin-form">
           <div className="form-group">
