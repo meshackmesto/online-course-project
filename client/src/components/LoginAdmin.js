@@ -26,7 +26,7 @@ function LoginAdmin() {
       })
       .then((data) => {
         setAdmin(data);
-        history.push("/course");
+        history.push("/admin-courses");
       })
       .catch((err) => {
         alert("Incorrect validation user details!");

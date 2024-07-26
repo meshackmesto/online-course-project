@@ -208,7 +208,11 @@ class Courses(Resource):
         new_course = course_schema.load(request.json)
         db.session.add(new_course)
         db.session.commit()
-        return jsonify(course_schema.dump(new_course)), 201
+
+        result = course_schema.dump(new_course)
+        response = make_response(jsonify(result), 201)
+        response.headers['Access-Control-Allow-Origin'] = 'http://localhost:3000'
+        return response
     
     def delete(self, course_id):
         admin_id = session.get('admin_id')
