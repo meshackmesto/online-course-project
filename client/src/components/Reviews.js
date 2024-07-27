@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import Navbar from "./Navbar";
+import { UserContext } from "./UserProvider";
 
-function Reviews() {
+function Reviews({ admin }) {
   const [reviews, setReviews] = useState([]);
   const [editReview, setEditReview] = useState(null);
   const [newReview, setNewReview] = useState({ comment: "", rating: "0" });
+  const [responseMessage, setResponseMessage] = useState("");
+  const [user] = useContext(UserContext);
 
   // Fetch all reviews on component mount
   useEffect(() => {
@@ -38,13 +41,26 @@ function Reviews() {
 
   // Delete a review
   function handleDeleteReview(id) {
+    if (!admin) {
+      setResponseMessage(
+        "You must be logged in as an admin to delete a review."
+      );
+      return;
+    }
+    
     fetch(`http://localhost:5555/reviews/${id}`, {
       method: "DELETE",
     })
-      .then(() => {
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Failed to delete review");
+        }
         setReviews(reviews.filter((review) => review.id !== id));
       })
-      .catch((error) => console.error("Error deleting review:", error));
+      .catch((error) => {
+        console.error("Error deleting review:", error);
+        setResponseMessage("Failed to delete review.");
+      });
   }
 
   // Edit a review
@@ -117,17 +133,33 @@ function Reviews() {
             </button>
           )}
         </form>
-
         {/* Review List */}
+        {/* {admin && handleDeleteReview && (
+          <div className="review-cards">
+            {reviews.map((review) => (
+              <div key={review.id} className="review-card">
+                <p className="ratings">Rating: {review.rating}</p>
+                <p className="comments">{review.comment}</p>
+                <button onClick={() => handleEditReview(review)}>Edit</button>
+                <button onClick={() => handleDeleteReview(review.id)}>
+                  Delete
+                </button>
+              </div>
+            ))}
+          </div>
+        )}
+        ):( */}
         <div className="review-cards">
           {reviews.map((review) => (
             <div key={review.id} className="review-card">
               <p className="ratings">Rating: {review.rating}</p>
               <p className="comments">{review.comment}</p>
               <button onClick={() => handleEditReview(review)}>Edit</button>
+              {admin && ( 
               <button onClick={() => handleDeleteReview(review.id)}>
                 Delete
               </button>
+              )} 
             </div>
           ))}
         </div>
