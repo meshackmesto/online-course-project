@@ -102,7 +102,7 @@ function Reviews({ admin }) {
 
       {/* Review Form */}
       <div className="reviews-container">
-        <form onSubmit={editReview ? handleUpdateReview : handleAddReview}>
+        <form className="review-form" onSubmit={editReview ? handleUpdateReview : handleAddReview}>
           <textarea
             value={newReview.comment}
             onChange={(e) =>

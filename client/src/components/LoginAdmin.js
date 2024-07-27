@@ -26,7 +26,7 @@ function LoginAdmin() {
       })
       .then((data) => {
         setAdmin(data);
-        history.push("/course");
+        history.push("/admin-courses");
       })
       .catch((err) => {
         alert("Incorrect validation user details!");
@@ -43,8 +43,8 @@ function LoginAdmin() {
       {/* <div className="admin-form-container"> */}
       <form className="admin-login" onSubmit={postLogin}>
         <div className="form-group">
-          <h1>Log in</h1>
-          <label>Username</label>
+          <h2 className="admin-title">Log in</h2>
+          <label id="labels">Username</label>
           <input
             type="text"
             id="username"
@@ -56,7 +56,7 @@ function LoginAdmin() {
           />
         </div>
         <div className="form-group">
-          <label>Password</label>
+          <label id="labels">Password</label>
           <input
             type="password"
             id="password"

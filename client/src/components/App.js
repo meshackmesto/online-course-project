@@ -11,6 +11,7 @@ import Signup from "./Signup";
 import MyCourses from "./MyCourses";
 import Admin from "./AdminRegistrationForm";
 import LoginAdmin from "./LoginAdmin";
+import AdminCourses from './AdminCourses';
 import { UserContext } from "./UserProvider";
 import "../App.css";
 
@@ -59,7 +60,10 @@ function App() {
             path="/admin"
             render={() => <LoginAdmin setUser={setUser} />}
           />
-
+            render={() => <LoginAdmin /* setAdmin={setAdmin}  *//>}
+            
+          />
+          <Route path="/admin-courses" component={AdminCourses} />
           {/* Private routes when logged in*/}
           {/*  {user ? ( */}
           <>

@@ -40,11 +40,12 @@ function Signup({ setUser }) {
 
   return (
     <div>
-      <Navbar />
       
       <div className="signup-image-container">
         <img src={coverImage} className="cover-image" alt="pexels" />
       </div>
+
+      <Navbar />
 
       <div className="signup-form-container">
       <form className="signup" onSubmit={postSignup}>

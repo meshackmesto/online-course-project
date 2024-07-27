@@ -3,6 +3,8 @@ import Navbar from './Navbar';
 
 function Students() {
   const [students, setStudents] = useState([]);
+  const [filteredStudents, setFilteredStudents] = useState([]);
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     fetchStudents();
@@ -15,10 +17,34 @@ function Students() {
       .catch(error => console.error('Error fetching students:', error));
   };
 
+  function filterStudents(e) {
+    const input = e.target.value;
+    setSearch(input);
+
+    const filtered = students.filter(
+      (student) =>
+        student.first_name.toLowerCase().includes(input.toLowerCase()) ||
+        student.last_name.includes(input.toLowerCase())
+    );
+    setFilteredStudents(filtered);
+  }
+
+  const displayedStudents = search.length > 0 ? filteredStudents : students;
+
   return (
     <div>
       <Navbar />
-      <h1>Students</h1>
+      <h2>Students</h2>
+
+      <div className="search_bar">
+        <input
+          className="search"
+          type="text"
+          value={search}
+          onChange={filterStudents}
+          placeholder="search student"
+        />
+      </div>
 
       <table>
         <thead>
@@ -29,12 +55,13 @@ function Students() {
           </tr>
         </thead>
         <tbody>
-          {students.map(student => (
-              <tr key={student.id}>
-               <td>{student.first_name}</td>
-               <td>{student.last_name}</td>
-               <td>{student.id}</td>
-              </tr>
+        {displayedStudents &&
+        displayedStudents.map((student) => (
+            <tr key={student.id}>
+              <td>{student.first_name}</td>
+              <td>{student.last_name}</td>
+              <td>{student.id}</td>
+            </tr>
           ))}
         </tbody>
       </table>

@@ -12,12 +12,12 @@ form {
 }
 
 .signup-form-container{
-   background-color: #6388af;
-  width: 50%;
+  background-color: #6388af;
+  width: 45%;
   height: 100vh;
   position: relative;
   top: 0;
-  left: 50%;
+  left: 55%;
   opacity: 0.9;
 }
 
