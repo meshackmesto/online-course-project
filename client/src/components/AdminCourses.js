@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import './AdminCourses.css'; 
+import { useHistory } from "react-router-dom";
 
 function AdminCourses() {
   const [courses, setCourses] = useState([]);
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  const history = useHistory();
 
   useEffect(() => {
     fetch('/courses')
@@ -40,7 +42,7 @@ function AdminCourses() {
   };
 
   return (
-    <><div className="admin-courses-container">
+    <div className="admin-courses-container">
       <div className="form-container">
         <form onSubmit={handleAddCourse}>
           <div>
@@ -61,7 +63,7 @@ function AdminCourses() {
           <button type="submit">Add Course</button>
         </form>
       </div>
-    </div><div className="courses-list">
+      <div className="courses-list">
         <h2>All Courses</h2>
         <ul>
           {courses.map((course) => (
@@ -71,8 +73,12 @@ function AdminCourses() {
             </li>
           ))}
         </ul>
-      </div></>
-
+      </div>
+      <div className="admin-buttons">
+        <button onClick={() => history.push('/reviews')}>Reviews</button>
+        <button onClick={() => history.push('/course')}>Courses</button>
+      </div>
+    </div>
   );
 }
 

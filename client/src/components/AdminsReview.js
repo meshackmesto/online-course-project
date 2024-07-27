@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
-import './AdminReviews.css';
 
-function Reviews() {
+import React, { useEffect, useState } from "react";
+import './AdminsReview.css';
+
+function AdminsReviews() {
   const [reviews, setReviews] = useState([]);
 
-  // Fetch all reviews on component mount
+ 
   useEffect(() => {
     fetch("http://localhost:5555/reviews")
       .then((response) => response.json())
@@ -24,8 +25,7 @@ function Reviews() {
   }
 
   return (
-    <div>
-      <Navbar />
+    <div className="container">
       <h2>Reviews</h2>
 
       {/* Review List */}
@@ -44,4 +44,4 @@ function Reviews() {
   );
 }
 
-export default Reviews;
+export default AdminsReviews;

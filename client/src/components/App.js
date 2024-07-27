@@ -1,5 +1,5 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import React, { useState, useEffect, useContext } from "react";
+import React, { useEffect, useContext } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 import Home from "./Home";
 import Course from "./Course";
@@ -12,40 +12,34 @@ import MyCourses from "./MyCourses";
 import Admin from "./AdminRegistrationForm";
 import LoginAdmin from "./LoginAdmin";
 import AdminCourses from './AdminCourses';
+import AdminsHome from "./AdminsHome";
+import AdminsReview from "./AdminsReview";
 import { UserContext } from "./UserProvider";
 import "../App.css";
 
 function App() {
   const [user, setUser] = useContext(UserContext);
-  const [admin, setAdmin] = useContext(UserContext);
-  /* const [isAdmin, setIsAdmin] = useState(false); */
+  /* const [admin, setAdmin] = useContext(UserContext); */
 
-  useEffect(() => {
-    fetch("/check_session")
-      .then((r) => {
-        if (r.ok) {
-          return r.json();
-        }
-        throw new Error("No session found");
-      })
-      .then((data) => setUser(data))
-      .catch(() => setUser(null));
-  }, [setUser]);
-
-  useEffect(() => {
-    fetch("/check_admin_session")
-      .then((r) => {
-        if (r.ok) {
-          return r.json();
-        }
-        throw new Error("No session found");
-      })
-      .then((data) => setAdmin(data))
-      .catch(() => setAdmin(null));
-  }, [setAdmin]);
-
-  const isUserAdmin = { admin };
-  console.log("Admin status:", isUserAdmin);
+  useEffect(
+    () => {
+      fetch("/check_session")
+        .then((r) => {
+          if (r.ok) {
+            return r.json();
+          }
+          throw new Error("No session found");
+        })
+        .then((user, admin) => {
+          setUser(user);
+          /* setAdmin(admin) */;
+        })
+        .catch(() => setUser(null));
+    },
+    /* [setAdmin], */
+    [setUser],
+    
+  );
 
   return (
     <div>
@@ -53,26 +47,25 @@ function App() {
         <Switch>
           {/* Public routes accessible to anyone*/}
           <Route exact path="/" component={Home} />
-          <Route path="/signup" render={() => <Signup setUser={setUser} />} />
+          <Route path="/signup" component={Signup}>
+            <Signup setUser={setUser} />
+          </Route>
           <Route path="/login" render={() => <Login setUser={setUser} />} />
-          <Route path="/admin" render={() => <Admin setUser={setUser} />} />
+          <Route path="/admin" render={() => <Admin /* setAdmin={setAdmin} */ />} />
           <Route
             path="/admin"
-            render={() => <LoginAdmin setUser={setUser} />}
-          />
             render={() => <LoginAdmin /* setAdmin={setAdmin}  *//>}
             
           />
           <Route path="/admin-courses" component={AdminCourses} />
+          <Route path="/adminhome" component={AdminsHome} />
+          <Route path="/admin-review" component={AdminsReview} />
           {/* Private routes when logged in*/}
           {/*  {user ? ( */}
           <>
             <Route path="/course" component={Course} />
             <Route path="/students" component={Students} />
-            <Route
-              path="/reviews"
-              render={() => <Reviews admin={isUserAdmin} />}
-            />
+            <Route path="/reviews" component={Reviews} />
             <Route path="/navbar" component={Navbar} />
             <Route path="/mycourses" component={MyCourses} />
           </>

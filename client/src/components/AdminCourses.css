@@ -35,15 +35,7 @@
   margin-top: 0%;
 }
 
-.form-container input[type="text"]{
-  width: 100%;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 1rem;
-  color: #333;
-  margin-top: 15px;
-}
+.form-container input[type="text"]
 .form-container textarea {
   width: 100%;
   padding: 8px;

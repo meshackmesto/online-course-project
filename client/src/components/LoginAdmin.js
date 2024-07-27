@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import "./LoginAdmin.css";
 import { useHistory } from "react-router-dom";
 import { UserContext } from "./UserProvider";
+import { NavLink } from "react-router-dom/cjs/react-router-dom.min";
 
 function LoginAdmin() {
   const [username, setUsername] = useState("");
@@ -68,7 +69,9 @@ function LoginAdmin() {
           />
         </div>
         <div className="form-group">
+          <NavLink to="/adminhome">
           <button className="login-button">Log in</button>
+          </NavLink>
         </div>
       </form>
       {/* </div> */}
