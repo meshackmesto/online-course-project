@@ -16,6 +16,11 @@ function Course({ onAddCourse }) {
   const [myCourses, setMyCourses] = useState([]);
   const [responseMessage, setResponseMessage] = useState("");
   const { user } = useContext(UserContext);
+  const [newCourse, setNewCourse] = useState({
+    title: "",
+    description: "",
+    image: "",
+  });
 
   const history = useHistory();
 
@@ -97,9 +102,43 @@ function Course({ onAddCourse }) {
     }
   }
 
+  function addCourse(e) {
+    e.preventDefault();
+    fetch("http://127.0.0.1:5555/courses", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newCourse),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((addedCourse) => {
+        setCourses([...courses, addedCourse]);
+        setResponseMessage("Course added successfully!");
+        setNewCourse({
+          title: "",
+          description: "",
+          image: "",
+        });
+      })
+      .catch((err) => {
+        console.error(err);
+        setResponseMessage("Failed to add course.");
+      });
+  }
+
   function handleLoggedIn() {
     if (user) {
-      postCourse();
+      if (user.isAdmin) {
+        history.push("/admin");
+      } else {
+        history.push("/login");
+      }
     } else {
       history.push("/login");
     }
@@ -108,6 +147,50 @@ function Course({ onAddCourse }) {
   return (
     <div className="courses">
       <Navbar />
+
+      {user && user.isAdmin && (
+        <div className="admin-add-course">
+          <h2>Add New Course</h2>
+          <form onSubmit={addCourse}>
+            <div className="form-group">
+              <label>Title:</label>
+              <input
+                type="text"
+                value={newCourse.title}
+                onChange={(e) =>
+                  setNewCourse({ ...newCourse, title: e.target.value })
+                }
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label>Description:</label>
+              <textarea
+                value={newCourse.description}
+                onChange={(e) =>
+                  setNewCourse({ ...newCourse, description: e.target.value })
+                }
+                required
+              />
+            </div>
+            <div className="form-group">
+              <label>Image URL:</label>
+              <input
+                type="text"
+                value={newCourse.image}
+                onChange={(e) =>
+                  setNewCourse({ ...newCourse, image: e.target.value })
+                }
+              />
+            </div>
+            <button type="submit" onClick={handleLoggedIn} className="add-btn">
+              Add Course
+            </button>
+            
+            {responseMessage && <p>{responseMessage}</p>}
+          </form>
+        </div>
+      )}
 
       {modal && (
         <div className="modal">
