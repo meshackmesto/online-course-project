@@ -26,8 +26,8 @@ function AdminsReviews() {
 
   return (
     <div className="container">
-      <h2>Reviews</h2>
-
+      <h3>Reviews</h3>
+      <div className="admin-reviews">
       {/* Review List */}
       <div className="review-cards">
         {reviews.map((review) => (
@@ -39,6 +39,7 @@ function AdminsReviews() {
             </button>
           </div>
         ))}
+      </div>
       </div>
     </div>
   );

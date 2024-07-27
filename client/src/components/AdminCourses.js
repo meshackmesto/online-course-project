@@ -43,28 +43,27 @@ function AdminCourses() {
 
   return (
     <div className="admin-courses-container">
-      <div className="form-container">
-        <form onSubmit={handleAddCourse}>
-          <div>
+      {/* <div className="addcourse-form-container"> */}
+        <form className="addcourses-form" onSubmit={handleAddCourse}>
+            <h3>Add New Course</h3>
             <label>Course Title:</label>
             <input
+              id= 'course-title'
               type="text"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               required />
-          </div>
-          <div>
             <label>Course Description:</label>
             <textarea
+              id = "course-description"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               required />
-          </div>
           <button type="submit">Add Course</button>
         </form>
-      </div>
+      {/* </div> */}
       <div className="courses-list">
-        <h2>All Courses</h2>
+        <h2>Available Courses</h2>
         <ul>
           {courses.map((course) => (
             <li key={course.id}>

@@ -1,31 +1,27 @@
 .admin-courses-container {
-  max-width: 800px;
-  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  margin-left: 5vw;
   padding: 20px;
-  position: relative;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
 
-.admin-courses-container h1 {
-  text-align: center;
+.addcourses-form {
   margin-bottom: 20px;
-  font-size: 2rem;
-  color: #333;
-}
-
-.form-container {
-  background-color: #f9f9f9;
-  padding: 20px;
+  display: flex;
+  margin-right: 50px;
+  width: 75%;
+  margin-top: 5px;
+  padding-bottom: 50px;
+  margin-left: 20px;
+  background-color: #fff;
   border: 1px solid #ddd;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 300px;
-  margin-right: 10px; 
 }
 
-.form-container label {
+.addcourses-form label {
   display: block;
   margin-bottom: 0px;
   font-weight: bold;
@@ -35,52 +31,67 @@
   margin-top: 0%;
 }
 
-.form-container input[type="text"]
-.form-container textarea {
-  width: 100%;
-  padding: 8px;
+#course-title[type="text"]{
+  width: 60%;
+  margin-bottom: 10px;
+  padding: 5px;
+  border-radius: 10px;
   border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 1rem;
-  color: #333;
-  margin-top: 15px;
 }
 
-.form-container textarea {
-  resize: vertical;
-  min-height: 80px; /* Adjust this to your preference */
-}
-
-.form-container button {
-  width: 100%;
+#course-description {
+  width: 80%;
+  margin-bottom: 10px;
   padding: 10px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+  border-radius: 10px;
+  border: 1px solid #ccc;
   margin-top: 10px;
 }
 
-.form-container button:hover {
+.addcourses-form button {
+  margin-right: 10px;
+  padding: 5px 10px;
+  color: rgb(40, 80, 212);
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-weight: bolder;
+  background-color: rgb(255, 255, 255);
+  border: 2px solid rgb(40, 80, 212);
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.addcourses-form button:hover {
   background-color: #0056b3;
 }
 
 .courses-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-right: 5%;
+  padding: 15px;
+  margin-top: 30%;
+  flex-direction: row;
+  flex: 1;
+  margin-left: 20px;
   background-color: #fff;
-  padding: 20px;
+  width: 85%;
   border: 1px solid #ddd;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  margin-top: 120px; 
+}
+
+h3{
+  align-items: center;
+  
 }
 
 .courses-list h2 {
   font-size: 1.5rem;
   color: #333;
-  margin-right: 55pc;
+  margin-bottom: 10px;
+  margin-top: 20px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 .courses-list ul {
@@ -107,4 +118,8 @@
 .courses-list p {
   color: #666;
   margin: 5px 0 0;
+}
+
+.addcourses-form{
+  padding-top: 20px;
 }
