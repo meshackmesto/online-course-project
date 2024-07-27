@@ -41,7 +41,6 @@ function AdminCourses() {
 
   return (
     <><div className="admin-courses-container">
-      <h1>Admin Courses</h1>
       <div className="form-container">
         <form onSubmit={handleAddCourse}>
           <div>
