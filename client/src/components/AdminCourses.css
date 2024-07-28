@@ -1,0 +1,143 @@
+.admin-courses-container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  max-width: 100vw;
+  height: 100%;
+  padding: 20px;
+  gap: 20px;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
+.admin-course-card {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  box-sizing: border-box;
+}
+
+.addcourses-form {
+  display: flex;
+  margin-right: 50px;
+  width: 45%;
+  height: 50%;
+  position: relative;
+  top: 3%;
+  left: 20%;
+  padding-bottom: 50px;
+  margin-left: 20px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.addcourses-form label {
+  display: block;
+  margin-bottom: 0px;
+  font-weight: bold;
+  color: #555;
+  font-size: 1rem;
+  margin-right: 75px;
+  margin-top: 0%;
+}
+
+#course-title[type="text"] {
+  width: 60%;
+  margin-bottom: 10px;
+  padding: 5px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+}
+
+#course-description {
+  width: 80%;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  margin-top: 10px;
+}
+
+.addcourses-form button {
+  margin-right: 10px;
+  padding: 5px 10px;
+  color: rgb(40, 80, 212);
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-weight: bolder;
+  background-color: rgb(255, 255, 255);
+  border: 2px solid rgb(40, 80, 212);
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.addcourses-form button:hover {
+  background-color: #0056b3;
+}
+
+.courses-list {
+  padding: 20px;
+}
+
+h3 {
+  align-items: center;
+}
+
+.courses-list h2 {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 10px;
+  margin-top: 20px;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
+.available-courses {
+  margin-top: 27%;
+  margin-left: -22%;
+  margin-bottom: auto;
+}
+
+.courses-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.courses-list li {
+  padding: 15px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.courses-list li:last-child {
+  border-bottom: none;
+}
+
+.courses-list h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: #007bff;
+}
+
+.courses-list p {
+  color: #666;
+  margin: 5px 0 0;
+}
+
+.addcourses-form {
+  padding-top: 20px;
+}
+
+.admin-buttons {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  left: 10%;
+  top: 1%;
+}
+
+.admin-courses-btn {
+  margin-left: 20px;
+}

@@ -13,7 +13,7 @@ from flask_cors import CORS
 from config import app, db, api
 
 # Add your model imports
-from models import Student, Course, MyCourse, Enrollment, Review
+from models import Student, Course, MyCourse, Enrollment, Review, Admin
 
 migrate = Migrate (app, db)
 
@@ -73,13 +73,16 @@ class Login(Resource):
         else:
             return {}, 401
 
-        """ json = request.get_json()
-        student = Student.query.filter_by(first_name = json()['first_name']).first()
-        if student and student.check_password(json['password']):
-            db.session['student_id'] = student.id
-            return jsonify(student_schema.dump(student)), 200
-        return {'message': 'Invalid credentials'}, 401
- """
+class LoginAdmin(Resource):
+    def post(self):
+        admin = Admin.query.filter(Admin.username == request.get_json()['username']).first()
+        if admin :
+            session['admin_id'] = admin.id
+            response = make_response(jsonify(admin.to_dict()), 200)
+            return response
+        else:
+            return {}, 401
+
 class Logout(Resource):
     def delete(self):
         session['student_id'] = None
@@ -134,6 +137,15 @@ class ReviewSchema(SQLAlchemyAutoSchema):
 review_schema = ReviewSchema()
 reviews_schema = ReviewSchema(many=True)
 
+class AdminSchema(SQLAlchemyAutoSchema):
+    class Meta:
+        model = Admin
+        sqla_session = db.session
+        load_instance = True
+
+admin_schema = AdminSchema()
+admins_schema = AdminSchema(many=True)
+
 
 class Students(Resource):
     def get(self, student_id):
@@ -185,38 +197,43 @@ class CourseByID(Resource):
 
 class Courses(Resource):
     def get(self, course_id):
-       courses = Course.query.get_or_404(course_id)
-       response = course_schema.dump(courses)
-       return jsonify(response), 200
+        course = Course.query.get_or_404(course_id)
+        return jsonify(course_schema.dump(course))
 
     def post(self):
+        admin_id = session.get('admin_id')
+        if not admin_id:
+            return {'error': 'Admin privileges required'}, 403
+        
         new_course = course_schema.load(request.json)
         db.session.add(new_course)
         db.session.commit()
-        response = course_schema.dump(new_course)
-        response.headers.add('Access-Control-Allow-Origin', 'http://localhost:3000')
-        return jsonify(response), 201
+
+        result = course_schema.dump(new_course)
+        response = make_response(jsonify(result), 201)
+        response.headers['Access-Control-Allow-Origin'] = 'http://localhost:3000'
+        return response
     
-    def delete(self, id):
-        course = Course.query.filter_by(id=id).first()
-        response = course_schema.dump(course)
-        response.headers.add('Access-Control-Allow-Origin', 'http://localhost:3000')
-        return jsonify(response), 201
-
-    def patch(self, course_id):
-        course = Course.query.get_or_404(course_id)
-        course.title = request.json.get('title', course.title)
-        course.description = request.json.get('description', course.description)
-        db.session.commit()
-        response = course_schema.dump(course)
-        response.headers.add('Access-Control-Allow-Origin', 'http://localhost:3000')
-        return jsonify(response)
-
     def delete(self, course_id):
+        admin_id = session.get('admin_id')
+        if not admin_id:
+            return {'error': 'Admin privileges required'}, 403
+        
         course = Course.query.get_or_404(course_id)
         db.session.delete(course)
         db.session.commit()
         return '', 204
+
+    def patch(self, course_id):
+        admin_id = session.get('admin_id')
+        if not admin_id:
+            return {'error': 'Admin privileges required'}, 403
+        
+        course = Course.query.get_or_404(course_id)
+        course.title = request.json.get('title', course.title)
+        course.description = request.json.get('description', course.description)
+        db.session.commit()
+        return jsonify(course_schema.dump(course))
 
 class EnrollmentResource(Resource):
     def get(self, id):
@@ -319,6 +336,10 @@ class Reviews(Resource):
         return jsonify(review_schema.dump(review))
 
     def patch(self, review_id):
+        admin_id = session.get('admin_id')
+        if not admin_id:
+            return {'error': 'Admin privileges required'}, 403
+        
         review = Review.query.get_or_404(review_id)
         review.rating = request.json.get('rating', review.rating)
         review.comment = request.json.get('comment', review.comment)
@@ -326,6 +347,10 @@ class Reviews(Resource):
         return jsonify(review_schema.dump(review))
 
     def delete(self, review_id):
+        admin_id = session.get('admin_id')
+        if not admin_id:
+            return {'error': 'Admin privileges required'}, 403
+        
         review = Review.query.get_or_404(review_id)
         db.session.delete(review)
         db.session.commit()
@@ -337,12 +362,71 @@ class ReviewList(Resource):
         return jsonify(reviews_schema.dump(reviews))
 
     def post(self):
-        new_review = review_schema.load(request.json, session = db.session)
-        db.session.add(new_review)
-        db.session.commit()
-        return jsonify(review_schema.dump(new_review)), 201
+        student_id = session.get('student_id')
+        if not student_id:
+            return {'error': 'Student privileges required'}, 403
         
+        data = request.get_json()
+        if not data:
+            return {'error': 'No data provided'}, 400
+        try:
+            review = Review(
+                rating=data['rating'],
+                comment=data['comment'],
+                student_id=student_id
+            )
+            db.session.add(review)
+            db.session.commit()
+            return review_schema.dump(review), 201
+        except Exception as e:
+            db.session.rollback()
+            return {'error': str(e)}, 400
+        
+class Admins(Resource):
+    def get(self, admin_id):
+        admin = Admin.query.get_or_404(admin_id)
+        return jsonify(admin_schema.dump(admin))
+
+    def patch(self, admin_id):
+        admin = Admin.query.get_or_404(admin_id)
+        admin.username = request.json.get('username', admin.username)
+        admin._password_hash = request.json.get('_password_hash', admin.password_hash)
+        db.session.commit()
+        return jsonify(student_schema.dump(admin))
+    
+    def delete(self, admin_id):
+        admin = Admin.query.get_or_404(admin_id)
+        db.session.delete(admin)
+        db.session.commit()
+        return '', 204
+
+class AdminList(Resource):
+    def get(self):
+        admins = [admin.to_dict() for admin in Admin.query.all()]
+        return make_response(jsonify(admins), 200)
+
+    def post(self):
+        data = request.get_json()
+        if not data:
+            return {'error': 'No data provided'}, 400
+        try:
+            hashed_password = generate_password_hash(data['password'])
+            admin = Admin(
+                username=data['username'],
+                password_hash = hashed_password
+            )
+            db.session.add(admin)
+            db.session.commit()
+            return admin_schema.dump(admin), 201
+        except Exception as e:
+            print("Error:", e) 
+            db.session.rollback()
+            return {'error': str(e)}, 400
+        
+
+
 api.add_resource(Login, '/login', endpoint='login')
+api.add_resource(LoginAdmin, '/loginadmin', endpoint='loginadmin')
 api.add_resource(CheckSession, '/check_session', endpoint='check_session')
 api.add_resource(Logout, '/logout', endpoint='logout')
 api.add_resource(ClearSession, '/clear', endpoint='clear')
@@ -357,7 +441,8 @@ api.add_resource(EnrollmentList, '/enrollments')
 api.add_resource(Enrollments, '/enrollments/<int:enrollment_id>')
 api.add_resource(ReviewList, '/reviews')
 api.add_resource(Reviews, '/reviews/<int:review_id>')
-        
+api.add_resource(AdminList, '/admins')
+api.add_resource(Admins, '/admins/<int:admin_id>')       
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)

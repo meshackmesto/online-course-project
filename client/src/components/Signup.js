@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Navbar from "./Navbar";
 import "./Signup.css";
 import { useHistory } from "react-router-dom";
+import coverImage from "../assets/image/pexels-enginakyurt-2767814 (2).jpg";
 
 function Signup({ setUser }) {
   const [firstName, setFirstName] = useState("");
@@ -12,7 +13,6 @@ function Signup({ setUser }) {
 
   const history = useHistory();
 
-  //const baseUrl = "http://localhost:3031";
   function postSignup(e) {
     e.preventDefault();
     setFormSubmitted(true);
@@ -40,11 +40,18 @@ function Signup({ setUser }) {
 
   return (
     <div>
+      
+      <div className="signup-image-container">
+        <img src={coverImage} className="cover-image" alt="pexels" />
+      </div>
+
       <Navbar />
-      <form className="signup bg-dark" onSubmit={postSignup}>
-        <h1>Sign up</h1>
-        <label htmlFor="first_name">
-          First Name
+
+      <div className="signup-form-container">
+      <form className="signup" onSubmit={postSignup}>
+        <div className="form-group">
+         <h1>Sign up</h1>
+          <label htmlFor="first_name">First Name</label>
           <input
             className="inputs"
             id="first_name"
@@ -56,9 +63,9 @@ function Signup({ setUser }) {
             placeholder="John"
             required
           />
-        </label>
-        <label htmlFor="last_name">
-          Last Name
+        </div>
+        <div className="form-group">
+          <label htmlFor="last_name">Last Name</label>
           <input
             id="last_name"
             className="inputs"
@@ -70,10 +77,9 @@ function Signup({ setUser }) {
             placeholder="Doe"
             required
           />
-        </label>
-
-        <label htmlFor="email">
-          Email
+        </div>
+        <div className="form-group">
+          <label htmlFor="email">Email</label>
           <input
             id="email"
             className="inputs"
@@ -85,9 +91,9 @@ function Signup({ setUser }) {
             placeholder="hunni@gmail"
             required
           />
-        </label>
-        <label htmlFor="password">
-          Password
+        </div>
+        <div className="form-group">
+          <label htmlFor="password">Password</label>
           <input
             className="inputs"
             id="password"
@@ -99,13 +105,15 @@ function Signup({ setUser }) {
             placeholder="Password"
             required
           />
-        </label>
-
-        <button type="submit" className="signup-button">
-          Sign up
-        </button>
+        </div>
+        <div className="form-group">
+          <button type="submit" className="signup-button">
+            Sign up
+          </button>
+        </div>
       </form>
       {formSubmitted ? <p>Sign up successful!</p> : null}
+    </div>
     </div>
   );
 }

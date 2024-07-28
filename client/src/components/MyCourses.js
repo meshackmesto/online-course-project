@@ -37,17 +37,19 @@ function MyCourses() {
     <div className="mycourses">
       <Navbar />
       <h2 className="heading">My Courses</h2>
-      <div className="cards-container">
-        {mycourses &&
-          mycourses.map((course) => (
-            <MyCourseCard
-              key={course.id}
-              image={course.image}
-              title={course.title}
-              description={course.description}
-              removeCourse={() => removeCourse(course.id)}
-            />
-          ))}
+      <div className="my-courses-cards-container">
+        <div className="my-courses-cards">
+          {mycourses &&
+            mycourses.map((course) => (
+              <MyCourseCard
+                key={course.id}
+                image={course.image}
+                title={course.title}
+                description={course.description}
+                removeCourse={() => removeCourse(course.id)}
+              />
+            ))}
+        </div>
       </div>
     </div>
   );
