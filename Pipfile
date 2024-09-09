@@ -16,6 +16,7 @@ faker = "*"
 marshmallow-sqlalchemy = "*"
 flask-bcrypt = "*"
 flask-jwt-extended = "*"
+gunicorn = "*"
 
 [requires]
 python_full_version = "3.10.12"
