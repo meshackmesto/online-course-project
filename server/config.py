@@ -24,6 +24,6 @@ migrate = Migrate(app, db)
 
 # Instantiate REST API
 api = Api(app)
-CORS(app, resources={r"/api/*": {"origins": "https://online-course-project-2.onrender.com/"}})
+CORS(app, supports_credentials=True, resources={r"/*": {"origins": "*"}})
 
 bcrypt =Bcrypt(app)
