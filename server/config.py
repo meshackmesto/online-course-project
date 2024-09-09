@@ -9,7 +9,8 @@ from flask_restful import Api
 from flask_bcrypt import Bcrypt
 
 # Instantiate app, set attributes
-app = Flask(__name__)
+app = Flask(__name__, static_folder="online-course-project/build", static_url_path="/")
+CORS(app, supports_credentials=True, resources={r"/*": {"origins": "*"}})
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///app.db'
 app.config['SECRET_KEY'] = 'f6f44f8f6f8d86f41eadf3e47791647c54c36bc297b3d60a'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -19,11 +20,13 @@ app.json_encoder.compact = False
 metadata = MetaData(naming_convention={
     "fk": "fk_%(table_name)s_%(column_0_name)s_%(referred_table_name)s",
 })
+
 db = SQLAlchemy(app, metadata=metadata)
-migrate = Migrate(app, db)
-
-# Instantiate REST API
-api = Api(app)
-CORS(app, supports_credentials=True, resources={r"/*": {"origins": "*"}})
-
 bcrypt =Bcrypt(app)
+migrate = Migrate(app, db)
+api = Api(app)
+
+
+
+
+
