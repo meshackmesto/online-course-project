@@ -8,14 +8,13 @@ from marshmallow_sqlalchemy import SQLAlchemyAutoSchema
 from flask_bcrypt import generate_password_hash
 
 # Local imports
-from config import app, db, api, CORS
+from config import app, db, api
 
 # Add your model imports
 from models import Student, Course, MyCourse, Enrollment, Review, Admin
 
 migrate = Migrate (app, db)
 
-CORS(app)
 
 class ClearSession(Resource):
 
