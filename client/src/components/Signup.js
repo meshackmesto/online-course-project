@@ -11,13 +11,15 @@ function Signup({ setUser }) {
   const [password, setPassword] = useState("");
   const [formSubmitted, setFormSubmitted] = useState(false);
 
+  const API = process.env.REACT_APP_SERVER_API;
+
   const history = useHistory();
 
   function postSignup(e) {
     e.preventDefault();
     setFormSubmitted(true);
 
-    fetch("http://127.0.0.1:5555/signup", {
+    fetch(`${API}/signup`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

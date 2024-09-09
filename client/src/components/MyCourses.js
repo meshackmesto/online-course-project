@@ -4,17 +4,18 @@ import MyCourseCard from "./MyCourseCard";
 
 function MyCourses() {
   const [mycourses, setMyCourses] = useState([]);
+  const API = process.env.REACT_APP_SERVER_API;
 
   //return to fetch courses from api endpoint/ database
   useEffect(() => {
-    fetch("http://127.0.0.1:5555/mycourses")
+    fetch(`${API}/mycourses`)
       .then((response) => response.json())
       .then((courses) => setMyCourses(courses))
       .catch((err) => console.log("deleting course failed", err));
   }, []);
 
   function removeCourse(id) {
-    fetch(`http://127.0.0.1:5555/mycourses/${id}`, {
+    fetch(`${API}/mycourses/${id}`, {
       method: "DELETE",
     })
       .then((response) => {

@@ -5,7 +5,7 @@ export const UserContext = createContext();
 export function UserProvider({ children }) {
   const [user, setUser] = useState(null);
 
- /*  useEffect(() => {
+  /*  useEffect(() => {
     fetch("/check_session")
       .then((response) => response.json())
       .then((data) => setUser(data))

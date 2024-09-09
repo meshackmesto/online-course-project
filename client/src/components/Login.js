@@ -9,9 +9,11 @@ function Login({ setUser }) {
   const [password, setPassword] = useState("");
   const history = useHistory();
 
+  const API = process.env.REACT_APP_SERVER_API;
+
   function postLogin(e) {
     e.preventDefault();
-    fetch("http://localhost:5555/login", {
+    fetch(`${API}/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -36,7 +38,6 @@ function Login({ setUser }) {
 
   return (
     <div>
-
       <div className="login-image-container">
         <img src={coverImage} className="cover-image" alt="pexels" />
       </div>

@@ -8,8 +8,10 @@ function AdminCourses() {
   const [description, setDescription] = useState("");
   const history = useHistory();
 
+  const API = process.env.REACT_APP_SERVER_API;
+
   useEffect(() => {
-    fetch("/courses")
+    fetch(`${API}/courses`)
       .then((response) => response.json())
       .then((data) => setCourses(data))
       .catch((error) => console.error("Error fetching courses:", error));
@@ -20,7 +22,7 @@ function AdminCourses() {
     const newCourse = { title, description };
 
     try {
-      const response = await fetch("/courses", {
+      const response = await fetch(`${API}/courses `, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

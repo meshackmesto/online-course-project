@@ -6,10 +6,11 @@ function CoursePage() {
   const [courses, setCourses] = useState([]);
   const [selectedCourses, setSelectedCourses] = useState([]);
 
+  const API = process.env.REACT_APP_SERVER_API;
+
   //remove baseUrl when fetching from db
   useEffect(() => {
-    const baseUrl = "http://localhost:3031";
-    fetch(`${baseUrl}/courses`)
+    fetch(`${API}/courses`)
       .then((response) => response.json())
       .then((coursesArray) => {
         setCourses(coursesArray);

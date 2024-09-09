@@ -4,13 +4,11 @@
 from flask import Flask, request, session, jsonify, make_response
 from flask_restful import Resource
 from flask_migrate import Migrate
-from flask_cors import CORS
 from marshmallow_sqlalchemy import SQLAlchemyAutoSchema
 from flask_bcrypt import generate_password_hash
-from flask_cors import CORS
 
 # Local imports
-from config import app, db, api
+from config import app, db, api, CORS
 
 # Add your model imports
 from models import Student, Course, MyCourse, Enrollment, Review, Admin
@@ -425,24 +423,24 @@ class AdminList(Resource):
         
 
 
-api.add_resource(Login, '/login', endpoint='login')
-api.add_resource(LoginAdmin, '/loginadmin', endpoint='loginadmin')
-api.add_resource(CheckSession, '/check_session', endpoint='check_session')
-api.add_resource(Logout, '/logout', endpoint='logout')
-api.add_resource(ClearSession, '/clear', endpoint='clear')
-api.add_resource(Signup, '/signup', endpoint='signup')
-api.add_resource(StudentList, '/students')
-api.add_resource(Students, '/students/<int:student_id>')
-api.add_resource(CourseList, '/courses')
-api.add_resource(Courses, '/courses/<int:course_id>')
-api.add_resource(MyCourses, '/mycourses/<int:mycourse_id>')
-api.add_resource(MyCourseList, '/mycourses')
-api.add_resource(EnrollmentList, '/enrollments')
-api.add_resource(Enrollments, '/enrollments/<int:enrollment_id>')
-api.add_resource(ReviewList, '/reviews')
-api.add_resource(Reviews, '/reviews/<int:review_id>')
-api.add_resource(AdminList, '/admins')
-api.add_resource(Admins, '/admins/<int:admin_id>')       
+api.add_resource(Login, '/api/login', endpoint='login')
+api.add_resource(LoginAdmin, '/api/loginadmin', endpoint='loginadmin')
+api.add_resource(CheckSession, '/api/check_session', endpoint='check_session')
+api.add_resource(Logout, '/api/logout', endpoint='logout')
+api.add_resource(ClearSession, '/api/clear', endpoint='clear')
+api.add_resource(Signup, '/api/signup', endpoint='signup')
+api.add_resource(StudentList, '/api/students')
+api.add_resource(Students, '/api/students/<int:student_id>')
+api.add_resource(CourseList, '/api/courses')
+api.add_resource(Courses, '/api/courses/<int:course_id>')
+api.add_resource(MyCourses, '/api/mycourses/<int:mycourse_id>')
+api.add_resource(MyCourseList, '/api/mycourses')
+api.add_resource(EnrollmentList, '/api/enrollments')
+api.add_resource(Enrollments, '/api/enrollments/<int:enrollment_id>')
+api.add_resource(ReviewList, '/api/reviews')
+api.add_resource(Reviews, '/api/reviews/<int:review_id>')
+api.add_resource(AdminList, '/api/admins')
+api.add_resource(Admins, '/api/admins/<int:admin_id>')       
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)

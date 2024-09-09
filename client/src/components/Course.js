@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import Navbar from "./Navbar";
 import CourseCard from "./CourseCard";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { UserContext } from "./UserProvider";
 import angularImage from "../assets/image/angular.jpg";
 
@@ -22,11 +22,13 @@ function Course({ onAddCourse }) {
     image: "",
   });
 
+  const API = process.env.REACT_APP_SERVER_API;
+
   const history = useHistory();
 
   //fetch courses from db.json
   useEffect(() => {
-    fetch("http://127.0.0.1:5555/courses")
+    fetch(`${API}/courses`)
       .then((response) => response.json())
       .then((coursesArray) => {
         setCourses(coursesArray);
@@ -35,7 +37,7 @@ function Course({ onAddCourse }) {
   }, []);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:5555/mycourses")
+    fetch(`${API}/mycourses`)
       .then((response) => response.json())
       .then((coursesArray) => {
         setMyCourses(coursesArray);
@@ -70,7 +72,7 @@ function Course({ onAddCourse }) {
       selectedCourse &&
       !myCourses.some((course) => course.id === selectedCourse.id)
     ) {
-      fetch("http://127.0.0.1:5555/mycourses", {
+      fetch(`${API}/mycourses`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -104,7 +106,7 @@ function Course({ onAddCourse }) {
 
   function addCourse(e) {
     e.preventDefault();
-    fetch("http://127.0.0.1:5555/courses", {
+    fetch(`${API}/courses`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -186,7 +188,7 @@ function Course({ onAddCourse }) {
             <button type="submit" onClick={handleLoggedIn} className="add-btn">
               Add Course
             </button>
-            
+
             {responseMessage && <p>{responseMessage}</p>}
           </form>
         </div>

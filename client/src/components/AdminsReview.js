@@ -5,9 +5,10 @@ import './AdminsReview.css';
 function AdminsReviews() {
   const [reviews, setReviews] = useState([]);
 
+  const API = process.env.REACT_APP_SERVER_API;
  
   useEffect(() => {
-    fetch("http://localhost:5555/reviews")
+    fetch(`${API}/reviews`)
       .then((response) => response.json())
       .then((data) => setReviews(data))
       .catch((error) => console.error("Error fetching reviews:", error));
@@ -15,7 +16,7 @@ function AdminsReviews() {
 
   // Delete a review
   function handleDeleteReview(id) {
-    fetch(`http://localhost:5555/reviews/${id}`, {
+    fetch(`${API}/reviews/${id}`, {
       method: "DELETE",
     })
       .then(() => {

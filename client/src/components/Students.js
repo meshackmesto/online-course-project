@@ -1,20 +1,22 @@
-import React, { useState, useEffect } from 'react';
-import Navbar from './Navbar';
+import React, { useState, useEffect } from "react";
+import Navbar from "./Navbar";
 
 function Students() {
   const [students, setStudents] = useState([]);
   const [filteredStudents, setFilteredStudents] = useState([]);
   const [search, setSearch] = useState("");
 
+  const API = process.env.REACT_APP_SERVER_API;
+
   useEffect(() => {
     fetchStudents();
   }, []);
 
   const fetchStudents = () => {
-    fetch('http://localhost:5555/students')
-      .then(response => response.json())
-      .then(data => setStudents(data))
-      .catch(error => console.error('Error fetching students:', error));
+    fetch(`${API}/students`)
+      .then((response) => response.json())
+      .then((data) => setStudents(data))
+      .catch((error) => console.error("Error fetching students:", error));
   };
 
   function filterStudents(e) {
@@ -55,14 +57,14 @@ function Students() {
           </tr>
         </thead>
         <tbody>
-        {displayedStudents &&
-        displayedStudents.map((student) => (
-            <tr key={student.id}>
-              <td>{student.first_name}</td>
-              <td>{student.last_name}</td>
-              <td>{student.id}</td>
-            </tr>
-          ))}
+          {displayedStudents &&
+            displayedStudents.map((student) => (
+              <tr key={student.id}>
+                <td>{student.first_name}</td>
+                <td>{student.last_name}</td>
+                <td>{student.id}</td>
+              </tr>
+            ))}
         </tbody>
       </table>
     </div>
@@ -70,4 +72,3 @@ function Students() {
 }
 
 export default Students;
-

@@ -9,9 +9,11 @@ function Reviews({ admin }) {
   const [responseMessage, setResponseMessage] = useState("");
   const [user] = useContext(UserContext);
 
+  const API = process.env.REACT_APP_SERVER_API;
+
   // Fetch all reviews on component mount
   useEffect(() => {
-    fetch("http://localhost:5555/reviews")
+    fetch(`${API}/reviews`)
       .then((response) => response.json())
       .then((data) => setReviews(data))
       .catch((error) => console.error("Error fetching reviews:", error));
@@ -20,7 +22,7 @@ function Reviews({ admin }) {
   // Add a new review
   function handleAddReview(e) {
     e.preventDefault();
-    fetch("http://localhost:5555/reviews", {
+    fetch(`${API}/reviews`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -48,7 +50,7 @@ function Reviews({ admin }) {
       return;
     }
     
-    fetch(`http://localhost:5555/reviews/${id}`, {
+    fetch(`${API}/reviews/${id}`, {
       method: "DELETE",
     })
       .then((response) => {
@@ -72,7 +74,7 @@ function Reviews({ admin }) {
   // Update an existing review
   function handleUpdateReview(e) {
     e.preventDefault();
-    fetch(`http://localhost:5555/reviews/${editReview.id}`, {
+    fetch(`${API}/reviews/${editReview.id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

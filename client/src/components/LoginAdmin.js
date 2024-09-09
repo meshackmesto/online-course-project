@@ -10,9 +10,11 @@ function LoginAdmin() {
   const [admin, setAdmin] = useContext(UserContext);
   const history = useHistory();
 
+  const API = process.env.REACT_APP_SERVER_API;
+
   function postLogin(e) {
     e.preventDefault();
-    fetch("http://localhost:5555/loginadmin", {
+    fetch(`${API}/loginadmin`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -70,7 +72,7 @@ function LoginAdmin() {
         </div>
         <div className="form-group">
           <NavLink to="/adminhome">
-          <button className="login-button">Log in</button>
+            <button className="login-button">Log in</button>
           </NavLink>
         </div>
       </form>
