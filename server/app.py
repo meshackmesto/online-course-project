@@ -98,6 +98,10 @@ class StudentSchema(SQLAlchemyAutoSchema):
 student_schema = StudentSchema()
 students_schema = StudentSchema(many=True)
 
+@app.route('/api/')
+def home():
+    return jsonify({'message': 'Welcome to Online Courses!'}), 200
+
 class CourseSchema(SQLAlchemyAutoSchema):
     class Meta:
         model = Course
