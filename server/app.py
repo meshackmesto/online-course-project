@@ -98,9 +98,7 @@ class StudentSchema(SQLAlchemyAutoSchema):
 student_schema = StudentSchema()
 students_schema = StudentSchema(many=True)
 
-@app.route('/api/')
-def home():
-    return jsonify({'message': 'Welcome to Online Courses!'}), 200
+
 
 class CourseSchema(SQLAlchemyAutoSchema):
     class Meta:
@@ -401,12 +399,13 @@ class Admins(Resource):
         db.session.commit()
         return '', 204
 
-class AdminList(Resource):
-    def get(self):
+    """ class AdminList(Resource): """
+@app.route('/api/admins/', methods=['GET', 'POST'])
+def get_admins():
         admins = [admin.to_dict() for admin in Admin.query.all()]
         return make_response(jsonify(admins), 200)
 
-    def post(self):
+def post_admin():
         data = request.get_json()
         if not data:
             return {'error': 'No data provided'}, 400
@@ -425,6 +424,9 @@ class AdminList(Resource):
             return {'error': str(e)}, 400
         
 
+@app.route('/api/')
+def home():
+    return jsonify({'message': 'Welcome to Online Courses!'}), 200
 
 api.add_resource(Login, '/api/login', endpoint='login')
 api.add_resource(LoginAdmin, '/api/loginadmin', endpoint='loginadmin')
