@@ -444,7 +444,7 @@ api.add_resource(EnrollmentList, '/api/enrollments', endpoint='enrollments')
 api.add_resource(Enrollments, '/api/enrollments/<int:enrollment_id>', endpoint='enrollment')
 api.add_resource(ReviewList, '/api/reviews', endpoint='reviews')
 api.add_resource(Reviews, '/api/reviews/<int:review_id>', endpoint='review')
-api.add_resource(AdminList, '/api/admins', endpoint='admins')
+""" api.add_resource(AdminList, '/api/admins', endpoint='admins') """
 api.add_resource(Admins, '/api/admins/<int:admin_id>', endpoint='admin')       
 
 if __name__ == '__main__':
