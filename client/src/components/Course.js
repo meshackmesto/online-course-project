@@ -28,7 +28,7 @@ function Course({ onAddCourse }) {
 
   //fetch courses from db.json
   useEffect(() => {
-    fetch(`${API}courses`)
+    fetch(`${API}/courses`)
       .then((response) => response.json())
       .then((coursesArray) => {
         setCourses(coursesArray);
