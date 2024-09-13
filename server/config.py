@@ -15,7 +15,7 @@ app = Flask(__name__, static_folder="online-course-project/client/build", static
 CORS(app, supports_credentials=True, resources={r"/*": {"origins": "*"}})
 
 # Set up Flask configuration
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URI')  # PostgreSQL connection URL
+app.config['SQLALCHEMY_DATABASE_URI'] = "postgresql://postgres:VVIPbokYBELamfdSKlXmtnVNDlcFKqAm@junction.proxy.rlwy.net:38575/railway"
 app.config['SECRET_KEY'] = 'f6f44f8f6f8d86f41eadf3e47791647c54c36bc297b3d60a'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.json_encoder.compact = False
