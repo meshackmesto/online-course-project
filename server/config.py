@@ -14,7 +14,7 @@ print(os.getcwd())
 app = Flask(__name__, static_folder="online-course-project/client/build", static_url_path="/")
 CORS(app, supports_credentials=True, resources={r"/*": {"origins": "*"}})
 basedir = os.path.abspath(os.path.dirname(__file__))
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'instance', 'app.db')
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'app.db')
 app.config['SECRET_KEY'] = 'f6f44f8f6f8d86f41eadf3e47791647c54c36bc297b3d60a'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.json_encoder.compact = False
